@@ -52,9 +52,16 @@ export function Projects() {
               whileHover={{ scale: 1.02 }}
               className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all hover:border-violet-500/30 hover:shadow-[0_0_40px_-10px_rgba(124,58,237,0.4)] dark:bg-white/[0.03]"
             >
-              <h3 className="font-heading text-xl font-bold text-primary">
-                {project.title}
-              </h3>
+              <div className="flex flex-wrap items-center gap-2">
+                <h3 className="font-heading text-xl font-bold text-primary">
+                  {project.title}
+                </h3>
+                {"hackathon" in project && project.hackathon && (
+                  <span className="rounded-md bg-violet-500/20 px-2 py-0.5 text-xs font-medium text-violet-300">
+                    {project.hackathon}
+                  </span>
+                )}
+              </div>
               <p className="mt-3 text-sm leading-relaxed text-muted">
                 {project.description}
               </p>
@@ -69,16 +76,22 @@ export function Projects() {
                 ))}
               </div>
               <div className="mt-6 flex gap-3">
-                <a
-                  href={project.githubUrl}
-                  aria-label="GitHub"
-                  className="rounded-lg p-2 text-muted transition-colors hover:bg-white/10 hover:text-primary"
-                >
-                  <Github className="h-5 w-5" />
-                </a>
+                {project.githubUrl !== "#" && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub"
+                    className="rounded-lg p-2 text-muted transition-colors hover:bg-white/10 hover:text-primary"
+                  >
+                    <Github className="h-5 w-5" />
+                  </a>
+                )}
                 <a
                   href={project.liveUrl}
-                  aria-label="Live Demo"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={project.liveUrl.includes("devpost") ? "View on Devpost" : "Live demo"}
                   className="rounded-lg p-2 text-muted transition-colors hover:bg-white/10 hover:text-primary"
                 >
                   <ExternalLink className="h-5 w-5" />
