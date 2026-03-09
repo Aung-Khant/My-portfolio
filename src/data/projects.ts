@@ -6,35 +6,32 @@ export interface Project {
   githubUrl: string;
   liveUrl: string;
   hackathon?: string;
+  award?: string;
+  role?: string;
 }
 
 export const projects: Project[] = [
   {
     id: "realibuddy",
-    title: "Realibuddy",
+    title: "RealiBuddy",
     description:
-      "Real-time AI voice fact-checking that identifies false claims and delivers physical feedback via the Pavlok wearable. Built with Deepgram, Perplexity AI, and Pavlok API. HackCC Fall 2025 — Best AI/ML.",
-    tags: ["TypeScript", "Node.js", "Deepgram", "Perplexity AI", "WebRTC", "Tailwind"],
+      "AI that holds you accountable when you lie—cyberpunk interrogation meets accountability tech. Started as a hackathon prototype with wearable feedback; v2.0 is a full rewrite for the web: browser-based, no hardware, prompt engineering at the core. Team project; my role was ideation and strategy.",
+    tags: ["React", "Next.js", "Gemini", "FastAPI", "Python"],
     githubUrl: "https://github.com/seanesla/Realibuddy",
     liveUrl: "https://devpost.com/software/pavshock",
-    hackathon: "HackCC Fall 2025",
+    hackathon: "HackCC",
+    award: "Best AI/ML",
+    role: "Ideation & strategy",
   },
   {
     id: "solaura",
     title: "Solaura",
     description:
-      "Spatial awareness for blind and low-vision users. iPhone LiDAR + YOLOv8 detect objects, 3D position is mapped in real time, and directional audio guides you—and your hand—to the target. Runs on-device.",
-    tags: ["Swift", "iOS", "LiDAR", "YOLOv8", "Gemini", "Next.js", "Three.js"],
-    githubUrl: "#",
+      "Changing how we perceive the world beyond sight: spatial audio AR that guides low-vision and blind users to objects via 3D directional sound. Works with the iPhone you already have—no new device needed, just the built-in LiDAR. Built in 24h at Hack for Humanity (YOLOv8, Next.js dashboard). Team project; my role was pitch and documentation: shaping the story for judges and stakeholders, plus technical docs and demo flow.",
+    tags: ["Swift", "ARKit", "YOLOv8", "Python", "Next.js"],
+    githubUrl: "https://github.com/Yinghao-Guan/solaura",
     liveUrl: "https://devpost.com/software/solaura-bouewf",
     hackathon: "Hack for Humanity 2026",
-  },
-  {
-    id: "gamma",
-    title: "Project Gamma",
-    description: "Built to learn, built to ship.",
-    tags: ["Next.js", "Prisma", "Vercel"],
-    githubUrl: "#",
-    liveUrl: "#",
+    role: "Pitch & docs",
   },
 ];

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Download, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import { ChevronDown, Download, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 
 const container = {
   hidden: { opacity: 0 },
@@ -33,10 +33,85 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pt-20 md:px-6"
     >
-      {/* Magnetic field background */}
+      {/* Floating gradient orbs */}
+      <div className="pointer-events-none absolute inset-0">
+        <motion.div
+          className="absolute -left-40 top-1/4 h-[420px] w-[420px] rounded-full bg-violet-500/25 blur-[100px]"
+          animate={{
+            x: [0, 80, -40, 0],
+            y: [0, -60, 40, 0],
+            scale: [1, 1.15, 1],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -right-40 top-1/2 h-[360px] w-[360px] rounded-full bg-cyan-500/20 blur-[90px]"
+          animate={{
+            x: [0, -70, 50, 0],
+            y: [0, 50, -30, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 left-1/2 h-80 w-80 -translate-x-1/2 rounded-full bg-violet-600/15 blur-[80px]"
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.4, 0.7, 0.4],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
+      {/* Floating particles */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-1 w-1 rounded-full bg-violet-400/40"
+            style={{
+              left: `${15 + i * 7}%`,
+              top: `${10 + (i % 5) * 22}%`,
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 4 + i * 0.3,
+              repeat: Infinity,
+              delay: i * 0.2,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={`c-${i}`}
+            className="absolute h-1 w-1 rounded-full bg-cyan-400/35"
+            style={{
+              right: `${10 + (i % 4) * 15}%`,
+              top: `${20 + i * 10}%`,
+            }}
+            animate={{
+              y: [0, 25, 0],
+              x: [0, -20, 0],
+              opacity: [0.25, 0.6, 0.25],
+            }}
+            transition={{
+              duration: 5 + i * 0.25,
+              repeat: Infinity,
+              delay: i * 0.15,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Magnetic field lines */}
       <div className="pointer-events-none absolute inset-0">
         <svg
-          className="h-full w-full opacity-[0.35] dark:opacity-[0.25]"
+          className="h-full w-full opacity-[0.28] dark:opacity-[0.2]"
           viewBox="0 0 1200 800"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -228,6 +303,22 @@ export function Hero() {
               <Icon className="h-6 w-6" />
             </a>
           ))}
+        </motion.div>
+
+        <motion.div variants={item} className="mt-16 flex flex-col items-center gap-2">
+          <a
+            href="#projects"
+            className="flex flex-col items-center gap-1 text-muted transition-colors hover:text-primary"
+            aria-label="Scroll to projects"
+          >
+            <span className="text-xs font-medium tracking-wide">Scroll to explore</span>
+            <motion.span
+              animate={{ y: [0, 6, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <ChevronDown className="h-6 w-6" />
+            </motion.span>
+          </a>
         </motion.div>
       </motion.div>
     </section>
