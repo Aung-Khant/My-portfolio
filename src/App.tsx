@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
@@ -6,8 +7,15 @@ import { Navbar } from "./components/Navbar";
 import Particles from "./components/Particles";
 import { Projects } from "./components/Projects";
 import { Resume } from "./components/Resume";
+import { useTheme } from "./hooks/useTheme";
 
 export default function App() {
+  const { theme } = useTheme();
+  const particleColors = useMemo(
+    () => (theme === "light" ? ["#000000"] : ["#ffffff"]),
+    [theme]
+  );
+
   return (
     <>
       <div
@@ -21,7 +29,7 @@ export default function App() {
         }}
       >
         <Particles
-          particleColors={["#ffffff"]}
+          particleColors={particleColors}
           particleCount={200}
           particleSpread={10}
           speed={0.1}

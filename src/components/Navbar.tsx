@@ -22,12 +22,12 @@ export function Navbar() {
       }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 md:px-6">
+      <nav className="mx-auto flex max-w-5xl items-center justify-between rounded-2xl glass border border-white/10 px-4 py-3 shadow-lg md:px-6">
         <a
           href="#hero"
           className="font-heading text-xl font-bold tracking-tight gradient-text md:text-2xl"
         >
-          AMK
+          Jonathan Aung
         </a>
 
         <div className="flex items-center gap-4 md:gap-8">
