@@ -47,7 +47,7 @@ export function Projects() {
           </p>
         </motion.div>
 
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 sm:gap-8">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 sm:gap-8 lg:gap-10">
           {projects.map((project, i) => (
             <motion.article
               key={project.id}
@@ -56,71 +56,84 @@ export function Projects() {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               whileHover={{ scale: 1.02 }}
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all hover:border-violet-500/30 hover:shadow-[0_0_40px_-10px_rgba(124,58,237,0.4)] dark:bg-white/[0.03] sm:p-7"
+              className="group relative flex min-h-0 flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl transition-all hover:border-violet-500/30 hover:shadow-[0_0_40px_-10px_rgba(124,58,237,0.4)] focus-within:border-violet-500/30 dark:bg-white/[0.03] sm:p-8"
             >
+              {/* Logo */}
               {projectLogos[project.id] && (
-                <div className="mb-4 flex justify-center">
+                <div className="mb-5 flex justify-center">
                   <img
                     src={projectLogos[project.id]}
-                    alt={`${project.title} logo`}
-                    className="h-8 w-auto max-w-[140px] object-contain object-center"
+                    alt=""
+                    className="h-9 w-auto max-w-[160px] object-contain object-center"
                   />
                 </div>
               )}
+
+              {/* Title + badges */}
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="font-heading text-lg font-bold text-primary">
+                <h3 className="font-heading text-xl font-bold text-primary sm:text-[1.25rem]">
                   {project.title}
                 </h3>
                 {"hackathon" in project && project.hackathon && (
-                  <span className="rounded-md bg-violet-500/20 px-2 py-0.5 text-xs font-medium text-violet-300">
+                  <span className="rounded-md bg-violet-500/20 px-2.5 py-1 text-xs font-medium text-violet-300">
                     {project.hackathon}
                   </span>
                 )}
                 {"award" in project && project.award && (
-                  <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-300">
-                    <Award className="h-3 w-3" />
+                  <span className="inline-flex items-center gap-1 rounded-md bg-amber-500/20 px-2.5 py-1 text-xs font-medium text-amber-300">
+                    <Award className="h-3.5 w-3.5" />
                     {project.award}
                   </span>
                 )}
               </div>
+
+              {/* Role */}
               {"role" in project && project.role && (
-                <p className="mt-2 text-[11px] text-muted">
-                  Role: <span className="text-primary/90">{project.role}</span>
+                <p className="mt-2 text-xs text-muted">
+                  Role: <span className="font-medium text-primary/90">{project.role}</span>
                 </p>
               )}
-              <p className="mt-3 text-xs leading-relaxed text-muted">
+
+              {/* Description — comfortable reading size and line-height */}
+              <p className="mt-4 flex-1 text-sm leading-relaxed text-muted">
                 {project.description}
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
+
+              {/* Tech stack — scannable pills */}
+              <div className="mt-5 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="rounded-full bg-white/10 px-2.5 py-1 text-[11px] font-medium text-muted"
+                    className="rounded-full bg-white/10 px-3 py-1.5 text-xs font-medium text-muted"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-              <div className="mt-5 flex gap-2">
+
+              {/* Actions — clear, accessible links */}
+              <div className="mt-6 flex items-center gap-3">
                 {project.githubUrl !== "#" && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="rounded-md p-1.5 text-muted transition-colors hover:bg-white/10 hover:text-primary"
-                >
-                  <Github className="h-4 w-4" />
-                </a>
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-white/10 hover:text-primary focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:ring-offset-2 focus:ring-offset-[var(--color-bg)]"
+                    aria-label={`View ${project.title} on GitHub`}
+                  >
+                    <Github className="h-4 w-4" />
+                    <span>Code</span>
+                  </a>
                 )}
                 <a
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label={project.liveUrl.includes("devpost") ? "View on Devpost" : "Live demo"}
-                  className="rounded-md p-1.5 text-muted transition-colors hover:bg-white/10 hover:text-primary"
+                  className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-white/10 hover:text-primary focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:ring-offset-2 focus:ring-offset-[var(--color-bg)]"
+                  aria-label={project.liveUrl.includes("devpost") ? `View ${project.title} on Devpost` : `View ${project.title} live`}
                 >
                   <ExternalLink className="h-4 w-4" />
+                  <span>View project</span>
                 </a>
               </div>
             </motion.article>
