@@ -6,7 +6,6 @@ import { Hero } from "./components/Hero";
 import { Navbar } from "./components/Navbar";
 import Particles from "./components/Particles";
 import { Projects } from "./components/Projects";
-import { Resume } from "./components/Resume";
 import { useTheme } from "./hooks/useTheme";
 
 export default function App() {
@@ -49,7 +48,6 @@ export default function App() {
         <Hero />
         <Projects />
         <Contact />
-        <Resume />
         <Footer />
       </motion.main>
     </>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronDown, Download, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import { ChevronDown, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 
 const container = {
   hidden: { opacity: 0 },
@@ -63,15 +63,6 @@ export function Hero() {
           >
             View My Work
             <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 rounded-xl border-2 border-white/20 bg-white/5 px-6 py-3.5 font-semibold text-primary backdrop-blur-sm transition-all hover:border-violet-500/40 hover:bg-white/10"
-          >
-            <Download className="h-4 w-4" />
-            Download Resume
           </a>
         </motion.div>
 

@@ -49,8 +49,7 @@ body {
 
 /* Anchor scroll offset for fixed navbar */
 #projects,
-#contact,
-#resume {
+#contact {
   scroll-margin-top: 5rem;
 }
 
