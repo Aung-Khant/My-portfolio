@@ -10,22 +10,20 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="px-4 py-8 md:px-6">
-      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 sm:flex-row">
+    <footer className="border-t border-subtle px-4 py-10 md:px-6">
+      <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-5 sm:flex-row">
         <p className="text-sm text-muted">
-          Designed & Built by{" "}
-          <span className="font-semibold text-primary">Aung Min Khant</span> ©{" "}
-          {year}
+          Jonathan Aung © {year}
         </p>
-        <div className="flex gap-4">
+        <div className="flex gap-5">
           {socialLinks.map(({ href, icon: Icon, label }) => (
             <a
               key={label}
               href={href}
               aria-label={label}
-              className="text-muted transition-colors hover:text-primary"
+              className="link-quiet"
             >
-              <Icon className="h-5 w-5" />
+              <Icon className="h-[1.125rem] w-[1.125rem]" />
             </a>
           ))}
         </div>

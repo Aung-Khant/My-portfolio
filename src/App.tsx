@@ -29,9 +29,9 @@ export default function App() {
       >
         <Particles
           particleColors={particleColors}
-          particleCount={200}
+          particleCount={160}
           particleSpread={10}
-          speed={0.1}
+          speed={0.08}
           particleBaseSize={100}
           moveParticlesOnHover
           alphaParticles={false}

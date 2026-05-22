@@ -6,18 +6,18 @@ const container = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.2,
+      staggerChildren: 0.1,
+      delayChildren: 0.15,
     },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 16 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 },
+    transition: { duration: 0.45 },
   },
 };
 
@@ -31,69 +31,59 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pt-20 md:px-6"
+      className="relative flex min-h-screen flex-col items-center justify-center px-4 pt-16 md:px-6"
     >
       <motion.div
-        className="relative z-10 mx-auto max-w-4xl text-center"
+        className="relative z-10 mx-auto max-w-2xl text-center"
         variants={container}
         initial="hidden"
         animate="visible"
       >
-        <motion.p
-          variants={item}
-          className="mb-4 font-sans text-sm font-medium uppercase tracking-widest text-muted md:text-base"
-        >
-          Welcome to my portfolio
-        </motion.p>
         <motion.h1
           variants={item}
-          className="font-heading text-4xl font-bold leading-tight text-primary md:text-5xl lg:text-6xl xl:text-7xl"
+          className="text-4xl font-semibold leading-[1.1] tracking-tight text-primary md:text-5xl lg:text-[3.25rem]"
         >
-          Hi, I'm{" "}
-          <span className="gradient-text">Aung Min Khant</span>
+          Aung Min Khant
         </motion.h1>
 
         <motion.div
           variants={item}
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          className="mt-8 flex flex-wrap items-center justify-center gap-4"
         >
-          <a
-            href="#projects"
-            className="group flex items-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-400 px-6 py-3.5 font-semibold text-white shadow-lg shadow-violet-500/25 transition-all hover:shadow-violet-500/40 hover:shadow-xl"
-          >
-            View My Work
+          <a href="#projects" className="btn-primary group">
+            View work
             <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </motion.div>
 
         <motion.div
           variants={item}
-          className="mt-12 flex items-center justify-center gap-6"
+          className="mt-10 flex items-center justify-center gap-6"
         >
           {socialLinks.map(({ href, icon: Icon, label }) => (
             <a
               key={label}
               href={href}
               aria-label={label}
-              className="rounded-full p-3 text-muted transition-colors hover:bg-white/10 hover:text-primary"
+              className="link-quiet"
             >
-              <Icon className="h-6 w-6" />
+              <Icon className="h-[1.125rem] w-[1.125rem]" />
             </a>
           ))}
         </motion.div>
 
-        <motion.div variants={item} className="mt-16 flex flex-col items-center gap-2">
+        <motion.div variants={item} className="mt-16 flex flex-col items-center gap-1.5 md:mt-20">
           <a
             href="#projects"
-            className="flex flex-col items-center gap-1 text-muted transition-colors hover:text-primary"
+            className="link-quiet flex flex-col items-center gap-1"
             aria-label="Scroll to projects"
           >
-            <span className="text-xs font-medium tracking-wide">Scroll to explore</span>
+            <span className="text-xs tracking-wide uppercase">Projects</span>
             <motion.span
-              animate={{ y: [0, 6, 0] }}
+              animate={{ y: [0, 4, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             >
-              <ChevronDown className="h-6 w-6" />
+              <ChevronDown className="h-5 w-5" />
             </motion.span>
           </a>
         </motion.div>

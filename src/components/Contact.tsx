@@ -6,20 +6,20 @@ const contactCards = [
   {
     href: "mailto:aung.m.khant22@gmail.com",
     icon: Mail,
-    title: "Send an Email",
-    description: "Say hi or start a conversation",
+    title: "Email",
+    description: "aung.m.khant22@gmail.com",
   },
   {
     href: "https://github.com/Aung-Khant",
     icon: Github,
-    title: "See my code",
-    description: "Check out my repositories",
+    title: "GitHub",
+    description: "Repositories and contributions",
   },
   {
     href: "https://www.linkedin.com/in/real-aungminkhant/",
     icon: Linkedin,
-    title: "Connect with me",
-    description: "Let's network on LinkedIn",
+    title: "LinkedIn",
+    description: "Professional profile",
   },
 ];
 
@@ -31,33 +31,30 @@ export function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="relative px-4 py-24 md:px-6 md:py-32"
+      className="section-shell border-t border-subtle"
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="section-inner">
         <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 24 }}
+          className="section-header"
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
-          <h2 className="font-heading text-3xl font-bold text-primary md:text-4xl lg:text-5xl">
-            Let's Connect
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted">
-            Whether you want to collaborate, hire, or just say hi — my inbox is
-            always open.
+          <h2 className="section-title">Contact</h2>
+          <p className="section-desc max-w-xl">
+            Open to collaboration, opportunities, or a quick hello.
           </p>
         </motion.div>
 
         <motion.div
-          className="mt-16 grid gap-6 sm:grid-cols-3"
+          className="grid gap-4 sm:grid-cols-3"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={{
             hidden: {},
             visible: {
               transition: {
-                staggerChildren: 0.1,
+                staggerChildren: 0.08,
               },
             },
           }}
@@ -67,22 +64,22 @@ export function Contact() {
               key={card.title}
               href={card.href}
               variants={{
-                hidden: { opacity: 0, y: 24 },
+                hidden: { opacity: 0, y: 16 },
                 visible: {
                   opacity: 1,
                   y: 0,
-                  transition: { duration: 0.4 },
+                  transition: { duration: 0.35 },
                 },
               }}
-              className="group flex flex-col items-center rounded-2xl border border-white/10 bg-white/5 p-8 text-center backdrop-blur-xl transition-all hover:border-violet-500/30 hover:shadow-[0_0_30px_-8px_rgba(124,58,237,0.35)] dark:bg-white/[0.03]"
+              className="card-surface flex flex-col p-5 sm:p-6"
             >
-              <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500/20 to-cyan-500/20 text-violet-400 transition-transform group-hover:scale-110">
-                <card.icon className="h-7 w-7" />
-              </span>
-              <h3 className="font-heading text-lg font-semibold text-primary">
+              <card.icon className="h-[1.125rem] w-[1.125rem] text-primary" />
+              <h3 className="mt-3 text-sm font-medium text-primary">
                 {card.title}
               </h3>
-              <p className="mt-1 text-sm text-muted">{card.description}</p>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                {card.description}
+              </p>
             </motion.a>
           ))}
         </motion.div>
