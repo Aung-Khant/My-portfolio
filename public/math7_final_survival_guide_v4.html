@@ -76,6 +76,9 @@
   .app-container {
     display: flex;
     min-height: 100vh;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
   }
 
   /* ── MOBILE HEADER ── */
@@ -110,14 +113,16 @@
     width: var(--sidebar-width);
     background: var(--surface);
     border-right: 1px solid var(--border);
-    position: fixed;
-    top: 0; bottom: 0; left: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
     overflow-y: auto;
     z-index: 900;
     padding: 24px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex-shrink: 0;
   }
   .sidebar-header {
     border-bottom: 1px solid var(--border);
@@ -390,11 +395,11 @@
 
   /* ── MAIN CONTENT AREA ── */
   main {
-    margin-left: var(--sidebar-width);
     flex: 1;
     padding: 40px;
-    max-width: 1100px;
+    max-width: 1200px;
     width: 100%;
+    min-width: 0;
   }
 
   /* ── COVER PAGE UPGRADE ── */
@@ -1239,14 +1244,16 @@
   /* ── RESPONSIVE SCROLL-OFFSET / PRINT / MEDIA ── */
   @media (max-width: 1024px) {
     aside {
+      position: fixed;
+      top: 0; bottom: 0; left: 0;
       transform: translateX(-100%);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      height: 100vh;
     }
     aside.open {
       transform: translateX(0);
     }
     main {
-      margin-left: 0;
       padding: 80px 16px 40px;
     }
     .mobile-header {
@@ -1983,8 +1990,6 @@ f(2) = 4 (defined but limit DNE → <em>jump discontinuity</em>)
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-1')">Hide</button>
       <div class="active-recall-content">
         <div class="algo">
-      </div>
-    </div>
 <span class="algo-title">ALGORITHM: Which technique to use?</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Direct substitution:</strong> Plug in x=a. If the result is defined and finite → DONE. Most limits end here.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>0/0 form → Factor:</strong> Factor numerator and denominator. Cancel common factor. Substitute. ALWAYS state restriction (x≠a).</span></div>
@@ -1994,6 +1999,8 @@ f(2) = 4 (defined but limit DNE → <em>jump discontinuity</em>)
 <div class="step"><span class="step-num">6</span><span class="step-body"><strong>One-sided limit (piecewise/|·|):</strong> Evaluate from left and right separately using the appropriate piece or sign.</span></div>
 <div class="step"><span class="step-num">7</span><span class="step-body"><strong>Bounded × vanishing → Squeeze Theorem:</strong> If |f(x)| ≤ (something → 0), use squeeze. (See #5.)</span></div>
 </div>
+      </div>
+    </div>
 
 <div class="subsection-title" style="margin-top:8px">Limits at ±∞</div>
 <div class="card card-dark">
@@ -2021,8 +2028,6 @@ Since x→−∞: |x|=−x, so = x/(−x·√4) = 1/(−2) = <strong>−1/2</str
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-2')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <span class="formula-line">lim(x→0) sin(x)/x = 1</span>
 <span class="formula-line">lim(x→0) (1 − cos x)/x = 0</span>
 <span class="formula-line">lim(x→0) tan(x)/x = 1</span>
@@ -2030,6 +2035,8 @@ Since x→−∞: |x|=−x, so = x/(−x·√4) = 1/(−2) = <strong>−1/2</str
 <span class="formula-line">lim(x→0) sin(ax)/sin(bx) = a/b</span>
 <span class="formula-line">lim(x→0) x·cot(x) = 1</span>
 </div>
+      </div>
+    </div>
 <div class="shortcut">
 <span class="shortcut-title">PATTERN: Massage to sinθ/θ form</span>
 If you see sin(3x)/x: multiply top and bottom by 3 → 3·(sin(3x)/3x) → 3·1 = 3<br>
@@ -2073,8 +2080,6 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-3')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-green">Easy — Factor &amp; Cancel</span>
 <div class="ex-row"><span class="ex-label">Given</span><span class="ex-val">lim(x→2) (x²−x−2)/(x²−4)</span></div>
 <div class="ex-row"><span class="ex-label">Check</span><span class="ex-val">Direct sub → 0/0 → factor</span></div>
@@ -2083,6 +2088,8 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">(2+1)/(2+2) = <strong>3/4</strong></span></div>
 <div class="ex-row"><span class="ex-label">Trap</span><span class="ex-val">Missing "x≠2" restriction loses a point</span></div>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-4">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -2091,8 +2098,6 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-4')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">Medium — Rationalize</span>
 <div class="ex-row"><span class="ex-label">Given</span><span class="ex-val">lim(x→2) (√x−√2)/(x−2)</span></div>
 <div class="ex-row"><span class="ex-label">Check</span><span class="ex-val">0/0 with √ → rationalize</span></div>
@@ -2102,6 +2107,8 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
 <div class="ex-row"><span class="ex-label">Cancel</span><span class="ex-val">1/(√x+√2), x≠2</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">1/(2√2) = <strong>√2/4</strong></span></div>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-5">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -2110,8 +2117,6 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-5')">Hide</button>
       <div class="active-recall-content">
         <div class="example-hard">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">Hard — Exam FR Q2a Style</span>
 <div class="ex-row"><span class="ex-label">Given</span><span class="ex-val">lim(x→−∞) x/√(4x²+1)</span></div>
 <div class="ex-row"><span class="ex-label">Recog</span><span class="ex-val">√ at −∞ → sign trap</span></div>
@@ -2121,6 +2126,8 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">= −1/√4 = <strong>−1/2</strong></span></div>
 <div class="ex-row"><span class="ex-label">Trap</span><span class="ex-val">+1/2 is the most common WRONG answer</span></div>
 </div>
+      </div>
+    </div>
 </div>
 
 <div class="memory">
@@ -2200,13 +2207,13 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-6')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <strong>f is continuous at c if ALL THREE hold:</strong><br>
 <span class="formula-line">1. f(c) is defined (c is in the domain of f)</span>
 <span class="formula-line">2. lim(x→c) f(x) exists (left = right limit)</span>
 <span class="formula-line">3. lim(x→c) f(x) = f(c)</span>
 </div>
+      </div>
+    </div>
 <div class="trap">
 <span class="trap-title">☠ EXAM KILLER: Must check and state ALL THREE.</span>
 Writing only "limit = f(c)" without verifying all three conditions = lost points. Must check them in order.
@@ -2245,8 +2252,6 @@ Polynomials · Rational (where defined) · Trig functions (where defined) · Com
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-7')">Hide</button>
       <div class="active-recall-content">
         <div class="algo" style="margin-top:6px">
-      </div>
-    </div>
 <span class="algo-title">ALGORITHM: IVT to show a root exists</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Define g(x) = f(x) − target value (e.g., if showing f(c)=5, let g(x)=f(x)−5)</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">State that g is continuous on [a,b] (and why — polynomial, composition, etc.)</span></div>
@@ -2254,6 +2259,8 @@ Polynomials · Rational (where defined) · Trig functions (where defined) · Com
 <div class="step"><span class="step-num">4</span><span class="step-body">Invoke: "Since g is continuous on [a,b] and g(a) &lt; 0 &lt; g(b) [or reverse], by the IVT, there exists c ∈ (a,b) such that g(c) = 0."</span></div>
 <div class="step"><span class="step-num">5</span><span class="step-body">Translate back: "Thus f(c) = target value." ✓</span></div>
 </div>
+      </div>
+    </div>
 
 <div class="active-recall-wrapper" id="recall-block-8">
       <div class="active-recall-overlay">
@@ -2263,14 +2270,14 @@ Polynomials · Rational (where defined) · Trig functions (where defined) · Com
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-8')">Hide</button>
       <div class="active-recall-content">
         <div class="example" style="margin-top:6px">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">EXAM STYLE — SG1 Q18: Show x⁴+x−3=0 has a root on (1,2)</span>
 <div class="ex-row"><span class="ex-label">Let</span><span class="ex-val">g(x) = x⁴+x−3 (polynomial → continuous on [1,2])</span></div>
 <div class="ex-row"><span class="ex-label">g(1)</span><span class="ex-val">= 1+1−3 = −1 &lt; 0</span></div>
 <div class="ex-row"><span class="ex-label">g(2)</span><span class="ex-val">= 16+2−3 = 15 &gt; 0</span></div>
 <div class="ex-row"><span class="ex-label">IVT</span><span class="ex-val">Since g continuous, g(1)&lt;0&lt;g(2), by IVT ∃c∈(1,2) with g(c)=0 → x⁴+x−3=0 ✓</span></div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 
@@ -2283,8 +2290,6 @@ Polynomials · Rational (where defined) · Trig functions (where defined) · Com
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-9')">Hide</button>
       <div class="active-recall-content">
         <div class="example-hard">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">EXAM STYLE — FR Q4: Find all x where f is continuous, all x where differentiable</span>
 <div style="font-size:9.5pt">
 f(x) = {3 if x&lt;−2 ; 1/(x−1) if |x|≤2, x≠1 ; 1 if x&gt;2}<br><br>
@@ -2295,6 +2300,8 @@ f(x) = {3 if x&lt;−2 ; 1/(x−1) if |x|≤2, x≠1 ; 1 if x&gt;2}<br><br>
 <strong>Differentiability:</strong> Subset of continuity (also check corners/cusps where defined). At x=2: check one-sided derivatives.
 </div>
 </div>
+      </div>
+    </div>
 
 <div class="memory">
 <span class="memory-title">MEMORY: "Continuous First, Differentiable Second"</span>
@@ -2373,12 +2380,12 @@ Differentiable ⟹ Continuous (if f is differentiable at a, it is continuous the
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-10')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <strong>Formal definition:</strong><br>
 lim(x→a) f(x) = L means: for every ε &gt; 0, there exists δ &gt; 0 such that:<br>
 <span class="formula-line">if 0 &lt; |x − a| &lt; δ, then |f(x) − L| &lt; ε</span>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-11">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -2387,14 +2394,14 @@ lim(x→a) f(x) = L means: for every ε &gt; 0, there exists δ &gt; 0 such that
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-11')">Hide</button>
       <div class="active-recall-content">
         <div class="algo">
-      </div>
-    </div>
 <span class="algo-title">STEP 1 ALGORITHM: Finding δ (what is always asked)</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Write |f(x) − L| and substitute f(x).</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Simplify algebraically until you get an expression of the form: C·|x − a| where C is a constant.</span></div>
 <div class="step"><span class="step-num">3</span><span class="step-body">Set C·|x−a| &lt; ε → |x−a| &lt; ε/C.</span></div>
 <div class="step"><span class="step-num">4</span><span class="step-body">Therefore δ = ε/C. (Sometimes δ = min(1, ε/C) if needed.)</span></div>
 </div>
+      </div>
+    </div>
 
 <div class="active-recall-wrapper" id="recall-block-12">
       <div class="active-recall-overlay">
@@ -2404,8 +2411,6 @@ lim(x→a) f(x) = L means: for every ε &gt; 0, there exists δ &gt; 0 such that
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-12')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">EXAM STYLE — FR Q1: lim(x→4) (2x/5 + 1) = 13/5</span>
 <div class="ex-row"><span class="ex-label">|f(x)−L|</span><span class="ex-val">|(2x/5+1) − 13/5| = |2x/5 − 8/5| = (2/5)|x−4|</span></div>
 <div class="ex-row"><span class="ex-label">Need</span><span class="ex-val">(2/5)|x−4| &lt; ε</span></div>
@@ -2413,6 +2418,8 @@ lim(x→a) f(x) = L means: for every ε &gt; 0, there exists δ &gt; 0 such that
 <div class="ex-row"><span class="ex-label">δ =</span><span class="ex-val"><strong>5ε/2</strong></span></div>
 <div class="ex-row"><span class="ex-label">Write</span><span class="ex-val">"Let δ = 5ε/2. If 0&lt;|x−4|&lt;δ, then |f(x)−13/5| = (2/5)|x−4| &lt; (2/5)·(5ε/2) = ε. ✓"</span></div>
 </div>
+      </div>
+    </div>
 </div>
 <div>
 <div class="subsection-title">Squeeze Theorem</div>
@@ -2424,12 +2431,12 @@ lim(x→a) f(x) = L means: for every ε &gt; 0, there exists δ &gt; 0 such that
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-13')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <strong>Theorem:</strong> If h(x) ≤ f(x) ≤ g(x) near a (but not necessarily at a),<br>
 and lim(x→a) h(x) = lim(x→a) g(x) = L,<br>
 <span class="formula-line">then lim(x→a) f(x) = L</span>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-14">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -2438,14 +2445,14 @@ and lim(x→a) h(x) = lim(x→a) g(x) = L,<br>
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-14')">Hide</button>
       <div class="active-recall-content">
         <div class="algo" style="margin-top:6px">
-      </div>
-    </div>
 <span class="algo-title">ALGORITHM: Squeeze Theorem Proof</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Identify the bounded part: usually a trig function. Write: −1 ≤ sin(anything) ≤ 1.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Multiply all sides by the other factor. <strong>CRUCIAL:</strong> If multiplying by x² (always ≥ 0), inequality direction unchanged. If multiplying by a possibly-negative quantity, handle signs carefully.</span></div>
 <div class="step"><span class="step-num">3</span><span class="step-body">Take lim(x→a) of both outer functions. Both should → L.</span></div>
 <div class="step"><span class="step-num">4</span><span class="step-body">Conclude: "By the Squeeze Theorem, lim f(x) = L." State the theorem by name.</span></div>
 </div>
+      </div>
+    </div>
 
 <div class="active-recall-wrapper" id="recall-block-15">
       <div class="active-recall-overlay">
@@ -2455,8 +2462,6 @@ and lim(x→a) h(x) = lim(x→a) g(x) = L,<br>
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-15')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">EXAM STYLE — Exam 1 Q2: Prove lim(x→0) x²sin(1/x²) = 0</span>
 <div class="ex-row"><span class="ex-label">Step 1</span><span class="ex-val">−1 ≤ sin(1/x²) ≤ 1 for all x ≠ 0</span></div>
 <div class="ex-row"><span class="ex-label">Step 2</span><span class="ex-val">Multiply by x² ≥ 0: −x² ≤ x²sin(1/x²) ≤ x²</span></div>
@@ -2464,6 +2469,8 @@ and lim(x→a) h(x) = lim(x→a) g(x) = L,<br>
 <div class="ex-row"><span class="ex-label">Conclude</span><span class="ex-val">By the Squeeze Theorem, lim(x→0) x²sin(1/x²) = 0. ✓</span></div>
 <div class="ex-row"><span class="ex-label">Trap</span><span class="ex-val">Must state "multiply by x² ≥ 0" to justify direction of inequality</span></div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 <div class="memory" style="margin-top:6px">
@@ -2549,11 +2556,11 @@ Picture f(x) squeezed between h(x) below and g(x) above. If top and bottom bread
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-16')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <span class="formula-line">f′(x) = lim(h→0) [f(x+h) − f(x)] / h</span>
 <span class="formula-line">f′(a) = lim(x→a) [f(x) − f(a)] / (x − a)</span>
 </div>
+      </div>
+    </div>
 <div class="card card-blue">
 <strong>Geometric meaning:</strong> Slope of the tangent line to y=f(x) at each point.<br>
 <strong>Physical meaning:</strong> Instantaneous rate of change of f at x.<br>
@@ -2608,12 +2615,12 @@ d/dx[sin(3x)] = cos(3x)·<strong>3</strong>, NOT just cos(3x). d/dx[(x²+1)⁵] 
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-17')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <span class="formula-line">d/dx[∫ₐˣ f(t)dt] = f(x)</span>
 <span class="formula-line">d/dx[∫ₐ^(g(x)) f(t)dt] = f(g(x))·g′(x)</span>
 <span class="formula-line">d/dx[∫ₓᵇ f(t)dt] = −f(x)</span>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-18">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -2622,8 +2629,6 @@ d/dx[sin(3x)] = cos(3x)·<strong>3</strong>, NOT just cos(3x). d/dx[(x²+1)⁵] 
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-18')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">EXAM 4 Q1 (8 pts): f(x) = ∫₂^(cosx) 1/(1−t²) dt, find f′(x)</span>
 <div class="ex-row"><span class="ex-label">Setup</span><span class="ex-val">Variable upper bound → FTC2 + chain rule</span></div>
 <div class="ex-row"><span class="ex-label">FTC2</span><span class="ex-val">f′(x) = 1/(1−cos²x)·(−sinx)</span></div>
@@ -2631,6 +2636,8 @@ d/dx[sin(3x)] = cos(3x)·<strong>3</strong>, NOT just cos(3x). d/dx[(x²+1)⁵] 
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">= −sinx/sin²x = <strong>−1/sinx = −cscx</strong></span></div>
 <div class="ex-row"><span class="ex-label">Trap</span><span class="ex-val">Missing the (−sinx) chain rule factor = ~5 pts lost</span></div>
 </div>
+      </div>
+    </div>
 <div class="trap" style="margin-top:5px">
 <span class="trap-title">☠ EXAM KILLER: FTC2 Chain Rule Factor</span>
 d/dx[∫ₐ^(cosx) f(t)dt] = f(cosx)·(−sinx). The inner derivative (−sinx) is REQUIRED. Missing it costs most of the problem's points. This was 8 points on Exam 4.
@@ -2649,14 +2656,14 @@ d/dx[∫ₐ^(cosx) f(t)dt] = f(cosx)·(−sinx). The inner derivative (−sinx) 
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-19')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-green">Easy — Product Rule</span>
 <div class="ex-row"><span class="ex-label">Find</span><span class="ex-val">d/dx[(x⁶+1)(3x³−2x+5)]</span></div>
 <div class="ex-row"><span class="ex-label">f=</span><span class="ex-val">x⁶+1, f′=6x⁵</span></div>
 <div class="ex-row"><span class="ex-label">g=</span><span class="ex-val">3x³−2x+5, g′=9x²−2</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">6x⁵(3x³−2x+5)+(x⁶+1)(9x²−2) [no simplification needed]</span></div>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-20">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -2665,8 +2672,6 @@ d/dx[∫ₐ^(cosx) f(t)dt] = f(cosx)·(−sinx). The inner derivative (−sinx) 
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-20')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">Medium — Nested Chain Rule</span>
 <div class="ex-row"><span class="ex-label">Find</span><span class="ex-val">d/dx[sin²(4√x)]</span></div>
 <div class="ex-row"><span class="ex-label">Layer 1</span><span class="ex-val">Outer: (·)² → 2sin(4√x)·d/dx[sin(4√x)]</span></div>
@@ -2674,6 +2679,8 @@ d/dx[∫ₐ^(cosx) f(t)dt] = f(cosx)·(−sinx). The inner derivative (−sinx) 
 <div class="ex-row"><span class="ex-label">Layer 3</span><span class="ex-val">4·(1/2)x⁻¹/² = 2/√x</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">2sin(4√x)·cos(4√x)·2/√x = 4sin(4√x)cos(4√x)/√x</span></div>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-21">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -2682,14 +2689,14 @@ d/dx[∫ₐ^(cosx) f(t)dt] = f(cosx)·(−sinx). The inner derivative (−sinx) 
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-21')">Hide</button>
       <div class="active-recall-content">
         <div class="example-hard">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">Hard — FR Q8: f(x)=sin(x+cos²x)+cos3x, find f′(π/2)</span>
 <div class="ex-row"><span class="ex-label">f′(x)</span><span class="ex-val">cos(x+cos²x)·(1+2cosx·(−sinx))+(−sin3x)·3</span></div>
 <div class="ex-row"><span class="ex-label">Simplify</span><span class="ex-val">cos(x+cos²x)·(1−sin2x)−3sin3x</span></div>
 <div class="ex-row"><span class="ex-label">At π/2</span><span class="ex-val">cos(π/2+0)=cos(π/2)=0; sin(π)=0; sin(3π/2)=−1</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">0·(1−0)−3(−1) = <strong>3</strong></span></div>
 </div>
+      </div>
+    </div>
 </div>
 
 <div class="speed">
@@ -2765,13 +2772,13 @@ Sum/difference → apply power rule term by term. Product of two things → prod
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-22')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <strong>Equation of tangent at (a, f(a)):</strong><br>
 <span class="formula-line">y − f(a) = f′(a)·(x − a)</span>
 <strong>Normal line</strong> (perpendicular to tangent):<br>
 <span class="formula-line">y − f(a) = −1/f′(a)·(x − a)</span>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-23">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -2780,14 +2787,14 @@ Sum/difference → apply power rule term by term. Product of two things → prod
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-23')">Hide</button>
       <div class="active-recall-content">
         <div class="algo">
-      </div>
-    </div>
 <span class="algo-title">ALGORITHM: Tangent Line</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Find f′(x) (differentiate)</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Evaluate f′(a) = slope m (the number)</span></div>
 <div class="step"><span class="step-num">3</span><span class="step-body">Find the point: (a, f(a)). If only x=a is given, compute f(a).</span></div>
 <div class="step"><span class="step-num">4</span><span class="step-body">Write: y − f(a) = m(x − a). Simplify if requested.</span></div>
 </div>
+      </div>
+    </div>
 
 <div class="active-recall-wrapper" id="recall-block-24">
       <div class="active-recall-overlay">
@@ -2797,14 +2804,14 @@ Sum/difference → apply power rule term by term. Product of two things → prod
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-24')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">FR Q6: Tangent to f(x)=x√(x−1) at x=5</span>
 <div class="ex-row"><span class="ex-label">f′(x)</span><span class="ex-val">= √(x−1) + x·1/(2√(x−1)) = √(x−1) + x/(2√(x−1))</span></div>
 <div class="ex-row"><span class="ex-label">f′(5)</span><span class="ex-val">= 2 + 5/4 = 13/4</span></div>
 <div class="ex-row"><span class="ex-label">f(5)</span><span class="ex-val">= 5·√4 = 10</span></div>
 <div class="ex-row"><span class="ex-label">Line</span><span class="ex-val">y − 10 = (13/4)(x−5) → y = (13/4)x − 25/4</span></div>
 </div>
+      </div>
+    </div>
 </div>
 <div>
 <div class="subsection-title">Implicit Differentiation — Full Guide</div>
@@ -2826,8 +2833,6 @@ Sum/difference → apply power rule term by term. Product of two things → prod
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-25')">Hide</button>
       <div class="active-recall-content">
         <div class="algo" style="margin-top:6px">
-      </div>
-    </div>
 <span class="algo-title">ALGORITHM: Implicit Differentiation + Tangent Line</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Differentiate both sides of the equation w.r.t. x (chain rule on every y term)</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Collect all dy/dx terms on one side</span></div>
@@ -2835,6 +2840,8 @@ Sum/difference → apply power rule term by term. Product of two things → prod
 <div class="step"><span class="step-num">4</span><span class="step-body">Substitute the given point (x,y) to get the numerical slope</span></div>
 <div class="step"><span class="step-num">5</span><span class="step-body">Write tangent line using point-slope form</span></div>
 </div>
+      </div>
+    </div>
 
 <div class="active-recall-wrapper" id="recall-block-26">
       <div class="active-recall-overlay">
@@ -2844,8 +2851,6 @@ Sum/difference → apply power rule term by term. Product of two things → prod
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-26')">Hide</button>
       <div class="active-recall-content">
         <div class="example-hard">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">FR Q7: Tangent to xy³−x²=y²+xy−5 at (2,1)</span>
 <div style="font-size:9.5pt">
 <strong>Differentiate:</strong> (y³+3xy²y′) − 2x = 2yy′ + (y+xy′)<br>
@@ -2855,6 +2860,8 @@ Sum/difference → apply power rule term by term. Product of two things → prod
 <strong>Tangent:</strong> y−1 = 2(x−2) → <strong>y = 2x−3</strong>
 </div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 
@@ -2874,8 +2881,6 @@ Sum/difference → apply power rule term by term. Product of two things → prod
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-27')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">FR Q32: Is f(x)={x² if x&lt;1; 2x−1 if x≥1} differentiable at x=1?</span>
 <div style="font-size:9.5pt">
 <strong>Continuity at 1:</strong> lim⁻=1, lim⁺=1, f(1)=1 ✓<br>
@@ -2884,6 +2889,8 @@ Sum/difference → apply power rule term by term. Product of two things → prod
 Left = Right = 2 → <strong>differentiable at x=1, f′(1)=2</strong>
 </div>
 </div>
+      </div>
+    </div>
 </div>
 
 <div class="trap" style="margin-top:6px">
@@ -2979,12 +2986,12 @@ Left = Right = 2 → <strong>differentiable at x=1, f′(1)=2</strong>
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-28')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <strong>c is a critical number of f if:</strong><br>
 <span class="formula-line">f′(c) = 0 &nbsp;&nbsp; OR &nbsp;&nbsp; f′(c) is undefined</span>
 AND c is in the domain of f.
 </div>
+      </div>
+    </div>
 <div class="trap">
 <span class="trap-title">🔥 TRAP (T/F Exam 3): Critical number ≠ local extremum</span>
 These were T/F questions that caught many students:<br>
@@ -3021,12 +3028,12 @@ If f′(c) = 0:<br>
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-29')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <strong>Inflection point</strong> = where concavity changes (f″ changes sign).<br>
 <span class="formula-line">Candidate: f″(c) = 0 or f″(c) undefined</span>
 <strong>Must verify:</strong> f″ actually changes sign at c. If f″(c)=0 but doesn't change sign → <strong>NOT</strong> an inflection point.
 </div>
+      </div>
+    </div>
 <div class="trap">
 <span class="trap-title">🔥 TRAP: f″(c)=0 alone is not enough</span>
 Example: f(x) = x⁴. f″(x) = 12x². f″(0) = 0. But f″ doesn't change sign at x=0 (always ≥ 0). So x=0 is NOT an inflection point. Must check sign change.
@@ -3053,8 +3060,6 @@ The absolute max/min is frequently at an endpoint. Students find the critical nu
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-30')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">FR Q9: Abs max/min of f(x)=x⁴−5x²+4 on [0,2]</span>
 <div class="ex-row"><span class="ex-label">Cite EVT</span><span class="ex-val">f is a polynomial, continuous on [0,2] → abs extrema exist (EVT)</span></div>
 <div class="ex-row"><span class="ex-label">f′(x)</span><span class="ex-val">= 4x³−10x = 2x(2x²−5) = 0 → x=0 or x=√(5/2) ≈ 1.58</span></div>
@@ -3065,6 +3070,8 @@ The absolute max/min is frequently at an endpoint. Students find the critical nu
 <div class="ex-row"><span class="ex-label">Abs max</span><span class="ex-val">= <strong>4</strong> at x=0</span></div>
 <div class="ex-row"><span class="ex-label">Abs min</span><span class="ex-val">= <strong>−9/4</strong> at x=√(5/2)</span></div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 </div><!-- end #8 section -->
@@ -3173,8 +3180,6 @@ Divide: 2x+5 remainder 0/x−1 → y = 2x+5 is the oblique asymptote
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-31')">Hide</button>
       <div class="active-recall-content">
         <div class="example-hard">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">EXAM STYLE — Full sketch: f(x) = 8/(x²+4)</span>
 <div style="font-size:9.5pt;line-height:1.6">
 <strong>1. Domain:</strong> All reals (denom x²+4 &gt; 0 always) → (−∞,∞)<br>
@@ -3190,6 +3195,8 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
 <strong>7. Sketch:</strong> Bell-shaped curve, peak at (0,2), inflection at (±2/√3, 3/2), approaches y=0 asymptotically.
 </div>
 </div>
+      </div>
+    </div>
 
 <div class="active-recall-wrapper" id="recall-block-32">
       <div class="active-recall-overlay">
@@ -3199,8 +3206,6 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-32')">Hide</button>
       <div class="active-recall-content">
         <div class="example" style="margin-top:6px">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">FR Q41 Style: y = x³/(x²−9)</span>
 <div style="font-size:9pt">
 <strong>1. Domain:</strong> x≠±3<br>
@@ -3210,6 +3215,8 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
 <strong>5–6.</strong> [Complete in practice — requires quotient rule, then second derivative]
 </div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 
@@ -3298,8 +3305,6 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-33')">Hide</button>
       <div class="active-recall-content">
         <div class="algo">
-      </div>
-    </div>
 <span class="algo-title">OPTIMIZATION ALGORITHM — 7 Steps</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Draw and label:</strong> Draw a picture. Label all quantities with variable names.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>Objective function:</strong> Write what you want to maximize or minimize. Usually area, volume, cost, distance. Call it Q(x,y).</span></div>
@@ -3309,6 +3314,8 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
 <div class="step"><span class="step-num">6</span><span class="step-body"><strong>Differentiate:</strong> Find Q′. Set Q′=0, solve for critical number. If domain is closed, also evaluate at endpoints.</span></div>
 <div class="step"><span class="step-num">7</span><span class="step-body"><strong>Verify and answer:</strong> Confirm it's a max or min (2nd deriv test or evaluate competing candidates). State the answer the question asks for (dimensions, not just the variable).</span></div>
 </div>
+      </div>
+    </div>
 </div>
 <div>
 <div class="active-recall-wrapper" id="recall-block-34">
@@ -3319,8 +3326,6 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-34')">Hide</button>
       <div class="active-recall-content">
         <div class="example-hard">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">FR Q14: Max surface area cylinder inscribed in sphere of radius 5 m</span>
 <div style="font-size:9.5pt">
 <strong>Setup:</strong> Cylinder has radius r, height h. Inscribed in sphere: r²+(h/2)²=25 → r²=25−h²/4<br>
@@ -3331,6 +3336,8 @@ Substitute: r²=25−h²/4 → S = 2πh√(25−h²/4) + 2π(25−h²/4)<br>
 Set S′=0 → solve for h. Then find r. Report both dimensions.
 </div>
 </div>
+      </div>
+    </div>
 
 <div class="active-recall-wrapper" id="recall-block-35">
       <div class="active-recall-overlay">
@@ -3340,8 +3347,6 @@ Set S′=0 → solve for h. Then find r. Report both dimensions.
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-35')">Hide</button>
       <div class="active-recall-content">
         <div class="example" style="margin-top:5px">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">SG4 Q5: Fencing — maximize area with 1000 yards total fencing. Field divided into 3 smaller rectangles with 2 internal fences parallel to width.</span>
 <div style="font-size:9.5pt">
 Let x = length, y = width. Fencing: 2x + 4y = 1000 (2 lengths + 4 widths).<br>
@@ -3351,6 +3356,8 @@ A′ = 500−4y = 0 → y = 125; x = 500−250 = 250<br>
 A″ = −4 &lt; 0 → maximum. Max area = 250·125 = 31,250 yd²
 </div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 
@@ -3373,8 +3380,6 @@ A″ = −4 &lt; 0 → maximum. Max area = 250·125 = 31,250 yd²
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-36')">Hide</button>
       <div class="active-recall-content">
         <div class="algo">
-      </div>
-    </div>
 <span class="algo-title">RELATED RATES ALGORITHM — 5 Steps</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Draw &amp; label:</strong> Draw at a general instant. Label quantities with variables and their rates (dx/dt, dV/dt, etc.). State all given numerical values separately.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>Write the geometric equation:</strong> Volume formula, Pythagorean theorem, similar triangles, area formula. This connects the variables.</span></div>
@@ -3382,6 +3387,8 @@ A″ = −4 &lt; 0 → maximum. Max area = 250·125 = 31,250 yd²
 <div class="step"><span class="step-num">4</span><span class="step-body"><strong>Substitute the given instant values:</strong> NOW plug in the specific numerical values of the variables (NOT before step 3).</span></div>
 <div class="step"><span class="step-num">5</span><span class="step-body"><strong>Solve for the unknown rate.</strong> Include units in final answer.</span></div>
 </div>
+      </div>
+    </div>
 <div class="trap" style="margin-top:5px">
 <span class="trap-title">☠ EXAM KILLER: Substituting values BEFORE differentiating</span>
 If you plug in the specific instant values before differentiating, all derivatives become zero (constants). You MUST differentiate the general equation first, then substitute numbers.
@@ -3396,8 +3403,6 @@ If you plug in the specific instant values before differentiating, all derivativ
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-37')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">FR Q13: Water trough — inverted equilateral triangle cross-section, 10 ft long, altitude 2 ft. Water leaks at 1 ft³/hr. Find dh/dt when h=1 ft.</span>
 <div style="font-size:9.5pt">
 <strong>Similar triangles:</strong> w/h = (2√3·h/(2))... equilateral triangle: w = √3·h (base/height ratio)<br>
@@ -3410,6 +3415,8 @@ w = √3h<br>
 <strong>Solve:</strong> −1 = 10√3(1)(dh/dt) → <strong>dh/dt = −1/(10√3) = −√3/30 ft/hr</strong>
 </div>
 </div>
+      </div>
+    </div>
 
 <div class="card card-blue" style="margin-top:5px">
 <strong>Key geometry formulas for related rates:</strong><br>
@@ -3441,8 +3448,6 @@ Then ∃ c ∈ (a,b) such that f′(c) = 0<br><br>
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-38')">Hide</button>
       <div class="active-recall-content">
         <div class="example" style="margin-top:5px">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">FR Q16: f(x)=x³−x on [0,1]. Verify Rolle's, find c.</span>
 <div style="font-size:9.5pt">
 <strong>(1)</strong> f is a polynomial → continuous on [0,1] ✓<br>
@@ -3453,6 +3458,8 @@ f′(x) = 3x²−1 = 0 → x² = 1/3 → x = 1/√3 = √3/3 ≈ 0.577 ∈ (0,1)
 <strong>c = √3/3</strong>
 </div>
 </div>
+      </div>
+    </div>
 </div>
 <div>
 <div class="card card-dark">
@@ -3471,8 +3478,6 @@ Then ∃ c ∈ (a,b) such that:<br>
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-39')">Hide</button>
       <div class="active-recall-content">
         <div class="example" style="margin-top:5px">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">FR Q28: f(x)=5x²−3x+1 on [1,3]. Find all c satisfying MVT.</span>
 <div style="font-size:9.5pt">
 <strong>(1)</strong> polynomial → continuous [1,3] ✓<br>
@@ -3481,6 +3486,8 @@ Then ∃ c ∈ (a,b) such that:<br>
 <strong>f′(x)</strong> = 10x−3 = 17 → 10x = 20 → <strong>c = 2</strong> ∈ (1,3) ✓
 </div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 
@@ -3590,8 +3597,6 @@ Every indefinite integral requires +C. Definite integrals do NOT need +C. This c
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-40')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <strong>FTC Part 1:</strong><br>
 <span class="formula-line">If F(x) = ∫ₐˣ f(t)dt, then F′(x) = f(x)</span>
 (f must be continuous on [a,b])<br><br>
@@ -3602,6 +3607,8 @@ where F is any antiderivative of f (F′=f).<br><br>
 <span class="formula-line">∫ₐᵇ F′(x)dx = F(b) − F(a)</span>
 The integral of a rate of change = net change in quantity.
 </div>
+      </div>
+    </div>
 </div>
 <div>
 <div class="subsection-title">Properties of Definite Integrals</div>
@@ -3635,13 +3642,13 @@ Split at x=2: ∫₁² (2−x)dx + ∫₂⁴ (x−2)dx = 1/2 + 2 = 5/2
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-41')">Hide</button>
       <div class="active-recall-content">
         <div class="example" style="margin-top:5px">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">Definite Integral from Graph (FR Q18)</span>
 <div style="font-size:9.5pt">
 Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above), region 5→7 = area 1 (below). Find ∫₀⁵f, ∫₅⁷f, ∫₀⁵|f|. Use integral properties to combine labeled regions.
 </div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 
@@ -3662,8 +3669,6 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-42')">Hide</button>
       <div class="active-recall-content">
         <div class="algo">
-      </div>
-    </div>
 <span class="algo-title">U-SUBSTITUTION ALGORITHM</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Choose u:</strong> Set u = the inside function (usually what's being raised to a power, or the argument of trig)</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>Find du:</strong> Differentiate u w.r.t. x to get du = g′(x)dx</span></div>
@@ -3672,6 +3677,8 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 <div class="step"><span class="step-num">5</span><span class="step-body"><strong>Back-substitute:</strong> Replace u with g(x).</span></div>
 <div class="step"><span class="step-num">6</span><span class="step-body"><strong>For definite integrals:</strong> Either change bounds (find u(a) and u(b)) OR back-sub first, then evaluate. Both work.</span></div>
 </div>
+      </div>
+    </div>
 </div>
 <div>
 <div class="card card-blue">
@@ -3697,8 +3704,6 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-43')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-green">Easy: ∫ sin³x cos x dx</span>
 <div class="ex-row"><span class="ex-label">u =</span><span class="ex-val">sin x</span></div>
 <div class="ex-row"><span class="ex-label">du =</span><span class="ex-val">cos x dx</span></div>
@@ -3706,6 +3711,8 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 <div class="ex-row"><span class="ex-label">Integrate</span><span class="ex-val">u⁴/4 + C</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val"><strong>sin⁴x/4 + C</strong></span></div>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-44">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -3714,8 +3721,6 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-44')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">Medium: ∫ sec x tan x/(4+sec x)² dx</span>
 <div class="ex-row"><span class="ex-label">u =</span><span class="ex-val">4 + sec x</span></div>
 <div class="ex-row"><span class="ex-label">du =</span><span class="ex-val">sec x tan x dx</span></div>
@@ -3723,6 +3728,8 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 <div class="ex-row"><span class="ex-label">Integrate</span><span class="ex-val">−1/u + C</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val"><strong>−1/(4+sec x) + C</strong></span></div>
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-45">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -3731,8 +3738,6 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-45')">Hide</button>
       <div class="active-recall-content">
         <div class="example-hard">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">Hard: ∫₁⁹ 3x/√(10−x) dx (FR Q17b)</span>
 <div class="ex-row"><span class="ex-label">u =</span><span class="ex-val">10−x → x = 10−u</span></div>
 <div class="ex-row"><span class="ex-label">du =</span><span class="ex-val">−dx</span></div>
@@ -3740,6 +3745,8 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 <div class="ex-row"><span class="ex-label">Sub</span><span class="ex-val">∫₉¹ 3(10−u)/√u·(−du) = 3∫₁⁹(10u⁻¹/²−u¹/²)du</span></div>
 <div class="ex-row"><span class="ex-label">Eval</span><span class="ex-val">3[20√u−(2/3)u³/²]₁⁹ = 3[(60−18)−(20−2/3)] = 68</span></div>
 </div>
+      </div>
+    </div>
 </div>
 
 <div class="subsection-title" style="margin-top:8px">Average Value of a Function</div>
@@ -3752,11 +3759,11 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-46')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <span class="formula-line">f_avg = 1/(b−a) · ∫ₐᵇ f(x) dx</span>
 Formula provided on exam.
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-47">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -3765,13 +3772,13 @@ Formula provided on exam.
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-47')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">FR Q12: Avg of f(x)=sinx on [0,π/2]</span>
 <div style="font-size:9.5pt">
 f_avg = (1/(π/2−0))·∫₀^(π/2) sinx dx = (2/π)·[−cosx]₀^(π/2) = (2/π)(0−(−1)) = <strong>2/π</strong>
 </div>
 </div>
+      </div>
+    </div>
 </div>
 </div><!-- end #11 -->
 
@@ -3843,11 +3850,11 @@ f_avg = (1/(π/2−0))·∫₀^(π/2) sinx dx = (2/π)·[−cosx]₀^(π/2) = (2
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-48')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <span class="formula-line">A = ∫ₐᵇ [f(x) − g(x)] dx</span>
 where f(x) ≥ g(x) on [a,b] (f is the TOP curve, g is the BOTTOM)
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-49">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -3856,8 +3863,6 @@ where f(x) ≥ g(x) on [a,b] (f is the TOP curve, g is the BOTTOM)
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-49')">Hide</button>
       <div class="active-recall-content">
         <div class="algo">
-      </div>
-    </div>
 <span class="algo-title">AREA BETWEEN CURVES ALGORITHM</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Find intersection points: set f(x)=g(x), solve for x. These are the bounds a and b.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Test a point in (a,b) to confirm which function is on top (larger value).</span></div>
@@ -3865,6 +3870,8 @@ where f(x) ≥ g(x) on [a,b] (f is the TOP curve, g is the BOTTOM)
 <div class="step"><span class="step-num">4</span><span class="step-body">If curves cross within [a,b], split the integral at each crossing point and handle each piece separately.</span></div>
 <div class="step"><span class="step-num">5</span><span class="step-body">Integrate, evaluate, add all pieces. Area is always positive.</span></div>
 </div>
+      </div>
+    </div>
 </div>
 <div>
 <div class="active-recall-wrapper" id="recall-block-50">
@@ -3875,8 +3882,6 @@ where f(x) ≥ g(x) on [a,b] (f is the TOP curve, g is the BOTTOM)
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-50')">Hide</button>
       <div class="active-recall-content">
         <div class="example-hard">
-      </div>
-    </div>
 <span class="ex-header ex-header-red">FR Q22: Area between y=cosx, y=sinx, x=0, x=π/2</span>
 <div style="font-size:9.5pt">
 <strong>Intersect:</strong> cosx=sinx → tanx=1 → x=π/4<br>
@@ -3888,6 +3893,8 @@ where f(x) ≥ g(x) on [a,b] (f is the TOP curve, g is the BOTTOM)
 = (√2−1) + (−1+√2) = <strong>2√2−2</strong>
 </div>
 </div>
+      </div>
+    </div>
 <div class="trap" style="margin-top:4px">
 <span class="trap-title">🔥 TRAP: Find intersections FIRST, then split the integral</span>
 Using one integral without checking whether curves cross gives a wrong (too small) answer because negative area cancels positive area.
@@ -3971,13 +3978,13 @@ Base has width w(x) = f(x)−g(x). Shape of cross-section determines A(x):<br>
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-51')">Hide</button>
       <div class="active-recall-content">
         <div class="formula-box">
-      </div>
-    </div>
 <span class="formula-line">Work: W = ∫ₐᵇ F(x) dx</span>
 <span class="formula-line">Average Value: f_avg = 1/(b−a)·∫ₐᵇ f(x)dx</span>
 <span class="formula-line">Arc Length: L = ∫ₐᵇ √(1+[f′(x)]²) dx</span>
 All three formulas will be provided on the exam.
 </div>
+      </div>
+    </div>
 <div class="active-recall-wrapper" id="recall-block-52">
       <div class="active-recall-overlay">
         <span class="recall-badge">Active Recall</span>
@@ -3986,14 +3993,14 @@ All three formulas will be provided on the exam.
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-52')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-blue">FR Q19: Arc length of f(x)=(2/3)x^(3/2) on [0,3]</span>
 <div style="font-size:9pt">
 f′(x) = x^(1/2). 1+[f′]² = 1+x.<br>
 L = ∫₀³ √(1+x)dx. Let u=1+x: = ∫₁⁴ u^(1/2)du = [(2/3)u^(3/2)]₁⁴ = (2/3)(8−1) = <strong>14/3</strong>
 </div>
 </div>
+      </div>
+    </div>
 </div>
 </div>
 
@@ -4013,13 +4020,13 @@ L = ∫₀³ √(1+x)dx. Let u=1+x: = ∫₁⁴ u^(1/2)du = [(2/3)u^(3/2)]₁⁴
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-53')">Hide</button>
       <div class="active-recall-content">
         <div class="algo" style="margin-bottom:6px">
-      </div>
-    </div>
 <span class="algo-title">INVERSE FUNCTION THEOREM — 3-STEP RECIPE (FR Q21)</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Find b = f⁻¹(a):</strong> Solve f(b) = a. What input gives the output a?</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>Compute f′(b):</strong> Differentiate f(x), then evaluate at x=b.</span></div>
 <div class="step"><span class="step-num">3</span><span class="step-body"><strong>Answer = 1/f′(b).</strong> Done.</span></div>
 </div>
+      </div>
+    </div>
 
 <div class="active-recall-wrapper" id="recall-block-54">
       <div class="active-recall-overlay">
@@ -4029,14 +4036,14 @@ L = ∫₀³ √(1+x)dx. Let u=1+x: = ∫₁⁴ u^(1/2)du = [(2/3)u^(3/2)]₁⁴
       <button class="recall-reset-trigger" onclick="resetRecall('recall-block-54')">Hide</button>
       <div class="active-recall-content">
         <div class="example">
-      </div>
-    </div>
 <span class="ex-header ex-header-green">FR Q21 (GUARANTEED EXTRA CREDIT): f(x)=3x³+4x²+6x+5, find (f⁻¹)′(5)</span>
 <div class="ex-row"><span class="ex-label">Step 1</span><span class="ex-val">Solve f(b)=5: 3b³+4b²+6b+5=5 → 3b³+4b²+6b=0 → b(3b²+4b+6)=0 → b=0 (others complex) → b=0</span></div>
 <div class="ex-row"><span class="ex-label">Step 2</span><span class="ex-val">f′(x)=9x²+8x+6. f′(0) = 0+0+6 = 6</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">(f⁻¹)′(5) = 1/f′(0) = <strong>1/6</strong></span></div>
 <div class="ex-row"><span class="ex-label">Time</span><span class="ex-val">Takes ~3 minutes. It's guaranteed extra credit. Always do this on the final.</span></div>
 </div>
+      </div>
+    </div>
 
 <div class="memory">
 <span class="memory-title">MEMORY: Disk/Washer/Shell decision</span>
