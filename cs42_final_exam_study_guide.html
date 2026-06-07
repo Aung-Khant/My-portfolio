@@ -1,0 +1,2775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS 42 Final Exam Study Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --surface2: #1c2030;
+    --border: #2a3050;
+    --accent: #4fffb0; /* Green: Must memorize / Tier 1 */
+    --accent-rgb: 79, 255, 176;
+    --accent2: #ff6b6b; /* Red: Traps / Warnings */
+    --accent2-rgb: 255, 107, 107;
+    --accent3: #ffd166; /* Yellow: Frequently tested / Tier 2 */
+    --accent3-rgb: 255, 209, 102;
+    --accent4: #74b9ff; /* Blue: Understanding / Tier 3 */
+    --accent4-rgb: 116, 185, 255;
+    --accent5: #a29bfe; /* Purple */
+    --accent5-rgb: 162, 155, 254;
+    --text: #e4e8f7;
+    --text-dim: #7a8aaa;
+    --text-bright: #ffffff;
+    --danger: #ff4757;
+    --success: #2ed573;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    --glass: rgba(20, 23, 32, 0.7);
+    --glass-border: rgba(42, 48, 80, 0.4);
+    --active-recall-bg: rgba(13, 15, 20, 0.95);
+    --sidebar-width: 320px;
+    --radius: 12px;
+  }
+
+  html.light {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface2: #f1f5f9;
+    --border: #cbd5e1;
+    --accent: #10b981;
+    --accent-rgb: 16, 185, 129;
+    --accent2: #ef4444;
+    --accent2-rgb: 239, 68, 68;
+    --accent3: #f59e0b;
+    --accent3-rgb: 245, 158, 11;
+    --accent4: #3b82f6;
+    --accent4-rgb: 59, 130, 246;
+    --accent5: #6366f1;
+    --accent5-rgb: 99, 102, 241;
+    --text: #334155;
+    --text-dim: #64748b;
+    --text-bright: #0f172a;
+    --danger: #ef4444;
+    --success: #10b981;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    --glass: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(203, 213, 225, 0.5);
+    --active-recall-bg: rgba(248, 250, 252, 0.95);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.2s ease, border-color 0.2s ease; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── LAYOUT STRUCTURE ── */
+  .app-container {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── MOBILE HEADER ── */
+  .mobile-header {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+  .menu-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .mobile-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-bright);
+  }
+
+  /* ── SIDEBAR ── */
+  aside {
+    width: var(--sidebar-width);
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    overflow-y: auto;
+    z-index: 900;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .sidebar-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+  }
+  .sidebar-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sidebar-logo span { color: var(--accent); }
+  .sidebar-subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* Theme Toggle */
+  .theme-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .toggle-label {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-bright);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-btn:hover {
+    background: var(--border);
+  }
+
+  /* Search Box */
+  .search-box {
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px 10px 36px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+  }
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 14px;
+    pointer-events: none;
+  }
+
+  /* Study Modes Control */
+  .modes-panel {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .modes-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  .mode-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.15s;
+    user-select: none;
+    margin-bottom: 6px;
+    border: 1px solid transparent;
+  }
+  .mode-option:last-child { margin-bottom: 0; }
+  .mode-option:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .mode-option.active {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-bright);
+  }
+  .mode-option input {
+    display: none;
+  }
+  .mode-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text-dim);
+  }
+  .mode-option.active .mode-dot {
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+  }
+  .mode-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: -4px;
+    margin-left: 18px;
+    display: block;
+    font-weight: normal;
+  }
+
+  /* Progress Tracking Dashboard */
+  .readiness-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .readiness-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .readiness-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .readiness-bar-fg {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent4) 0%, var(--accent) 100%);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .readiness-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: bold;
+    text-align: right;
+  }
+
+  /* Table of Contents */
+  .toc-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .toc-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .toc-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--text);
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .toc-link:hover {
+    background: var(--surface2);
+    border-left-color: var(--text-dim);
+  }
+  .toc-link.active-toc {
+    background: var(--surface2);
+    border-left-color: var(--accent);
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+  .toc-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
+  }
+  .toc-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .toc-check {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: transparent;
+  }
+  .toc-link.mastered .toc-check {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
+
+  /* Actions Box */
+  .sidebar-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .action-btn {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .action-btn:hover {
+    background: var(--surface);
+    border-color: var(--accent);
+    color: var(--text-bright);
+  }
+
+  /* ── MAIN CONTENT AREA ── */
+  main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 40px;
+    max-width: 1100px;
+    width: 100%;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(var(--accent-rgb), 0.05) 50%, var(--bg) 100%);
+    border: 1px solid var(--border);
+    border-bottom: 2px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 40px 32px 32px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(var(--accent-rgb),0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  header h1 span { color: var(--accent); }
+  .header-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex; gap: 24px; flex-wrap: wrap; margin-top: 18px;
+  }
+  .header-meta span { display: flex; align-items: center; gap: 6px; }
+  .header-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  /* ── HIGH-YIELD DASHBOARD ── */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .dashboard-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: var(--shadow);
+  }
+  .dash-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .dash-card-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  .dash-card-val span {
+    color: var(--accent);
+  }
+  .dash-card-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* Interactive Graph / Visual Dependency Map */
+  .dependency-map-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  .dependency-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+  .dependency-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+  .dependency-map-wrapper {
+    overflow-x: auto;
+    width: 100%;
+  }
+  .dependency-map {
+    width: 100%;
+    min-width: 700px;
+    height: auto;
+  }
+  .node {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .node:hover {
+    transform: scale(1.03);
+  }
+  .node text {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Topic Probability Tracker */
+  .dash {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  .dash-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dash-title span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .prob-row {
+    display: grid;
+    grid-template-columns: 1fr auto 180px;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .prob-row:last-child { border-bottom: none; }
+  .prob-row:hover {
+    background: rgba(255, 255, 255, 0.01);
+  }
+  .prob-label { font-size: 13.5px; font-weight: 600; color: var(--text); }
+  .prob-pct {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 42px;
+    text-align: right;
+  }
+  .prob-bar-bg {
+    height: 6px; border-radius: 3px;
+    background: var(--surface2); overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .prob-bar { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(0.1, 0.8, 0.2, 1); }
+  
+  .p99 { color: var(--accent); }
+  .p99 .prob-bar { background: var(--accent); }
+  .p95 { color: var(--accent3); }
+  .p95 .prob-bar { background: var(--accent3); }
+  .p90 { color: var(--accent4); }
+  .p90 .prob-bar { background: var(--accent4); }
+  .p85 { color: var(--accent5); }
+  .p85 .prob-bar { background: var(--accent5); }
+  .p80 { color: #fd79a8; }
+  .p80 .prob-bar { background: #fd79a8; }
+  .p75 { color: var(--text-dim); }
+  .p75 .prob-bar { background: var(--text-dim); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 80px; /* Offset for mobile sticky header */
+  }
+  .section-header {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .section-header:hover { background: var(--surface2); }
+  
+  /* Mastery Checkbox in Header */
+  .header-checkbox-container {
+    display: flex;
+    align-items: center;
+    z-index: 10;
+  }
+  .section-mastery-chk {
+    appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.15s;
+  }
+  .section-mastery-chk:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .section-mastery-chk:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    font-weight: 900;
+    color: #000;
+  }
+  
+  .rank-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .section-title { font-family: 'Outfit', sans-serif; font-size: 18px; font-weight: 700; flex: 1; color: var(--text-bright); }
+  .section-prob {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .chevron {
+    font-size: 12px; color: var(--text-dim);
+    transition: transform 0.2s;
+  }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { padding: 24px; display: none; }
+  .section.open .section-body { display: block; }
+  
+  /* Section Mastery Highlighting */
+  .section.mastered-section {
+    border-color: rgba(var(--accent-rgb), 0.3);
+  }
+  .section.mastered-section .section-header {
+    background: rgba(var(--accent-rgb), 0.02);
+  }
+  .section.mastered-section .section-header:hover {
+    background: rgba(var(--accent-rgb), 0.05);
+  }
+
+  /* Section Meta Panels (Difficulty / Master Time / Prerequisites) */
+  .section-meta-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text);
+  }
+  .meta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .meta-val {
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+
+  /* ── TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid currentColor;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .tag-exam { color: var(--accent2); background: rgba(255, 107, 107, 0.06); }
+  .tag-hw { color: var(--accent4); background: rgba(116, 185, 255, 0.06); }
+  .tag-review { color: var(--accent); background: rgba(79, 255, 176, 0.06); }
+
+  /* ── CONTENT BLOCKS ── */
+  .desc { color: var(--text); margin-bottom: 18px; font-size: 14.5px; line-height: 1.7; }
+
+  .card {
+    background: var(--surface2);
+    border-left: 4px solid var(--border);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 18px;
+    margin-bottom: 16px;
+    font-size: 13.5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+  
+  /* Card Visual Hierarchies */
+  .card.pattern { border-left-color: var(--accent); } /* Core Concepts (Green) */
+  .card.pattern .card-title { color: var(--accent); }
+  
+  .card.shortcut { border-left-color: var(--accent3); } /* High Probability (Yellow) */
+  .card.shortcut .card-title { color: var(--accent3); }
+  
+  .card.predict { border-left-color: var(--accent4); } /* Understanding (Blue) */
+  .card.predict .card-title { color: var(--accent4); }
+  
+  .card.trap { border-left-color: var(--accent2); } /* Traps & Mistakes (Red) */
+  .card.trap .card-title { color: var(--accent2); }
+
+  ul.list {
+    list-style: none;
+    padding: 0;
+  }
+  ul.list li {
+    padding: 6px 0 6px 22px;
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  ul.list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 12px;
+    top: 7px;
+  }
+  
+  /* Bulleted Lists in Traps use Red Arrow */
+  .card.trap ul.list li::before {
+    color: var(--accent2);
+  }
+
+  /* ── CODE / MATH ── */
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    background: rgba(var(--accent-rgb), 0.08);
+    border: 1px solid rgba(var(--accent-rgb), 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+  }
+  
+  .light code {
+    background: rgba(var(--accent-rgb), 0.1);
+    color: rgba(var(--accent-rgb), 0.8);
+    font-weight: 600;
+  }
+
+  pre {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    background: #07090e;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    line-height: 1.8;
+    color: #cbd5e0;
+    margin: 14px 0;
+  }
+  
+  .light pre {
+    background: #0f172a;
+    color: #e2e8f0;
+  }
+
+  pre .kw { color: var(--accent); font-weight: 600; }
+  pre .cm { color: var(--text-dim); font-style: italic; }
+  pre .val { color: var(--accent3); }
+  pre .op { color: var(--accent5); }
+
+  /* ── TABLE ── */
+  .tbl-wrap { overflow-x: auto; margin: 16px 0; border-radius: 8px; border: 1px solid var(--border); }
+  table {
+    border-collapse: collapse;
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+    width: 100%;
+    background: var(--surface);
+  }
+  th {
+    background: var(--surface2);
+    padding: 12px 16px;
+    text-align: left;
+    color: var(--text-bright);
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 11px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--border);
+  }
+  td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12.5px;
+    color: var(--text);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td {
+    background: rgba(255,255,255,0.01);
+  }
+  .hi { color: var(--accent); font-weight: 600; }
+  .warn { color: var(--accent3); font-weight: 600; }
+  .danger-cell { color: var(--accent2); font-weight: 700; }
+
+  /* ── GRID ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 14px 0;
+  }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── EXAM ANATOMY ── */
+  .exam-box {
+    background: var(--surface);
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  .exam-box-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 13.5px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  .alert-icon { font-size: 18px; flex-shrink: 0; line-height: 1; }
+  .alert.info { background: rgba(116,185,255,0.08); border: 1px solid rgba(116,185,255,0.2); color: var(--accent4); }
+  .alert.warn { background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.2); color: var(--accent3); }
+  .alert.danger { background: rgba(255,71,87,0.08); border: 1px solid rgba(255,71,87,0.2); color: var(--accent2); }
+  .alert.success { background: rgba(46,213,115,0.07); border: 1px solid rgba(46,213,115,0.2); color: var(--accent); }
+  .alert span strong {
+    color: var(--text-bright);
+  }
+
+  h3 { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 700; margin: 24px 0 12px; color: var(--text-bright); border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h4 { font-size: 11.5px; font-weight: 700; margin: 18px 0 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1.5px; font-family: 'IBM Plex Mono', monospace; }
+  p { margin: 10px 0; font-size: 14px; line-height: 1.7; }
+  strong { color: var(--text-bright); }
+  .spacer { height: 16px; }
+
+  /* ── ACTIVE RECALL MECHANICS ── */
+  .active-recall-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  body.mode-recall .active-recall-wrapper {
+    border: 1px dashed var(--accent3);
+    padding: 6px;
+    background: rgba(255, 209, 102, 0.02);
+  }
+  body.mode-recall .active-recall-wrapper .active-recall-content {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.25;
+  }
+  body.mode-recall .active-recall-wrapper.revealed .active-recall-content {
+    filter: none !important;
+    pointer-events: auto !important;
+    user-select: auto !important;
+    opacity: 1 !important;
+  }
+  .active-recall-overlay {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 10;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+  body.mode-recall .active-recall-wrapper:not(.revealed) .active-recall-overlay {
+    display: flex;
+    pointer-events: auto;
+  }
+  .recall-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent3);
+    background: rgba(255, 209, 102, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 209, 102, 0.2);
+  }
+  .active-recall-btn {
+    background: var(--accent3);
+    color: #0d0f14;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .active-recall-btn:hover {
+    background: var(--text-bright);
+    color: #000;
+  }
+  .active-recall-wrapper.revealed .active-recall-overlay {
+    display: none !important;
+  }
+
+  /* Reset Button for Recall cards in standard mode */
+  .recall-reset-trigger {
+    display: none;
+    position: absolute;
+    top: 8px; right: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 5;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  body.mode-recall .active-recall-wrapper.revealed:hover .recall-reset-trigger {
+    display: block;
+  }
+  .recall-reset-trigger:hover {
+    background: var(--surface);
+    color: var(--accent3);
+    border-color: var(--accent3);
+  }
+
+  /* ── EXAM CRAM MECHANICS ── */
+  body.mode-cram .section:not(.tier-1-section):not(.cram-open) .section-body {
+    display: none !important;
+  }
+  body.mode-cram .section:not(.tier-1-section):not(.cram-open) {
+    opacity: 0.55;
+  }
+  body.mode-cram .section:not(.tier-1-section):not(.cram-open) .section-header {
+    border-bottom: none;
+  }
+  body.mode-cram .section.tier-1-section {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(79, 255, 176, 0.05);
+  }
+  body.mode-cram .card:not(.trap) {
+    opacity: 0.85;
+  }
+  body.mode-cram .card.trap {
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.15);
+    border-width: 5px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.005); box-shadow: 0 0 20px rgba(255, 107, 107, 0.25); }
+    100% { transform: scale(1); }
+  }
+
+  /* ── RESPONSIVE SCROLL-OFFSET / PRINT / MEDIA ── */
+  @media (max-width: 1024px) {
+    aside {
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    aside.open {
+      transform: translateX(0);
+    }
+    main {
+      margin-left: 0;
+      padding: 80px 16px 40px;
+    }
+    .mobile-header {
+      display: flex;
+    }
+  }
+
+  /* ── PRINT OPTIMIZATION ── */
+  @media print {
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+      font-size: 12pt;
+    }
+    aside, .mobile-header, .modes-panel, .dependency-map-container, .action-btn, .dashboard-grid, .recall-reset-trigger, .sidebar-footer {
+      display: none !important;
+    }
+    main {
+      margin-left: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    .section {
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: none !important;
+      margin-bottom: 20px !important;
+      page-break-inside: avoid;
+    }
+    .section-body {
+      display: block !important;
+    }
+    .active-recall-wrapper .active-recall-content {
+      filter: none !important;
+      opacity: 1 !important;
+    }
+    .active-recall-overlay {
+      display: none !important;
+    }
+    .card {
+      border: 1px solid #cbd5e1 !important;
+      border-left-width: 4px !important;
+      background: #f8fafc !important;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+    }
+    code {
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    pre {
+      background: #f8fafc !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- MOBILE HEADER -->
+  <div class="mobile-header">
+    <button class="menu-toggle-btn" onclick="toggleSidebar()">☰</button>
+    <div class="mobile-title">CS 42 Final Guide</div>
+    <button class="theme-btn" onclick="toggleTheme()">🌓</button>
+  </div>
+
+  <!-- STICKY SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><span>CS 42</span> Study Guide</div>
+      <div class="sidebar-subtitle">SMC · Professor Kurtz</div>
+    </div>
+
+    <!-- Theme Control -->
+    <div class="theme-toggle-container">
+      <span class="toggle-label">Theme Settings</span>
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌓 Toggle</button>
+    </div>
+
+    <!-- Live Search -->
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="search-input" placeholder="Search concepts, equations..." oninput="handleSearch(this.value)">
+    </div>
+
+    <!-- Interactive Study Modes -->
+    <div class="modes-panel">
+      <div class="modes-title">Study Workflow Mode</div>
+      
+      <label class="mode-option active" id="mode-study-lbl" onclick="setStudyMode('study')">
+        <input type="radio" name="studymode" value="study" checked>
+        <span class="mode-dot"></span>
+        <div>
+          Standard Study Mode
+          <span class="mode-desc">Full explanations and complete guide visible.</span>
+        </div>
+      </label>
+
+      <label class="mode-option" id="mode-recall-lbl" onclick="setStudyMode('recall')">
+        <input type="radio" name="studymode" value="recall">
+        <span class="mode-dot"></span>
+        <div>
+          Active Recall Mode
+          <span class="mode-desc">Solutions are blurred. Click to reveal.</span>
+        </div>
+      </label>
+
+      <label class="mode-option" id="mode-cram-lbl" onclick="setStudyMode('cram')">
+        <input type="radio" name="studymode" value="cram">
+        <span class="mode-dot"></span>
+        <div>
+          Exam-Cram Mode
+          <span class="mode-desc">Filters Tier 1/2 concepts and vital traps.</span>
+        </div>
+      </label>
+    </div>
+
+    <!-- Readiness tracker -->
+    <div class="readiness-container">
+      <div class="readiness-header">
+        <span>Exam Readiness</span>
+        <span id="readiness-pct">0%</span>
+      </div>
+      <div class="readiness-bar-bg">
+        <div class="readiness-bar-fg" id="readiness-bar"></div>
+      </div>
+      <div class="readiness-status" id="readiness-status">Focusing on basics</div>
+    </div>
+
+    <!-- TOC Navigation -->
+    <nav class="toc-nav">
+      <div class="toc-header">Topic Modules</div>
+      <a href="#s1" class="toc-link" onclick="scrollToSection('s1', event)">
+        <span class="toc-text">1. Sequential Circuits</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 99%</span>
+      </a>
+      <a href="#s2" class="toc-link" onclick="scrollToSection('s2', event)">
+        <span class="toc-text">2. Boolean &amp; K-Maps</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 99%</span>
+      </a>
+      <a href="#s3" class="toc-link" onclick="scrollToSection('s3', event)">
+        <span class="toc-text">3. Counter Design</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 95%</span>
+      </a>
+      <a href="#s4" class="toc-link" onclick="scrollToSection('s4', event)">
+        <span class="toc-text">4. Register Transfer</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 90%</span>
+      </a>
+      <a href="#s5" class="toc-link" onclick="scrollToSection('s5', event)">
+        <span class="toc-text">5. MUX Input Mask</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 90%</span>
+      </a>
+      <a href="#s6" class="toc-link" onclick="scrollToSection('s6', event)">
+        <span class="toc-text">6. Bitwise Logic Masks</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 85%</span>
+      </a>
+      <a href="#s7" class="toc-link" onclick="scrollToSection('s7', event)">
+        <span class="toc-text">7. Decoder + OR</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 80%</span>
+      </a>
+      <a href="#s8" class="toc-link" onclick="scrollToSection('s8', event)">
+        <span class="toc-text">8. Adder-Subtractor</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 75%</span>
+      </a>
+      <a href="#s9" class="toc-link" onclick="scrollToSection('s9', event)">
+        <span class="toc-text">9. MUX Implementation</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> 75%</span>
+      </a>
+      <a href="#s10" class="toc-link" onclick="scrollToSection('s10', event)">
+        <span class="toc-text">10. Kurtz's Global Traps</span>
+        <span class="toc-meta">TRAPS</span>
+      </a>
+      <a href="#s11" class="toc-link" onclick="scrollToSection('s11', event)">
+        <span class="toc-text">11. Study Session Plan</span>
+        <span class="toc-meta">PLAN</span>
+      </a>
+    </nav>
+
+    <!-- Printing and quick controls -->
+    <div class="sidebar-footer">
+      <button class="action-btn" onclick="expandAll()">
+        <span>展开</span> Expand All Sections
+      </button>
+      <button class="action-btn" onclick="collapseAll()">
+        <span>折叠</span> Collapse All Sections
+      </button>
+      <button class="action-btn" onclick="window.print()">
+        <span>🖨️</span> Print Guide / Save PDF
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN SCROLLABLE CONTENT -->
+  <main>
+    <header>
+      <div class="header-tag">CS 42 · Kurtz · Santa Monica College</div>
+      <h1><span>Final Exam</span> Deep-Dive Study Guide</h1>
+      <div class="header-meta">
+        <span><span class="dot"></span> 6 Questions · 200 Points · 130 Min</span>
+        <span><span class="dot" style="background:var(--accent3)"></span> Comprehensive · All Topics</span>
+        <span><span class="dot" style="background:var(--accent4)"></span> Based on 2 Exams + All Assignments + Review Sessions</span>
+      </div>
+    </header>
+
+    <!-- HIGH-YIELD OVERVIEW DASHBOARD -->
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <div class="dash-card-title">Exam Blueprint</div>
+        <div class="dash-card-val">200 <span>Points</span></div>
+        <div class="dash-card-desc">6 structured questions, partial credits heavily applied.</div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dash-card-title">Duration Limit</div>
+        <div class="dash-card-val">130 <span>Mins</span></div>
+        <div class="dash-card-desc">120 mins solving + 10 mins submission protocol.</div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dash-card-title">High-Yield Targets</div>
+        <div class="dash-card-val">5 <span>Tier 1s</span></div>
+        <div class="dash-card-desc">Five core concepts carry 90%+ probability of appearing.</div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dash-card-title">Mastery Progress</div>
+        <div class="dash-card-val"><span id="dash-progress-val">0</span>/11 <span>Pass</span></div>
+        <div class="dash-card-desc">Track and check your sections for mastery updates.</div>
+      </div>
+    </div>
+
+    <!-- VISUAL CONCEPT DEPENDENCY MAP -->
+    <div class="dependency-map-container">
+      <div class="dependency-title">Interactive Concept Dependency Map</div>
+      <div class="dependency-subtitle">Understand structural relationships. Click on any node to jump directly to its review section.</div>
+      <div class="dependency-map-wrapper">
+        <svg viewBox="0 0 800 420" class="dependency-map">
+          <!-- Arrows -->
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-dim)" />
+            </marker>
+          </defs>
+          
+          <g class="edges" stroke="var(--border)" stroke-width="2" fill="none">
+            <!-- Prereqs -> Core -->
+            <path d="M 150 65 Q 225 130 300 130" marker-end="url(#arrow)" />
+            <path d="M 450 65 Q 375 130 300 130" marker-end="url(#arrow)" />
+            
+            <!-- Boolean Expr -> implementations -->
+            <path d="M 300 130 Q 225 180 150 230" marker-end="url(#arrow)" />
+            <path d="M 300 130 L 300 230" marker-end="url(#arrow)" />
+            <path d="M 300 130 Q 375 180 450 230" marker-end="url(#arrow)" />
+            <path d="M 300 130 Q 450 130 600 130" marker-end="url(#arrow)" />
+            
+            <!-- Sequential -> Counter -->
+            <path d="M 600 130 Q 625 180 650 230" marker-end="url(#arrow)" />
+            
+            <!-- Logic to Datapaths -->
+            <path d="M 150 230 L 200 330" marker-end="url(#arrow)" />
+            <path d="M 300 230 Q 400 280 500 330" marker-end="url(#arrow)" />
+            <path d="M 450 230 L 350 330" marker-end="url(#arrow)" />
+            
+            <!-- Registers & Masks -->
+            <path d="M 350 330 Q 500 280 650 230" marker-end="url(#arrow)" />
+            <path d="M 350 330 L 500 330" marker-end="url(#arrow)" />
+            <path d="M 500 330 L 650 330" marker-end="url(#arrow)" />
+          </g>
+
+          <g class="nodes" font-family="'IBM Plex Sans', sans-serif" font-size="10" font-weight="700">
+            <!-- Prereqs -->
+            <g class="node" onclick="scrollToSection('s2', event)">
+              <circle cx="150" cy="50" r="22" fill="var(--surface2)" stroke="var(--border)" stroke-width="2" />
+              <text x="150" y="53" text-anchor="middle" fill="var(--text-dim)" font-size="8">BASIC GATES</text>
+            </g>
+            <g class="node" onclick="scrollToSection('s2', event)">
+              <circle cx="450" cy="50" r="22" fill="var(--surface2)" stroke="var(--border)" stroke-width="2" />
+              <text x="450" y="53" text-anchor="middle" fill="var(--text-dim)" font-size="8">BOOLEAN ALG</text>
+            </g>
+            
+            <!-- Tier 1 -->
+            <g class="node" onclick="scrollToSection('s2', event)">
+              <rect x="220" y="110" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" />
+              <text x="300" y="128" text-anchor="middle" fill="var(--text-bright)">S2: K-Map &amp; SOP</text>
+              <text x="300" y="142" text-anchor="middle" fill="var(--accent)" font-family="'IBM Plex Mono', monospace" font-size="8">99% PROB (TIER 1)</text>
+            </g>
+            <g class="node" onclick="scrollToSection('s1', event)">
+              <rect x="520" y="110" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" />
+              <text x="600" y="128" text-anchor="middle" fill="var(--text-bright)">S1: Sequential Circuits</text>
+              <text x="600" y="142" text-anchor="middle" fill="var(--accent)" font-family="'IBM Plex Mono', monospace" font-size="8">99% PROB (TIER 1)</text>
+            </g>
+            
+            <!-- Row 3 -->
+            <g class="node" onclick="scrollToSection('s2', event)">
+              <rect x="70" y="210" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent4)" stroke-width="2" />
+              <text x="150" y="228" text-anchor="middle" fill="var(--text-bright)">S2-C: NAND Only SOP</text>
+              <text x="150" y="242" text-anchor="middle" fill="var(--accent4)" font-family="'IBM Plex Mono', monospace" font-size="8">75% PROB (TIER 3)</text>
+            </g>
+            <g class="node" onclick="scrollToSection('s9', event)">
+              <rect x="220" y="210" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent4)" stroke-width="2" />
+              <text x="300" y="228" text-anchor="middle" fill="var(--text-bright)">S9: MUX Boolean</text>
+              <text x="300" y="242" text-anchor="middle" fill="var(--accent4)" font-family="'IBM Plex Mono', monospace" font-size="8">75% PROB (TIER 3)</text>
+            </g>
+            <g class="node" onclick="scrollToSection('s7', event)">
+              <rect x="370" y="210" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent3)" stroke-width="2" />
+              <text x="450" y="228" text-anchor="middle" fill="var(--text-bright)">S7: Decoder + OR</text>
+              <text x="450" y="242" text-anchor="middle" fill="var(--accent3)" font-family="'IBM Plex Mono', monospace" font-size="8">80% PROB (TIER 2)</text>
+            </g>
+            <g class="node" onclick="scrollToSection('s3', event)">
+              <rect x="570" y="210" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" />
+              <text x="650" y="228" text-anchor="middle" fill="var(--text-bright)">S3: Counter Design</text>
+              <text x="650" y="242" text-anchor="middle" fill="var(--accent)" font-family="'IBM Plex Mono', monospace" font-size="8">95% PROB (TIER 1)</text>
+            </g>
+            
+            <!-- Row 4 -->
+            <g class="node" onclick="scrollToSection('s8', event)">
+              <rect x="120" y="310" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent4)" stroke-width="2" />
+              <text x="200" y="328" text-anchor="middle" fill="var(--text-bright)">S8: Adder-Subtractor</text>
+              <text x="200" y="342" text-anchor="middle" fill="var(--accent4)" font-family="'IBM Plex Mono', monospace" font-size="8">75% PROB (TIER 3)</text>
+            </g>
+            <g class="node" onclick="scrollToSection('s4', event)">
+              <rect x="270" y="310" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" />
+              <text x="350" y="328" text-anchor="middle" fill="var(--text-bright)">S4: Register Transfer</text>
+              <text x="350" y="342" text-anchor="middle" fill="var(--accent)" font-family="'IBM Plex Mono', monospace" font-size="8">90% PROB (TIER 1)</text>
+            </g>
+            <g class="node" onclick="scrollToSection('s5', event)">
+              <rect x="420" y="310" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" />
+              <text x="500" y="328" text-anchor="middle" fill="var(--text-bright)">S5: MUX Input Mask</text>
+              <text x="500" y="342" text-anchor="middle" fill="var(--accent)" font-family="'IBM Plex Mono', monospace" font-size="8">90% PROB (TIER 1)</text>
+            </g>
+            <g class="node" onclick="scrollToSection('s6', event)">
+              <rect x="570" y="310" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent3)" stroke-width="2" />
+              <text x="650" y="328" text-anchor="middle" fill="var(--text-bright)">S6: Bitwise Masks</text>
+              <text x="650" y="342" text-anchor="middle" fill="var(--accent3)" font-family="'IBM Plex Mono', monospace" font-size="8">85% PROB (TIER 2)</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- EXAM FORMAT REMINDER -->
+    <div class="exam-box" style="border-color:var(--accent); margin-bottom:28px;">
+      <div class="exam-box-title">⚡ Exam Format — Know Before You Sit Down</div>
+      <div class="two-col">
+        <ul class="list">
+          <li>6 questions, some multi-part (a/b/c)</li>
+          <li>200 total points</li>
+          <li>~130 minutes (2 hr + 10 min submit)</li>
+          <li>Show ALL work — answers-only may lose points</li>
+        </ul>
+        <ul class="list">
+          <li>Complements available/not available — READ the problem</li>
+          <li>Don't use red ink</li>
+          <li>Write name on every page</li>
+          <li>Number your pages</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PROBABILITY DASHBOARD -->
+    <div class="dash">
+      <div class="dash-title">◈ Prediction Dashboard — Topic Probability <span>Click row to jump</span></div>
+      <div class="prob-row p99" onclick="scrollToSection('s1')">
+        <span class="prob-label">Sequential Circuit: logic diagram + state table + state diagram</span>
+        <span class="prob-pct">99%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:99%"></div></div>
+      </div>
+      <div class="prob-row p99" onclick="scrollToSection('s2')">
+        <span class="prob-label">Boolean expr → Logic diagram (no-simplify) + K-map + 2-level SOP</span>
+        <span class="prob-pct">99%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:99%"></div></div>
+      </div>
+      <div class="prob-row p95" onclick="scrollToSection('s3')">
+        <span class="prob-label">Counter design with D flip-flops (state table → K-maps → diagram)</span>
+        <span class="prob-pct">95%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:95%"></div></div>
+      </div>
+      <div class="prob-row p90" onclick="scrollToSection('s4')">
+        <span class="prob-label">Register transfer logic diagram (MUX + load-enable signals)</span>
+        <span class="prob-pct">90%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:90%"></div></div>
+      </div>
+      <div class="prob-row p90" onclick="scrollToSection('s5')">
+        <span class="prob-label">MUX-based logical input mask (4-to-1, find S &amp; B values)</span>
+        <span class="prob-pct">90%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:90%"></div></div>
+      </div>
+      <div class="prob-row p85" onclick="scrollToSection('s6')">
+        <span class="prob-label">Bitwise logic masks (AND/OR/XOR on 16-bit operand)</span>
+        <span class="prob-pct">85%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:85%"></div></div>
+      </div>
+      <div class="prob-row p80" onclick="scrollToSection('s7')">
+        <span class="prob-label">Decoder + OR gate implementation of Boolean functions</span>
+        <span class="prob-pct">80%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:80%"></div></div>
+      </div>
+      <div class="prob-row p75" onclick="scrollToSection('s8')">
+        <span class="prob-label">Adder-subtractor circuit (4-bit ripple, S=0 add / S=1 subtract)</span>
+        <span class="prob-pct">75%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:75%"></div></div>
+      </div>
+      <div class="prob-row p75" onclick="scrollToSection('s9')">
+        <span class="prob-label">MUX implementation (truth table → select A,B as MSBs, map D input)</span>
+        <span class="prob-pct">75%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:75%"></div></div>
+      </div>
+      <div class="prob-row p75" onclick="scrollToSection('s2')">
+        <span class="prob-label">NAND-only two-level diagram (from simplified SOP)</span>
+        <span class="prob-pct">75%</span>
+        <div class="prob-bar-bg"><div class="prob-bar" style="width:75%"></div></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 1 ══════════════════ -->
+    <div class="section open tier-1-section" id="s1">
+      <div class="section-header" onclick="toggle('s1')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s1" onchange="toggleSectionMastery('s1', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">#1 HIGHEST</span>
+        <span class="section-title">Sequential Circuits — Logic Diagram + State Table + State Diagram</span>
+        <span class="section-prob" style="color:var(--accent)">99%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">4.8/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">45 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">Flip-Flop Logic, State Tables</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-exam">Exam 2C Q3 (45 pts)</span>
+          <span class="tag tag-hw">Assig 7 Q1</span>
+          <span class="tag tag-review">Final Review Ex. 2</span>
+          <span class="tag tag-review">Mid2 Review</span>
+        </div>
+
+        <div class="alert success">
+          <span class="alert-icon">★</span>
+          <span>This was worth <strong>45 points</strong> on Exam 2C — the single biggest problem on any exam. It is <em>explicitly</em> listed as #2 and #3 on the professor's "You should know how to" list and appears in every review session. Expect it.</span>
+        </div>
+
+        <div class="card pattern">
+          <div class="card-title">Exact Problem Pattern</div>
+          Given: two D flip-flops (A, B), 1–2 inputs (X [,Y]), one output (Z/Y) with equations like:<br>
+          <div class="active-recall-wrapper" id="recall-s1-pattern">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s1-pattern')">Reveal Equations</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s1-pattern')">Hide</button>
+            <div class="active-recall-content">
+              <pre><span class="kw">D_A</span> = AX' + XY    <span class="cm">← function of current state + inputs</span>
+<span class="kw">D_B</span> = AX + BX
+<span class="kw">Z</span>  = A' + B       <span class="cm">← output equation</span></pre>
+            </div>
+          </div>
+          Tasks asked: <strong>(a) logic diagram, (b) state table, (c) state diagram</strong>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">Step-by-Step Procedure</div>
+          <ul class="list">
+            <li><strong>Logic Diagram:</strong> Draw AND/OR/NOT gates feeding D inputs of each flip-flop. Feedback from Q outputs. Clock line to all FFs. Output combinational logic at bottom.</li>
+            <li><strong>State Table:</strong> Enumerate all 2² = 4 present states (AB = 00, 01, 10, 11). For each, try each input combination. Compute D_A, D_B by substituting values → these become next state A, B. Compute Z.</li>
+            <li><strong>State Diagram:</strong> One bubble per state (labeled "AB"). Arrow for each input, labeled "input/output". Self-loops allowed.</li>
+          </ul>
+          <p>With 1 input X: each state has 2 arrows (X=0 and X=1).<br>
+          With 2 inputs X,Y: each state has 4 arrows.</p>
+        </div>
+
+        <div class="card predict">
+          <div class="card-title">Most Likely Variation on Final</div>
+          Based on Exam 2C pattern, expect <strong>3 sub-parts (a/b/c)</strong> each worth ~15 pts. The equations will be similar in complexity to:
+          <div class="active-recall-wrapper" id="recall-s1-predict">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s1-predict')">Reveal Equations</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s1-predict')">Hide</button>
+            <div class="active-recall-content">
+              <pre><span class="kw">D_A</span> = AX + BX    <span class="val">(Exam 2C)</span>
+<span class="kw">D_B</span> = A'X + BX
+<span class="kw">Y</span>  = B</pre>
+              or the review guide's:
+              <pre><span class="kw">D_A</span> = AX + BX
+<span class="kw">D_B</span> = A'X + BX
+<span class="kw">Y</span>  = B</pre>
+            </div>
+          </div>
+          Practice both. The Assig 7 version uses 2 inputs — that may appear too.
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps — These Cost Points</div>
+          <ul class="list">
+            <li>Forgetting the <strong>clock line</strong> in the logic diagram (lost 2 pts on Exam 2C)</li>
+            <li>Leaving out a transition in the state diagram — every state needs arrows for ALL input combos</li>
+            <li>State diagram label format: <code>input/output</code>, not just input</li>
+            <li>For Mealy machines: output depends on BOTH state and input; for Moore: output depends only on state. Know which one you have</li>
+            <li>When output equation is just Y=B, output column is simply the B flip-flop value — easy points if you remember</li>
+          </ul>
+        </div>
+
+        <h3>Quick Reference: State Table Template</h3>
+        <div class="active-recall-wrapper" id="recall-s1-table">
+          <div class="active-recall-overlay">
+            <span class="recall-badge">Active Recall</span>
+            <button class="active-recall-btn" onclick="toggleRecall('recall-s1-table')">Reveal Template</button>
+          </div>
+          <button class="recall-reset-trigger" onclick="resetRecall('recall-s1-table')">Hide</button>
+          <div class="active-recall-content">
+            <div class="tbl-wrap">
+              <table>
+                <tr><th>Present A</th><th>Present B</th><th>Input X</th><th>D_A (next A)</th><th>D_B (next B)</th><th>Output Y</th></tr>
+                <tr><td>0</td><td>0</td><td>0</td><td><em>compute</em></td><td><em>compute</em></td><td><em>compute</em></td></tr>
+                <tr><td>0</td><td>0</td><td>1</td><td><em>compute</em></td><td><em>compute</em></td><td><em>compute</em></td></tr>
+                <tr><td>0</td><td>1</td><td>0</td><td><em>compute</em></td><td><em>compute</em></td><td><em>compute</em></td></tr>
+                <tr><td colspan="6" style="text-align:center;color:var(--text-dim)">... (8 rows total for 2 FFs, 1 input)</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 2 ══════════════════ -->
+    <div class="section open tier-1-section" id="s2">
+      <div class="section-header" onclick="toggle('s2')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s2" onchange="toggleSectionMastery('s2', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">#2 HIGHEST</span>
+        <span class="section-title">Boolean Expr → Logic Diagram (exact) + K-map Simplification + SOP Diagram</span>
+        <span class="section-prob" style="color:var(--accent)">99%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">4.0/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">35 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">Karnaugh Maps, Gray Code, Logic Gates</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-exam">Exam 1C Q3 (18 pts)</span>
+          <span class="tag tag-exam">Exam 1C Q4 (20 pts)</span>
+          <span class="tag tag-review">Final Review Ex. 1</span>
+          <span class="tag tag-review">CS42 Review Ex. 1</span>
+        </div>
+
+        <div class="alert warn">
+          <span class="alert-icon">⚡</span>
+          <span>This topic appeared as <strong>two separate problems</strong> on Exam 1C. Expect it again — possibly combined into one multi-part problem worth 25–40 pts on the final.</span>
+        </div>
+
+        <div class="card pattern">
+          <div class="card-title">Exact Problem Pattern (3 parts)</div>
+          <div class="active-recall-wrapper" id="recall-s2-pattern">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s2-pattern')">Reveal Pattern</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s2-pattern')">Hide</button>
+            <div class="active-recall-content">
+              <pre><span class="val">Part (a)</span>: Draw logic diagram corresponding <span class="kw">EXACTLY</span> to the equation.
+         Do NOT simplify. Complements <span class="kw">ARE</span> available.
+         e.g. F = BC + B(AD + C'D)
+
+<span class="val">Part (b)</span>: Simplify with a <span class="kw">Karnaugh map</span>. Draw the two-level (SOP)
+         logic diagram. Complements <span class="kw">ARE</span> available.
+
+<span class="val">Part (c)</span>: Redraw using <span class="kw">ONLY NAND gates + inverters</span>.
+         Complements are <span class="kw">NOT</span> available.</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">Part (a) Shortcut — Exact Diagram</div>
+          <ul class="list">
+            <li>Work <strong>inside-out</strong>: innermost parentheses first</li>
+            <li>Each + (OR) → one OR gate. Each product → one AND gate</li>
+            <li>For F = BC + B(AD + C'D): first build (AD + C'D), then AND with B, then OR with BC</li>
+            <li>Complement inputs (A', B', etc.) come directly as wires — no extra gates needed when they're available</li>
+            <li>Count levels: this tells you the number of gate layers to draw</li>
+          </ul>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">K-Map Shortcut</div>
+          <ul class="list">
+            <li>Convert the expression to a truth table first (fill minterms)</li>
+            <li>Label the K-map correctly: for 3-var (ABC), cols are BC = 00,01,11,10 (Gray code!)</li>
+            <li>For 4-var (ABCD): rows AB = 00,01,11,10 and cols CD = 00,01,11,10</li>
+            <li>Group 1s in powers of 2 (1,2,4,8). Largest groups first. Wrap edges.</li>
+            <li>Each group → one product term. Write simplified SOP.</li>
+            <li>Don't cares (X): can be included in any group to make it larger</li>
+          </ul>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">Part (c) NAND-Only Shortcut</div>
+          <ul class="list">
+            <li>Start from the simplified SOP (sum of products)</li>
+            <li>Replace each AND gate with a NAND gate</li>
+            <li>Replace the final OR gate with a NAND gate (DeMorgan: NAND of complements = OR)</li>
+            <li>Because complements are NOT available: add an inverter on each uncomplemented input going into AND/NAND gates that need the complement</li>
+            <li>Visual check: a 2-level SOP → 2-level NAND-NAND with inverters on raw inputs where needed</li>
+          </ul>
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps</div>
+          <ul class="list">
+            <li><strong>"Do not simplify"</strong> — students simplify anyway. The diagram must match the equation exactly, even if redundant</li>
+            <li>K-map column/row ordering: must use Gray code (00,01,<strong>11</strong>,10) — not binary order</li>
+            <li>NAND diagram: when complements are NOT available, you must add an inverter for every complemented literal. Forgetting these = -2 pts each</li>
+            <li>2-variable K-maps have 4 cells; 3-var → 8 cells; 4-var → 16 cells</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 3 ══════════════════ -->
+    <div class="section open tier-1-section" id="s3">
+      <div class="section-header" onclick="toggle('s3')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s3" onchange="toggleSectionMastery('s3', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">#3 HIGH</span>
+        <span class="section-title">Counter Design with D Flip-Flops</span>
+        <span class="section-prob" style="color:var(--accent)">95%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">4.9/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">50 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">K-Maps, Counter States, D FFs</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-hw">Assig 8 Q1–Q3</span>
+          <span class="tag tag-review">Final Review Ex. 4</span>
+          <span class="tag tag-review">CS42 Review Ex. 4 (solved)</span>
+          <span class="tag tag-review">Mid2 Review</span>
+        </div>
+
+        <div class="alert success">
+          <span class="alert-icon">★</span>
+          <span>The professor provided a <strong>fully worked solution</strong> for the counter sequence 1,3,5,7,9,11,13,15 in the review session notes — complete with state table, K-maps, equations, and logic diagram. This exact problem or a close variation is very likely.</span>
+        </div>
+
+        <div class="card pattern">
+          <div class="card-title">Full Procedure</div>
+          <ul class="list">
+            <li><strong>Step 1 — How many flip-flops?</strong> 2ⁿ ≥ length of sequence. For 8 states: 4 bits (W,X,Y,Z)</li>
+            <li><strong>Step 2 — State table:</strong> List present state, next state. Unused states → don't cares (X)</li>
+            <li><strong>Step 3 — D equations:</strong> For each flip-flop, write D_FF = minterm list from next-state column</li>
+            <li><strong>Step 4 — K-maps:</strong> One K-map per flip-flop. Include don't cares.</li>
+            <li><strong>Step 5 — Logic diagram:</strong> Draw gates + D FFs with clock</li>
+          </ul>
+        </div>
+
+        <div class="card predict">
+          <div class="card-title">★ Memorize This Solved Example (Sequence 1,3,5,7,9,11,13,15)</div>
+          <div class="active-recall-wrapper" id="recall-s3-example">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s3-example')">Reveal Solution</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s3-example')">Hide</button>
+            <div class="active-recall-content">
+              <pre><span class="cm">4 flip-flops: W X Y Z</span>
+All are ODD → Z (LSB) is always 1
+
+<span class="kw">D_W</span> = WY' + WX' + W'XY    <span class="cm">(from K-map)</span>
+<span class="kw">D_X</span> = XY' + X'Y = X <span class="op">⊕</span> Y  <span class="cm">(XOR!)</span>
+<span class="kw">D_Y</span> = Y'                   <span class="cm">(just complement Y)</span>
+<span class="kw">D_Z</span> = 1                    <span class="cm">(LSB always 1)</span>
+
+Don't cares: 0,2,4,6,8,10,12,14 (all even numbers)</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps</div>
+          <ul class="list">
+            <li>Forgetting to mark unused states as don't cares → missed simplification = wrong equations</li>
+            <li>State table needs the NEXT state, not the next value in sequence by +1 — it's whatever comes next in the <em>given sequence</em></li>
+            <li>For 3-bit counters: 3 flip-flops, 8 rows even if sequence is shorter — fill remaining as don't cares</li>
+            <li>K-map size matches number of flip-flops (for W,X,Y,Z → 4-variable K-maps = 16 cells)</li>
+          </ul>
+        </div>
+
+        <h3>Other Counter Sequences from Assignments</h3>
+        <div class="active-recall-wrapper" id="recall-s3-table">
+          <div class="active-recall-overlay">
+            <span class="recall-badge">Active Recall</span>
+            <button class="active-recall-btn" onclick="toggleRecall('recall-s3-table')">Reveal Reference Table</button>
+          </div>
+          <button class="recall-reset-trigger" onclick="resetRecall('recall-s3-table')">Hide</button>
+          <div class="active-recall-content">
+            <div class="tbl-wrap">
+              <table>
+                <tr><th>Sequence</th><th>Bits</th><th>Don't Cares</th><th>Key Observation</th></tr>
+                <tr><td class="hi">0, 1, 2 (repeat)</td><td>2</td><td>3</td><td>Simple 2-bit, only state 11 unused</td></tr>
+                <tr><td class="hi">0,1,2,3,4,5</td><td>3</td><td>6,7</td><td>6-state 3-bit counter</td></tr>
+                <tr><td class="hi">0,2,1,3,4,6,5,7</td><td>3</td><td>none</td><td>Gray-code-like, no don't cares</td></tr>
+                <tr><td class="warn">1,3,5,7,9,11,13,15</td><td>4</td><td>0,2,4,6,8,10,12,14</td><td>★ Most likely on final</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 4 ══════════════════ -->
+    <div class="section open tier-1-section" id="s4">
+      <div class="section-header" onclick="toggle('s4')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s4" onchange="toggleSectionMastery('s4', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">#4 HIGH</span>
+        <span class="section-title">Register Transfer — Logic Diagram with MUX &amp; Load-Enable</span>
+        <span class="section-prob" style="color:var(--accent)">90%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">4.2/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">30 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">Mux Selection, Control Variables</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-hw">Assig 9 Q1–Q3</span>
+          <span class="tag tag-review">Final Review Ex. 5</span>
+          <span class="tag tag-review">CS42 Review Ex. 5 (fully solved)</span>
+        </div>
+
+        <div class="card pattern">
+          <div class="card-title">Problem Pattern</div>
+          Given conditional register transfer statements with mutually exclusive control inputs:<br>
+          <div class="active-recall-wrapper" id="recall-s4-pattern">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s4-pattern')">Reveal Code Block</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s4-pattern')">Hide</button>
+            <div class="active-recall-content">
+              <pre><span class="kw">C₀</span>: R1 ← R0, R2 ← R0
+<span class="kw">C₁</span>: R1 ← R0
+<span class="kw">C₂</span>: R2 ← R1
+<span class="cm">Only one Cᵢ = 1 at a time.</span>
+<span class="cm">→ Complete the logic diagram (MUX selects + register LE signals)</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">Derivation Method</div>
+          <p>Build a truth table for control outputs (L₀, L₁, L₂ = load enables; S = MUX select):</p>
+          <div class="active-recall-wrapper" id="recall-s4-table">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s4-table')">Reveal Truth Table</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s4-table')">Hide</button>
+            <div class="active-recall-content">
+              <div class="tbl-wrap">
+                <table>
+                  <tr><th>C₂</th><th>C₁</th><th>C₀</th><th>L₀ (load R0?)</th><th>L₁ (load R1?)</th><th>L₂ (load R2?)</th><th>S (MUX sel)</th></tr>
+                  <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>X</td></tr>
+                  <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                  <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                  <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <p>From the table: <code>L₀ = 0</code>, <code>L₁ = C₀ + C₁</code>, <code>L₂ = C₀ + C₂</code>, <code>S = C₂</code></p>
+          <p>S=0 → MUX routes R0. S=1 → MUX routes R1. The OR gates for L₁ and L₂ are drawn explicitly in the diagram.</p>
+        </div>
+
+        <div class="card predict">
+          <div class="card-title">★ Assignment 9 Variation — Likely on Final</div>
+          <div class="active-recall-wrapper" id="recall-s4-predict">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s4-predict')">Reveal Equations</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s4-predict')">Hide</button>
+            <div class="active-recall-content">
+              <pre><span class="kw">C₀</span>: R2 ← 0      <span class="cm">(clear)</span>
+<span class="kw">C₁</span>: R2 ← R̄2    <span class="cm">(complement)</span>
+<span class="kw">C₂</span>: R2 ← R1    <span class="cm">(transfer)</span></pre>
+            </div>
+          </div>
+          For this: need AND gates, OR gates, inverters. No MUX needed — the D input expression for each register bit is:<br>
+          <code>D = C₁·Q̄ + C₂·R1_bit</code>  (with C₀ driving clear via the LE or reset)
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps</div>
+          <ul class="list">
+            <li>When no control is active (all C=0), the register must NOT load → LE = 0</li>
+            <li>The MUX output goes to ALL registers' D input — but only the one with LE=1 actually loads</li>
+            <li>For simultaneous transfers (C₀: R1←R0 AND R2←R0), both L₁ and L₂ fire</li>
+            <li>Assig 9 Q2 uses a 4-to-1 MUX (4 sources R0–R3 → R4). Select lines S₁S₀ encode which Cᵢ is active</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 5 ══════════════════ -->
+    <div class="section open tier-1-section" id="s5">
+      <div class="section-header" onclick="toggle('s5')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s5" onchange="toggleSectionMastery('s5', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">#5 HIGH</span>
+        <span class="section-title">MUX Logical Input Mask (4-to-1, find S &amp; B values)</span>
+        <span class="section-prob" style="color:var(--accent)">90%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">3.8/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">25 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">Mux Truth Tables, XOR masking</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-review">Final Review Ex. 6</span>
+          <span class="tag tag-review">CS42 Review Ex. 6 (fully solved)</span>
+        </div>
+
+        <div class="card pattern">
+          <div class="card-title">Problem Pattern</div>
+          A 4-bit, 4-to-1 MUX circuit where inputs A₀–A₃ and mask B₀–B₃ feed four 4-to-1 MUXes in parallel (one per bit). S₁ is the HIGH-ORDER select bit. Given desired output G₀–G₃, find S₀, S₁, and B₀–B₃.
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">★ Master Key — Memorize This Table</div>
+          <div class="active-recall-wrapper" id="recall-s5-table">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s5-table')">Reveal Operations</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s5-table')">Hide</button>
+            <div class="active-recall-content">
+              <div class="tbl-wrap">
+                <table>
+                  <tr><th>Goal</th><th>Operation</th><th>S₁S₀ selects</th><th>B value</th></tr>
+                  <tr><td class="hi">G = A (pass through)</td><td>Select A</td><td>S = 00 (input 0 = A)</td><td>irrelevant</td></tr>
+                  <tr><td class="hi">G = Ā (complement)</td><td>XOR with 1</td><td>01 or 11</td><td class="warn">B = 1 (all 1s)</td></tr>
+                  <tr><td class="hi">G = 1 (set all bits)</td><td>OR with 1</td><td>11 (input 3 = 1)</td><td class="warn">B = 1</td></tr>
+                  <tr><td class="hi">G = 0 (clear all bits)</td><td>AND with 0</td><td>10 (input 2 = 0)</td><td class="warn">B = 0</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <p>The MUX inputs are wired: input 0 = A (operand), input 1 = A XOR B, input 2 = 0, input 3 = 1. So selecting S₁S₀ = 01 gives A⊕B (logical mask with XOR).</p>
+          <p>Review session note: <strong>"Could B be a mask? AND OR XOR"</strong> — think of B as the mask operand.</p>
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps</div>
+          <ul class="list">
+            <li><strong>S₁ is the HIGH-order select bit</strong> — the professor bolds this in the problem. S₁S₀ = 10 means input 2, not input 1</li>
+            <li>Each MUX in the 4-bit circuit shares the same S₀, S₁ — but has its own B bit</li>
+            <li>When G = A (identity), B values are irrelevant (don't care) but you still write something</li>
+            <li>When G = Ā, you need S₁S₀ = 01 and B = 1 (XOR with all 1s)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 6 ══════════════════ -->
+    <div class="section" id="s6">
+      <div class="section-header" onclick="toggle('s6')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s6" onchange="toggleSectionMastery('s6', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--accent3);border-color:var(--accent3)">#6 HIGH</span>
+        <span class="section-title">Bitwise Logic Masks (AND / OR / XOR on n-bit operands)</span>
+        <span class="section-prob" style="color:var(--accent3)">85%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">3.2/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">20 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">Bitwise Boolean Operators</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-hw">Assig 9 Q4–Q5</span>
+          <span class="tag tag-review">Final Review Ex. 7</span>
+          <span class="tag tag-review">CS42 Review Ex. 7 (solved)</span>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">★ The Three Rules — Anchor Everything Here</div>
+          <div class="active-recall-wrapper" id="recall-s6-rules">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s6-rules')">Reveal Mask Rules</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s6-rules')">Hide</button>
+            <div class="active-recall-content">
+              <div class="tbl-wrap">
+                <table>
+                  <tr><th>Goal</th><th>Operation</th><th>Mask Bit</th><th>Why</th></tr>
+                  <tr><td class="hi">Clear bit to 0</td><td class="hi">AND</td><td class="warn">0</td><td>0 AND anything = 0</td></tr>
+                  <tr><td class="hi">Set bit to 1</td><td class="hi">OR</td><td class="warn">1</td><td>1 OR anything = 1</td></tr>
+                  <tr><td class="hi">Complement/toggle bit</td><td class="hi">XOR</td><td class="warn">1</td><td>1 XOR x = x̄</td></tr>
+                  <tr><td style="color:var(--text-dim)">Leave bit unchanged</td><td style="color:var(--text-dim)">AND or OR</td><td style="color:var(--text-dim)">1 (AND) or 0 (OR)</td><td>Identity element</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card predict">
+          <div class="card-title">★ The Exact Problem That Will Appear (Assig 9 Q5 = Review Ex. 7)</div>
+          <div class="active-recall-wrapper" id="recall-s6-predict">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s6-predict')">Reveal Masks &amp; Answers</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s6-predict')">Hide</button>
+            <div class="active-recall-content">
+              <pre>Operand: 0011 0101 1100 1010  (16-bit, positions 15–0)
+
+(a) Clear all ODD bit positions to 0
+    → AND mask with 0 at odd positions (15,13,11,...,1)
+    → Mask: 1010 1010 1010 1010  <span class="val">= 0xAAAA</span>
+
+(b) Set the rightmost 4 bits to 1
+    → OR mask with 1 at bits 3,2,1,0
+    → Mask: 0000 0000 0000 1111  <span class="val">= 0x000F</span>
+
+(c) Complement the most significant 8 bits
+    → XOR mask with 1 at bits 15–8
+    → Mask: 1111 1111 0000 0000  <span class="val">= 0xFF00</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps</div>
+          <ul class="list">
+            <li><strong>Bit position 15 = leftmost (MSB), bit position 0 = rightmost (LSB)</strong>. The professor states this explicitly in the problem — don't flip them</li>
+            <li>"Odd bit positions" means positions 15, 13, 11, 9, 7, 5, 3, 1 (every other bit starting from left for 15, or right for 1). Use the explicitly stated convention</li>
+            <li>Show your work: write out the operand, the mask, and the result bit-by-bit</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 7 ══════════════════ -->
+    <div class="section" id="s7">
+      <div class="section-header" onclick="toggle('s7')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s7" onchange="toggleSectionMastery('s7', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:#fd79a8;border-color:#fd79a8">#7 SOLID</span>
+        <span class="section-title">Decoder + OR Gate Implementation of Boolean Functions</span>
+        <span class="section-prob" style="color:#fd79a8">80%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">3.9/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">25 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">Decoders, Minterm Expansions</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-review">Final Review Ex. 3</span>
+          <span class="tag tag-review">CS42 Review Ex. 3 (solved)</span>
+          <span class="tag tag-review">Mid2 Review</span>
+        </div>
+
+        <div class="card pattern">
+          <div class="card-title">Problem Pattern</div>
+          <div class="active-recall-wrapper" id="recall-s7-pattern">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s7-pattern')">Reveal Problem Functions</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s7-pattern')">Hide</button>
+            <div class="active-recall-content">
+              <pre>Given: F₁ = AB + A'B'C
+        F₂ = AB + A'BC'
+        F₃ = AB + AB'C'
+
+Implement with a <span class="kw">3-to-8 decoder</span> and three external OR gates.</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">Step-by-Step</div>
+          <ul class="list">
+            <li><strong>Step 1:</strong> Build the truth table for each function (3 inputs A,B,C → 8 rows)</li>
+            <li><strong>Step 2:</strong> Identify the minterms where each function = 1</li>
+            <li><strong>Step 3:</strong> For the solved example: F₁ = Σm(1,6,7), F₂ = Σm(2,6,7), F₃ = Σm(4,6,7)</li>
+            <li><strong>Step 4:</strong> Connect decoder outputs 1,6,7 to OR gate → F₁. Outputs 2,6,7 → F₂. Outputs 4,6,7 → F₃</li>
+            <li><strong>Step 5:</strong> Draw: A,B,C → S₂,S₁,S₀ of decoder → 8 outputs → OR gates</li>
+          </ul>
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps</div>
+          <ul class="list">
+            <li>Which input is MSB? In a 3-to-8 decoder, S₂ is the most significant (A usually), S₀ least significant (C)</li>
+            <li>A function with output 1 only when AB=11 (regardless of C) covers minterms 6 AND 7 — write both</li>
+            <li>The OR gate has one input per minterm — so a function with 3 minterms needs a 3-input OR gate</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 8 ══════════════════ -->
+    <div class="section" id="s8">
+      <div class="section-header" onclick="toggle('s8')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s8" onchange="toggleSectionMastery('s8', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--text-dim);border-color:var(--text-dim)">#8 LIKELY</span>
+        <span class="section-title">Adder-Subtractor Circuit (4-bit ripple carry)</span>
+        <span class="section-prob" style="color:var(--text-dim)">75%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">4.1/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">30 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">Ripple Carry Adders, 2's Complement</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-exam">Exam 2C Q2 (20 pts)</span>
+          <span class="tag tag-hw">Assig 6 Q5</span>
+          <span class="tag tag-review">Mid2 Review</span>
+        </div>
+
+        <div class="alert info">
+          <span class="alert-icon">ℹ</span>
+          <span>This appeared on Exam 2C and as a homework problem with the <strong>exact same circuit</strong>. The professor may include it on the final as a lower-point warm-up or sub-part.</span>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">How the Circuit Works</div>
+          <ul class="list">
+            <li>S = 0 → ADD. S = 1 → SUBTRACT (2's complement subtraction)</li>
+            <li>Each B bit is XOR'd with S before entering the full adder</li>
+            <li>When S=1: B is complemented, and C₀ = 1, giving A + B̄ + 1 = A - B (2's complement)</li>
+            <li>Output: C₄, S₃, S₂, S₁, S₀</li>
+          </ul>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">Computation Shortcut</div>
+          <div class="active-recall-wrapper" id="recall-s8-shortcut">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s8-shortcut')">Reveal Shortcut Rules</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s8-shortcut')">Hide</button>
+            <div class="active-recall-content">
+              <ul class="list">
+                <li>S=0: just binary add A + B. C₄ = carry out. Result = S₃S₂S₁S₀</li>
+                <li>S=1: take 2's complement of B, add to A. Show your work in columns (1's complement → add 1)</li>
+                <li>For negative results: the answer is a negative number in 2's complement if C₄=0 when expected otherwise</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps (from Exam 2C)</div>
+          <ul class="list">
+            <li>On Exam 2C, several students lost points for not showing the 2's complement steps explicitly</li>
+            <li>C₄ is the carry OUT of the MSB FA — include it as part of your answer</li>
+            <li>When subtracting and there's no borrow, C₄=1 and the result is positive. When C₄=0, result is negative (2's complement representation)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 9 ══════════════════ -->
+    <div class="section" id="s9">
+      <div class="section-header" onclick="toggle('s9')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s9" onchange="toggleSectionMastery('s9', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--text-dim);border-color:var(--text-dim)">#9 LIKELY</span>
+        <span class="section-title">MUX Implementation of Boolean Functions</span>
+        <span class="section-prob" style="color:var(--text-dim)">75%</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Difficulty:</span>
+            <span class="meta-val">4.3/5.0</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Est. Mastery Time:</span>
+            <span class="meta-val">30 mins</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Prerequisites:</span>
+            <span class="meta-val">Multiplexer Operation, Truth Tables</span>
+          </div>
+        </div>
+
+        <div class="tags">
+          <span class="tag tag-exam">Exam 2C Q1 (20 pts)</span>
+          <span class="tag tag-review">Mid2 Review (4-to-1 MUX)</span>
+          <span class="tag tag-hw">Assig 5</span>
+        </div>
+
+        <div class="card pattern">
+          <div class="card-title">Problem Pattern</div>
+          <div class="active-recall-wrapper" id="recall-s9-pattern">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s9-pattern')">Reveal Equation</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s9-pattern')">Hide</button>
+            <div class="active-recall-content">
+              <pre>F(X,Y,Z) = Σm(1,2,4,7)
+Implement with one or two <span class="kw">4-to-1 MUXes</span> and a single inverter.</pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card shortcut">
+          <div class="card-title">The Trick</div>
+          <ul class="list">
+            <li>Use the two most-significant variables (X, Y) as select lines S₁, S₀</li>
+            <li>For each of the 4 groupings of (X,Y): look at F values with Z=0 and Z=1</li>
+            <li>Each data input (I₀–I₃) gets: 0, 1, Z, or Z' based on the function value pattern</li>
+            <li>For 2 functions: use 2 separate 4-to-1 MUXes with shared select lines</li>
+          </ul>
+        </div>
+
+        <div class="card predict">
+          <div class="card-title">Exam 2C Q1 Exact Pattern — Learn This</div>
+          <div class="active-recall-wrapper" id="recall-s9-predict">
+            <div class="active-recall-overlay">
+              <span class="recall-badge">Active Recall</span>
+              <button class="active-recall-btn" onclick="toggleRecall('recall-s9-predict')">Reveal Exact Mapping</button>
+            </div>
+            <button class="recall-reset-trigger" onclick="resetRecall('recall-s9-predict')">Hide</button>
+            <div class="active-recall-content">
+              <pre>F = Σm(1,2,4,7), G = Σm(0,1,5,7)
+
+Use X,Y as select → for each group:
+XY=00: F: Z=0→0, Z=1→1 → <span class="kw">I₀ = Z</span>
+XY=01: F: Z=0→1, Z=1→0 → <span class="kw">I₁ = Z'</span>  <span class="cm">(inverter)</span>
+XY=10: F: Z=0→1, Z=1→0 → <span class="kw">I₂ = Z'</span>
+XY=11: F: Z=0→0, Z=1→1 → <span class="kw">I₃ = Z</span></pre>
+            </div>
+          </div>
+        </div>
+
+        <div class="card trap">
+          <div class="card-title">⚠ Top Traps</div>
+          <ul class="list">
+            <li>Must also draw the truth table when asked — don't skip it</li>
+            <li>S₁ is the high-order select bit (connected to X/first variable)</li>
+            <li>The data inputs (0,1,2,3) select when S₁S₀ = 00,01,10,11 respectively</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ GLOBAL TRAPS ══════════════════ -->
+    <div class="section" id="s10">
+      <div class="section-header" onclick="toggle('s10')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s10" onchange="toggleSectionMastery('s10', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--accent2);border-color:var(--accent2)">⚠ TRAPS</span>
+        <span class="section-title">Professor Kurtz's Favorite Tricks &amp; Global Traps</span>
+        <span class="section-prob" style="color:var(--accent2)">Read This</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Module Type:</span>
+            <span class="meta-val">Trap Checklist</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Focus Area:</span>
+            <span class="meta-val">Deduction Prevention</span>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="card trap">
+            <div class="card-title">Wording Traps</div>
+            <ul class="list">
+              <li><strong>"Exactly"</strong> or <strong>"Do not simplify"</strong> = draw gates matching the equation, every layer, no shortcuts</li>
+              <li><strong>"Complements ARE available"</strong> = use A' directly as a wire</li>
+              <li><strong>"Complements are NOT available"</strong> = add inverter for each complemented literal</li>
+              <li><strong>"S₁ is the high-order select bit"</strong> = always stated when it matters — S₁S₀=10 → input 2, not input 1</li>
+            </ul>
+          </div>
+          <div class="card trap">
+            <div class="card-title">Circuit Drawing Traps</div>
+            <ul class="list">
+              <li>Sequential circuits: always draw the <strong>clock line</strong> connecting all D flip-flops</li>
+              <li>Feedback wires: Q outputs must loop back to input gates</li>
+              <li>State diagram: every state needs a transition for EVERY input combination — missing = partial credit deduction</li>
+              <li>Logic diagram: show gate types (AND, OR, NOT — not just boxes)</li>
+            </ul>
+          </div>
+          <div class="card trap">
+            <div class="card-title">K-Map Traps</div>
+            <ul class="list">
+              <li>Column/row order must be <strong>Gray code</strong>: 00, 01, <strong>11</strong>, 10</li>
+              <li>Groups must be powers of 2: 1, 2, 4, 8, 16</li>
+              <li>Groups can wrap around edges (top↔bottom, left↔right, corners)</li>
+              <li>Don't cares: include in groups to maximize group size — but you don't have to cover them</li>
+            </ul>
+          </div>
+          <div class="card trap">
+            <div class="card-title">Arithmetic Traps</div>
+            <ul class="list">
+              <li>2's complement of 0 is 0 (not 2^n)</li>
+              <li>For subtraction: show 2's complement steps explicitly for full credit</li>
+              <li>Overflow vs. carry: C₄=1 doesn't always mean positive result; check sign bits</li>
+              <li>Bit position 15 = MSB (leftmost), bit 0 = LSB (rightmost) — stated explicitly in problems</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ STUDY PLAN ══════════════════ -->
+    <div class="section open" id="s11">
+      <div class="section-header" onclick="toggle('s11')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-s11" onchange="toggleSectionMastery('s11', this.checked)">
+        </div>
+        <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">▶ PLAN</span>
+        <span class="section-title">Optimal Study Session Plan (Priority Order)</span>
+        <span class="section-prob" style="color:var(--accent)">Do This</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Box -->
+        <div class="section-meta-panel">
+          <div class="meta-item">
+            <span class="meta-label">Suggested Pace:</span>
+            <span class="meta-val">3 Sessions (Total 4 Hours)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Primary Strategy:</span>
+            <span class="meta-val">Worked Solutions &amp; Re-solving</span>
+          </div>
+        </div>
+
+        <div class="tbl-wrap">
+          <table>
+            <tr><th>Priority</th><th>Topic</th><th>What to Practice</th><th>Source</th><th>Est. Points</th></tr>
+            <tr>
+              <td class="danger-cell">1st</td>
+              <td>Sequential Circuit</td>
+              <td>Logic diagram + state table + state diagram from D equations</td>
+              <td>Final Review Ex. 2; Assig 7 Q1</td>
+              <td class="hi">~45 pts</td>
+            </tr>
+            <tr>
+              <td class="danger-cell">2nd</td>
+              <td>K-map + Logic Diagram</td>
+              <td>Exact diagram (no simplify) + K-map + SOP diagram + NAND version</td>
+              <td>Final Review Ex. 1; Exam 1C Q3,Q4</td>
+              <td class="hi">~35 pts</td>
+            </tr>
+            <tr>
+              <td class="warn">3rd</td>
+              <td>Counter Design</td>
+              <td>State table → D equations via K-maps → logic diagram</td>
+              <td>CS42 Review Ex. 4 (solved!); Assig 8</td>
+              <td class="hi">~35 pts</td>
+            </tr>
+            <tr>
+              <td class="warn">4th</td>
+              <td>Register Transfer</td>
+              <td>Derive LE/select truth table → draw MUX + register diagram</td>
+              <td>CS42 Review Ex. 5 (solved!); Assig 9</td>
+              <td class="hi">~30 pts</td>
+            </tr>
+            <tr>
+              <td style="color:var(--text-dim)">5th</td>
+              <td>Logical Mask (MUX)</td>
+              <td>Given target G values, find S bits and B mask</td>
+              <td>CS42 Review Ex. 6 (solved!)</td>
+              <td>~25 pts</td>
+            </tr>
+            <tr>
+              <td style="color:var(--text-dim)">6th</td>
+              <td>Bitwise AND/OR/XOR</td>
+              <td>16-bit operand, identify operation + build mask</td>
+              <td>CS42 Review Ex. 7 (solved!); Assig 9 Q5</td>
+              <td>~15 pts</td>
+            </tr>
+            <tr>
+              <td style="color:var(--text-dim)">7th</td>
+              <td>Decoder + OR</td>
+              <td>Convert SOP to minterms, wire decoder outputs</td>
+              <td>CS42 Review Ex. 3 (solved!)</td>
+              <td>~15 pts</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="alert success" style="margin-top:16px;">
+          <span class="alert-icon">✓</span>
+          <span><strong>The CS42 Review document (Final_Review.pdf in your project) contains fully worked solutions for ALL 7 examples.</strong> This is the single most valuable resource — work through each solution step-by-step, then re-do the problem from scratch without looking.</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // State Management
+  let studyMode = 'study';
+  let masteredSections = {};
+
+  // Initialize page and load local storage
+  window.addEventListener('DOMContentLoaded', () => {
+    // Load mastered sections
+    try {
+      const stored = localStorage.getItem('cs42_mastered_sections');
+      if (stored) {
+        masteredSections = JSON.parse(stored);
+        Object.keys(masteredSections).forEach(id => {
+          if (masteredSections[id]) {
+            const chk = document.getElementById(`chk-${id}`);
+            if (chk) {
+              chk.checked = true;
+              toggleSectionMastery(id, true, false); // don't write again during load
+            }
+          }
+        });
+      }
+    } catch(e) { console.error("Could not load progress", e); }
+
+    // Load active study mode
+    const savedMode = localStorage.getItem('cs42_study_mode');
+    if (savedMode) {
+      setStudyMode(savedMode);
+    }
+
+    // Load theme setting
+    const savedTheme = localStorage.getItem('cs42_theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+    }
+
+    // Update global progress tracker UI
+    updateProgressUI();
+    highlightActiveTOC();
+  });
+
+  // Toggle Section Collapse
+  function toggle(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('open');
+    const body = el.querySelector('.section-body');
+    if (body) {
+      if (el.classList.contains('open')) {
+        body.style.display = 'block';
+      } else {
+        body.style.display = 'none';
+      }
+    }
+    highlightActiveTOC();
+  }
+
+  // Scroll smoothly to a section and open it
+  function scrollToSection(id, event) {
+    if (event) event.preventDefault();
+    const el = document.getElementById(id);
+    if (!el) return;
+    
+    // Close sidebar on mobile if open
+    document.getElementById('sidebar').classList.remove('open');
+
+    // If cram mode and clicking a non-tier-1 section, open it as a temporary exception
+    if (studyMode === 'cram' && !el.classList.contains('tier-1-section')) {
+      el.classList.add('cram-open');
+    }
+
+    // Expand
+    if (!el.classList.contains('open')) {
+      el.classList.add('open');
+      const body = el.querySelector('.section-body');
+      if (body) body.style.display = 'block';
+    }
+
+    el.scrollIntoView({ behavior: 'smooth' });
+    highlightActiveTOC(id);
+  }
+
+  // Expand / Collapse Buttons
+  function expandAll() {
+    document.querySelectorAll('.section').forEach(el => {
+      el.classList.add('open');
+      if (studyMode === 'cram' && !el.classList.contains('tier-1-section')) {
+        el.classList.add('cram-open');
+      }
+      const body = el.querySelector('.section-body');
+      if (body) body.style.display = 'block';
+    });
+    highlightActiveTOC();
+  }
+
+  function collapseAll() {
+    document.querySelectorAll('.section').forEach(el => {
+      el.classList.remove('open');
+      el.classList.remove('cram-open');
+      const body = el.querySelector('.section-body');
+      if (body) body.style.display = 'none';
+    });
+    highlightActiveTOC();
+  }
+
+  // Toggle Mastery Checks
+  function toggleSectionMastery(id, isMastered, writeToStorage = true) {
+    const section = document.getElementById(id);
+    const tocLink = document.querySelector(`.toc-link[href="#${id}"]`);
+
+    if (isMastered) {
+      masteredSections[id] = true;
+      if (section) section.classList.add('mastered-section');
+      if (tocLink) tocLink.classList.add('mastered');
+    } else {
+      masteredSections[id] = false;
+      if (section) section.classList.remove('mastered-section');
+      if (tocLink) tocLink.classList.remove('mastered');
+    }
+
+    if (writeToStorage) {
+      localStorage.setItem('cs42_mastered_sections', JSON.stringify(masteredSections));
+    }
+
+    updateProgressUI();
+  }
+
+  // Progress Calculations
+  function updateProgressUI() {
+    const totalSections = 11;
+    const masteredCount = Object.values(masteredSections).filter(Boolean).length;
+    
+    // Readiness progress bar percentage
+    const pct = Math.round((masteredCount / totalSections) * 100);
+    
+    const bar = document.getElementById('readiness-bar');
+    const label = document.getElementById('readiness-pct');
+    const status = document.getElementById('readiness-status');
+    const dashVal = document.getElementById('dash-progress-val');
+
+    if (bar) bar.style.width = `${pct}%`;
+    if (label) label.innerText = `${pct}%`;
+    if (dashVal) dashVal.innerText = masteredCount;
+
+    if (status) {
+      if (pct === 0) status.innerText = 'Ready to start!';
+      else if (pct < 30) status.innerText = 'Building foundation';
+      else if (pct < 60) status.innerText = 'Solid comprehension';
+      else if (pct < 90) status.innerText = 'Highly prepared!';
+      else status.innerText = 'Mastered — ready to ace!';
+    }
+  }
+
+  // Switch Study Modes
+  function setStudyMode(mode) {
+    studyMode = mode;
+    localStorage.setItem('cs42_study_mode', mode);
+
+    // Update UI options classes
+    document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('active'));
+    const activeLabel = document.getElementById(`mode-${mode}-lbl`);
+    if (activeLabel) {
+      const radio = activeLabel.querySelector('input');
+      if (radio) radio.checked = true;
+      activeLabel.classList.add('active');
+    }
+
+    // Toggle body class
+    document.body.classList.remove('mode-study', 'mode-recall', 'mode-cram');
+    document.body.classList.add(`mode-${mode}`);
+
+    // Action adjustments based on mode
+    if (mode === 'cram') {
+      // Auto open Tier 1, collapse others
+      document.querySelectorAll('.section').forEach(el => {
+        el.classList.remove('cram-open'); // reset exceptions
+        const body = el.querySelector('.section-body');
+        if (el.classList.contains('tier-1-section')) {
+          el.classList.add('open');
+          if (body) body.style.display = 'block';
+        } else {
+          el.classList.remove('open');
+          if (body) body.style.display = 'none';
+        }
+      });
+    } else if (mode === 'recall') {
+      // Blur solution blocks, reset revealed classes
+      document.querySelectorAll('.active-recall-wrapper').forEach(wrap => {
+        wrap.classList.remove('revealed');
+      });
+    } else {
+      // Study mode - expand everything standard or keep as is
+    }
+
+    highlightActiveTOC();
+  }
+
+  // Active Recall Block Toggles
+  function toggleRecall(id) {
+    const wrap = document.getElementById(id);
+    if (wrap) {
+      wrap.classList.add('revealed');
+    }
+  }
+
+  function resetRecall(id) {
+    const wrap = document.getElementById(id);
+    if (wrap) {
+      wrap.classList.remove('revealed');
+    }
+  }
+
+  // Theme Switches
+  function toggleTheme() {
+    const isLight = document.documentElement.classList.toggle('light');
+    localStorage.setItem('cs42_theme', isLight ? 'light' : 'dark');
+  }
+
+  // Mobile drawer trigger
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('open');
+    }
+  }
+
+  // Live Search
+  function handleSearch(query) {
+    const q = query.toLowerCase().trim();
+    const sections = document.querySelectorAll('.section');
+
+    sections.forEach(sec => {
+      if (!q) {
+        // Reset view
+        sec.style.display = 'block';
+        return;
+      }
+      const text = sec.textContent.toLowerCase();
+      if (text.includes(q)) {
+        sec.style.display = 'block';
+        // Auto open if matching search
+        sec.classList.add('open');
+        const body = sec.querySelector('.section-body');
+        if (body) body.style.display = 'block';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+    highlightActiveTOC();
+  }
+
+  // TOC highlight sync during scroll
+  function highlightActiveTOC(activeId) {
+    if (activeId) {
+      document.querySelectorAll('.toc-link').forEach(link => {
+        link.classList.remove('active-toc');
+        if (link.getAttribute('href') === `#${activeId}`) {
+          link.classList.add('active-toc');
+        }
+      });
+      return;
+    }
+
+    // Default highlights matching first visible scroll block
+    const scrollPos = window.scrollY + 100;
+    const sections = document.querySelectorAll('.section');
+    let currentSection = null;
+
+    for (let i = 0; i < sections.length; i++) {
+      const sec = sections[i];
+      if (sec.style.display === 'none') continue;
+      if (sec.offsetTop <= scrollPos) {
+        currentSection = sec.getAttribute('id');
+      } else {
+        break;
+      }
+    }
+
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.classList.remove('active-toc');
+      if (currentSection && link.getAttribute('href') === `#${currentSection}`) {
+        link.classList.add('active-toc');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    highlightActiveTOC();
+  });
+</script>
+</body>
+</html>
