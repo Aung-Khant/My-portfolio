@@ -5,236 +5,1456 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Math 7 Final Exam Survival Guide — A-Level Edition</title>
 <style>
-/* ===================================================
-   RESET & BASE
-   =================================================== */
-*{box-sizing:border-box;margin:0;padding:0}
-html{font-size:11pt}
-body{font-family:'Georgia',serif;color:#111;background:#fff;max-width:1100px;margin:0 auto;padding:0 24px}
-h1{font-size:22pt;font-weight:900;line-height:1.15}
-h2{font-size:15pt;font-weight:800;margin:0 0 10px;line-height:1.3}
-h3{font-size:12pt;font-weight:700;margin:0 0 8px}
-h4{font-size:11pt;font-weight:700;margin:0 0 6px}
-h5{font-size:10.5pt;font-weight:700;margin:0 0 5px}
-p{margin:6px 0;line-height:1.75}
-ul,ol{padding-left:20px;margin:7px 0}
-li{margin:5px 0;line-height:1.65}
-strong{font-weight:800}
-em{font-style:italic}
-code{font-family:'Courier New',monospace;font-size:9.5pt;background:#f3f3f3;padding:2px 6px;border-radius:3px;display:inline}
-pre{font-family:'Courier New',monospace;font-size:9.5pt;background:#f3f3f3;padding:12px 14px;border-radius:5px;margin:10px 0;line-height:1.65;overflow-x:auto;border-left:3px solid #bbb}
-table{border-collapse:collapse;width:100%;margin:12px 0;font-size:9.5pt}
-th{background:#1a1a2e;color:#f1c40f;padding:9px 12px;text-align:left;font-size:9pt;font-weight:700}
-td{padding:8px 12px;border:0.5px solid #ccc;vertical-align:top;line-height:1.6}
-tr:nth-child(even){background:#f7f7f7}
-a{color:#1a5276;text-decoration:none}
 
-/* ===================================================
-   LAYOUT
-   =================================================== */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:14px 0}
-.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin:14px 0}
-.four-col{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:14px 0}
-.col-60-40{display:grid;grid-template-columns:60% 38%;gap:20px;margin:14px 0}
-.col-40-60{display:grid;grid-template-columns:38% 60%;gap:20px;margin:14px 0}
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&display=swap');
 
-/* ===================================================
-   SECTION STRUCTURE
-   =================================================== */
-.section{padding:28px 0 20px;border-bottom:2px solid #ddd;margin-bottom:8px}
-.section-header{background:#1a1a2e;color:#fff;padding:12px 18px;border-radius:6px;margin-bottom:18px;display:flex;align-items:center;gap:12px}
-.section-header h2{color:#f1c40f;margin:0}
-.section-header .sec-num{color:#f1c40f;font-size:9pt;opacity:.8;margin-left:auto;white-space:nowrap}
-.subsection{margin:16px 0;padding:0}
-.subsection-title{font-size:11pt;font-weight:700;color:#1a5276;border-bottom:1.5px solid #aed6f1;padding-bottom:5px;margin-bottom:12px;margin-top:18px}
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --surface2: #1c2030;
+    --border: #2a3050;
+    --accent: #4fffb0; /* Green: Must Know / S-Tier */
+    --accent-rgb: 79, 255, 176;
+    --accent2: #ff6b6b; /* Red: Traps / Mistakes */
+    --accent2-rgb: 255, 107, 107;
+    --accent3: #ffd166; /* Yellow: Frequently Tested / A-Tier */
+    --accent3-rgb: 255, 209, 102;
+    --accent4: #74b9ff; /* Blue: Understanding / B-Tier */
+    --accent4-rgb: 116, 185, 255;
+    --accent5: #a29bfe; /* Purple: Prerequisites */
+    --accent5-rgb: 162, 155, 254;
+    --text: #e4e8f7;
+    --text-dim: #7a8aaa;
+    --text-bright: #ffffff;
+    --danger: #ff4757;
+    --success: #2ed573;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    --glass: rgba(20, 23, 32, 0.7);
+    --glass-border: rgba(42, 48, 80, 0.4);
+    --active-recall-bg: rgba(13, 15, 20, 0.95);
+    --sidebar-width: 320px;
+    --radius: 12px;
+  }
 
-/* ===================================================
-   PRIORITY TAGS & BADGES
-   =================================================== */
-.tag{display:inline-block;padding:2px 7px;border-radius:3px;font-size:7.5pt;font-weight:800;letter-spacing:.4px;vertical-align:middle;margin:0 2px}
-.s-tier{background:#922b21;color:#fff}
-.a-tier{background:#d35400;color:#fff}
-.b-tier{background:#1a5276;color:#fff}
-.c-tier{background:#515a5a;color:#fff}
-.new-tag{background:#1e8449;color:#fff}
-.ec-tag{background:#6c3483;color:#fff}
-.prob-badge{background:#2c3e50;color:#f1c40f;font-size:7.5pt;padding:1px 6px;border-radius:10px;font-weight:700}
-.pts-badge{background:#e8f8f5;color:#1e8449;border:1px solid #abebc6;font-size:7.5pt;padding:1px 6px;border-radius:3px;font-weight:700}
-.warn-badge{background:#fef9e7;color:#9a7d0a;border:1px solid #f9e79f;font-size:7.5pt;padding:1px 6px;border-radius:3px;font-weight:700}
+  html.light {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --surface2: #f1f5f9;
+    --border: #cbd5e1;
+    --accent: #10b981;
+    --accent-rgb: 16, 185, 129;
+    --accent2: #ef4444;
+    --accent2-rgb: 239, 68, 68;
+    --accent3: #f59e0b;
+    --accent3-rgb: 245, 158, 11;
+    --accent4: #3b82f6;
+    --accent4-rgb: 59, 130, 246;
+    --accent5: #6366f1;
+    --accent5-rgb: 99, 102, 241;
+    --text: #334155;
+    --text-dim: #64748b;
+    --text-bright: #0f172a;
+    --danger: #ef4444;
+    --success: #10b981;
+    --shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    --glass: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(203, 213, 225, 0.5);
+    --active-recall-bg: rgba(248, 250, 252, 0.95);
+  }
 
-/* ===================================================
-   CARDS
-   =================================================== */
-.card{background:#fff;border:0.75px solid #ddd;border-radius:8px;padding:16px 18px;margin:10px 0}
-.card-blue{border-left:4px solid #2471a3;background:#eaf4fb}
-.card-red{border-left:4px solid #922b21;background:#fdedec}
-.card-green{border-left:4px solid #1e8449;background:#eafaf1}
-.card-yellow{border-left:4px solid #d4ac0d;background:#fefde7}
-.card-purple{border-left:4px solid #6c3483;background:#f5eef8}
-.card-orange{border-left:4px solid #ca6f1e;background:#fdf2e9}
-.card-dark{background:#1a1a2e;color:#ecf0f1;border-radius:8px;padding:16px 18px;margin:10px 0}
-.card-dark h3,.card-dark h4,.card-dark h5{color:#f1c40f}
-.card-dark code{background:#2c3e50;color:#f1c40f;border:none}
-.card-dark strong{color:#f1c40f}
+  * { box-sizing: border-box; margin: 0; padding: 0; transition: background-color 0.2s ease, border-color 0.2s ease; }
 
-/* ===================================================
-   FORMULA BOXES
-   =================================================== */
-.formula-block{background:#1a1a2e;border-radius:8px;padding:14px 18px;margin:10px 0}
-.formula-block code,.formula-block pre{background:#2c3e50;color:#f1c40f;border:none;font-size:9.5pt}
-.formula-line{display:block;font-family:'Courier New',monospace;font-size:10pt;background:#1a1a2e;color:#f1c40f;padding:7px 12px;border-radius:4px;margin:5px 0}
-.formula-box{border:2px solid #2471a3;border-radius:8px;padding:16px 18px;margin:10px 0;background:#f0f7ff}
-.formula-box .formula-line{font-size:9pt}
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 14.5px;
+  }
 
-/* ===================================================
-   TRAPS, SHORTCUTS, MEMORY
-   =================================================== */
-.trap{border-left:4px solid #c0392b;background:#fdedec;padding:12px 16px;margin:10px 0;border-radius:0 6px 6px 0}
-.trap-title{font-weight:800;color:#922b21;font-size:9.5pt;display:block;margin-bottom:6px}
-.shortcut{border-left:4px solid #1e8449;background:#eafaf1;padding:12px 16px;margin:10px 0;border-radius:0 6px 6px 0}
-.shortcut-title{font-weight:800;color:#1a7a47;font-size:9.5pt;display:block;margin-bottom:6px}
-.memory{border-left:4px solid #6c3483;background:#f5eef8;padding:12px 16px;margin:10px 0;border-radius:0 6px 6px 0}
-.memory-title{font-weight:800;color:#6c3483;font-size:9.5pt;display:block;margin-bottom:6px}
-.speed{border-left:4px solid #ca6f1e;background:#fdf2e9;padding:12px 16px;margin:10px 0;border-radius:0 6px 6px 0}
-.speed-title{font-weight:800;color:#a04000;font-size:9.5pt;display:block;margin-bottom:6px}
+  /* ── LAYOUT STRUCTURE ── */
+  .app-container {
+    display: flex;
+    min-height: 100vh;
+  }
 
-/* ===================================================
-   ALGORITHMS / STEPS
-   =================================================== */
-.algo{background:#f8f9fa;border:1px solid #ddd;border-radius:8px;padding:14px 16px;margin:12px 0}
-.algo-title{background:#2c3e50;color:#f1c40f;font-size:9.5pt;font-weight:800;padding:7px 14px;margin:-14px -16px 12px;border-radius:7px 7px 0 0;display:block}
-.step{display:flex;gap:12px;align-items:flex-start;padding:8px 0;border-bottom:0.5px dotted #ddd}
-.step:last-child{border-bottom:none}
-.step-num{background:#2c3e50;color:#f1c40f;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:9pt;font-weight:800;flex-shrink:0;margin-top:2px}
-.step-body{flex:1;font-size:10pt;line-height:1.65}
+  /* ── MOBILE HEADER ── */
+  .mobile-header {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+  .menu-toggle-btn {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .mobile-title {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--text-bright);
+  }
 
-/* ===================================================
-   EXAMPLES
-   =================================================== */
-.example{border:1.5px solid #2471a3;border-radius:8px;padding:16px 18px;margin:12px 0;background:#fafeff}
-.example-hard{border:1.5px solid #922b21;border-radius:8px;padding:16px 18px;margin:12px 0;background:#fffafa}
-.ex-header{font-size:9pt;font-weight:800;text-transform:uppercase;padding:6px 14px;margin:-16px -18px 14px;border-radius:7px 7px 0 0;display:block}
-.ex-header-blue{background:#2471a3;color:#fff}
-.ex-header-red{background:#922b21;color:#fff}
-.ex-header-green{background:#1e8449;color:#fff}
-.ex-row{display:grid;grid-template-columns:100px 1fr;gap:6px;margin:6px 0;font-size:10pt;align-items:start}
-.ex-label{font-weight:700;color:#555;font-size:9pt;text-transform:uppercase;padding-top:3px}
-.ex-val{line-height:1.65}
+  /* ── SIDEBAR ── */
+  aside {
+    width: var(--sidebar-width);
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0; bottom: 0; left: 0;
+    overflow-y: auto;
+    z-index: 900;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .sidebar-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+  }
+  .sidebar-logo {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sidebar-logo span { color: var(--accent3); }
+  .sidebar-subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
 
-/* ===================================================
-   DEPENDENCY MAP
-   =================================================== */
-.dep-chain{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:12px 0}
-.dep-node{background:#2c3e50;color:#ecf0f1;padding:5px 11px;border-radius:4px;font-size:8.5pt;font-weight:700}
-.dep-node.cur{background:#2471a3;font-size:8.5pt}
-.dep-node.root{background:#6c3483}
-.dep-node.goal{background:#1e8449}
-.dep-node.warn{background:#922b21}
-.dep-arrow{color:#aaa;font-size:11pt;line-height:1}
-.dep-box{background:#f8f9fa;border:1px solid #ddd;border-radius:8px;padding:16px 18px;margin:12px 0}
+  /* Theme Toggle */
+  .theme-toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 8px 12px;
+  }
+  .toggle-label {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .theme-btn {
+    background: none;
+    border: none;
+    color: var(--text-bright);
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+  .theme-btn:hover {
+    background: var(--border);
+  }
 
-/* ===================================================
-   PRIORITY DASHBOARD ROWS
-   =================================================== */
-.dash-container{margin:6px 0}
-.dash-head{display:grid;grid-template-columns:50px 190px 55px 55px 70px 1fr;gap:6px;padding:8px 10px;font-size:8.5pt;font-weight:700;color:#555;border-bottom:2px solid #2c3e50;background:#f0f0f0}
-.dash-row{display:grid;grid-template-columns:50px 190px 55px 55px 70px 1fr;gap:6px;padding:9px 10px;border-bottom:0.5px solid #eee;font-size:9.5pt;align-items:center}
-.dash-row:hover{background:#f9f9f9}
-.bar-wrap{background:#e0e0e0;border-radius:10px;height:5px;overflow:hidden;display:inline-block;width:60px;vertical-align:middle;margin-left:3px}
-.bar-fill{height:5px;border-radius:10px;background:#2471a3;display:block}
+  /* Search Box */
+  .search-box {
+    position: relative;
+  }
+  .search-input {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px 10px 36px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    outline: none;
+  }
+  .search-input:focus {
+    border-color: var(--accent);
+  }
+  .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-dim);
+    font-size: 14px;
+    pointer-events: none;
+  }
 
-/* ===================================================
-   RECOGNITION SIGNAL BOX
-   =================================================== */
-.recognize{background:#fef9e7;border:1.5px solid #f9e79f;border-radius:8px;padding:14px 16px;margin:12px 0}
-.recognize-title{font-size:9pt;font-weight:800;color:#9a7d0a;text-transform:uppercase;margin-bottom:8px;display:block}
-.rec-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0;font-size:9.5pt}
-.rec-if{font-style:italic;color:#555}
-.rec-then{font-weight:700;color:#2c3e50}
+  /* Study Modes Control */
+  .modes-panel {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .modes-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent3);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  .mode-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12.5px;
+    font-weight: 600;
+    transition: background 0.15s;
+    user-select: none;
+    margin-bottom: 6px;
+    border: 1px solid transparent;
+  }
+  .mode-option:last-child { margin-bottom: 0; }
+  .mode-option:hover {
+    background: rgba(255, 255, 255, 0.03);
+  }
+  .mode-option.active {
+    background: var(--surface);
+    border-color: var(--border);
+    color: var(--text-bright);
+  }
+  .mode-option input {
+    display: none;
+  }
+  .mode-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--text-dim);
+  }
+  .mode-option.active .mode-dot {
+    background: var(--accent3);
+    box-shadow: 0 0 8px var(--accent3);
+  }
+  .mode-desc {
+    font-size: 10.5px;
+    color: var(--text-dim);
+    margin-top: -3px;
+    margin-left: 18px;
+    display: block;
+    font-weight: normal;
+  }
 
-/* ===================================================
-   COVER PAGE
-   =================================================== */
-.cover{text-align:center;padding:48px 24px 36px;border-bottom:3px solid #1a1a2e;margin-bottom:24px}
-.cover-kicker{font-size:9pt;color:#888;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px}
-.cover-title{font-size:30pt;font-weight:900;color:#1a1a2e;margin-bottom:4px;line-height:1.1}
-.cover-subtitle{font-size:12pt;color:#444;margin:5px 0}
-.cover-alert{background:#922b21;color:#fff;padding:9px 20px;border-radius:4px;display:inline-block;margin:12px 0;font-size:11pt;font-weight:800;letter-spacing:.5px}
-.cover-meta{font-size:9pt;color:#666;margin-top:8px}
-.tier-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:24px 0}
-.tier-box{padding:16px 10px;border-radius:8px;text-align:center}
-.tier-box .tb-letter{font-size:20pt;font-weight:900;display:block}
-.tier-box .tb-label{font-size:7.5pt;display:block;margin-top:2px}
+  /* Progress Tracking Dashboard */
+  .readiness-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .readiness-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .readiness-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .readiness-bar-fg {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent4) 0%, var(--accent) 100%);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .readiness-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent3);
+    font-weight: bold;
+    text-align: right;
+  }
 
-/* ===================================================
-   PATTERN SUMMARY GRID
-   =================================================== */
-.pattern-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
-.pattern-card{background:#fff;border:0.75px solid #ddd;border-radius:7px;padding:14px 16px}
-.pattern-card .pc-title{font-size:9pt;font-weight:800;color:#1a1a2e;margin-bottom:3px}
-.pattern-card p{font-size:9.5pt}
+  /* Table of Contents */
+  .toc-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .toc-header {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .toc-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--text);
+    border-left: 2px solid transparent;
+    transition: all 0.15s;
+  }
+  .toc-link:hover {
+    background: var(--surface2);
+    border-left-color: var(--text-dim);
+  }
+  .toc-link.active-toc {
+    background: var(--surface2);
+    border-left-color: var(--accent3);
+    color: var(--text-bright);
+    font-weight: 600;
+  }
+  .toc-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 180px;
+  }
+  .toc-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    font-weight: bold;
+  }
+  .toc-check {
+    width: 13px; height: 13px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: transparent;
+  }
+  .toc-link.mastered .toc-check {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+  }
 
-/* ===================================================
-   CHEAT SHEET (# final)
-   =================================================== */
-.cheat-body{font-size:8.5pt;line-height:1.4}
-.cheat-body .formula-line{font-size:8pt;padding:2px 7px}
-.cheat-col-header{background:#1a1a2e;color:#f1c40f;font-size:8.5pt;font-weight:800;padding:3px 8px;border-radius:3px 3px 0 0;display:block}
-.cheat-col-body{border:0.5px solid #ddd;border-top:none;border-radius:0 0 3px 3px;padding:5px 7px;font-size:8.5pt}
-.cheat-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:6px 0}
+  /* Actions Box */
+  .sidebar-footer {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .action-btn {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 11.5px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .action-btn:hover {
+    background: var(--surface);
+    border-color: var(--accent3);
+    color: var(--text-bright);
+  }
 
-/* ===================================================
-   STUDY PLAN
-   =================================================== */
-.plan-day{background:#f0f7ff;border:1px solid #aed6f1;border-radius:8px;padding:18px 20px;margin:12px 0}
-.plan-day-title{background:#1a5276;color:#fff;font-size:9pt;font-weight:800;padding:3px 8px;border-radius:3px;display:inline-block;margin-bottom:6px}
-.plan-block{display:grid;grid-template-columns:100px 1fr;gap:12px;margin:10px 0;align-items:start;font-size:9.5pt}
-.plan-time{background:#2c3e50;color:#f1c40f;font-size:8pt;font-weight:700;padding:2px 6px;border-radius:3px;text-align:center}
-.plan-tasks{line-height:1.5}
-.plan-tasks li{list-style:none;padding-left:0}
-.plan-tasks li::before{content:"☐ ";font-size:9pt}
+  /* ── MAIN CONTENT AREA ── */
+  main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 40px;
+    max-width: 1100px;
+    width: 100%;
+  }
 
-/* ===================================================
-   TOC
-   =================================================== */
-.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:14px 0}
-.toc-item{padding:6px 0;border-bottom:0.5px dotted #ccc;font-size:10pt;display:flex;justify-content:space-between;align-items:baseline}
-.toc-item a{color:#1a5276;text-decoration:none;transition:color .15s}
-.toc-item a:hover{color:#2471a3;text-decoration:underline}
-.toc-item a.toc-pg{color:#2471a3;font-weight:700;font-size:9.5pt;white-space:nowrap;margin-left:8px}
-.toc-item a.toc-pg:hover{color:#1a5276}
-.toc-pg{color:#2471a3;font-weight:700;font-size:9pt}
+  /* ── COVER PAGE UPGRADE ── */
+  .cover {
+    background: linear-gradient(135deg, var(--surface) 0%, rgba(var(--accent3-rgb), 0.04) 50%, var(--bg) 100%);
+    border: 1px solid var(--border);
+    border-bottom: 3px solid var(--accent3);
+    border-radius: var(--radius);
+    padding: 48px 32px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  .cover-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: bold;
+  }
+  .cover-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--text-bright);
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .cover-subtitle {
+    font-size: 15px;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .cover-alert {
+    background: var(--accent2);
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 6px;
+    display: inline-block;
+    margin: 14px 0;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    box-shadow: 0 4px 15px rgba(var(--accent2-rgb), 0.2);
+  }
+  .cover-meta {
+    font-size: 12px;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
 
-/* ===================================================
-   PAGE BREAKS
-   =================================================== */
-.page-break{page-break-after:always;break-after:page;height:0;border:none;display:block}
-.no-break{page-break-inside:avoid;break-inside:avoid}
-.keep-together{page-break-inside:avoid}
+  .tier-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin: 24px 0 16px;
+  }
+  @media (max-width: 600px) { .tier-grid { grid-template-columns: repeat(3, 1fr); } }
+  .tier-box {
+    padding: 16px 8px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  .tier-box .tb-letter {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .tier-box .tb-label {
+    font-size: 8.5px;
+    display: block;
+    line-height: 1.3;
+    font-family: 'IBM Plex Mono', monospace;
+    opacity: 0.9;
+  }
 
-/* ===================================================
-   PRINT MEDIA
-   =================================================== */
-@media print{
-  html{font-size:9.5pt}
-  body{max-width:100%;padding:0;margin:0}
-  .page-break{page-break-after:always;break-after:page}
-  .no-break,.keep-together{page-break-inside:avoid;break-inside:avoid}
-  .card,.example,.example-hard,.trap,.shortcut,.memory,.speed,.algo,.formula-box,.formula-block{break-inside:avoid}
-  .section{break-inside:avoid}
-  th{background:#1a1a2e !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;color:#f1c40f !important}
-  .card-dark,.formula-line,.formula-block,.cheat-col-header,.section-header,.dep-node,.step-num,.dash-head,.tier-box,.plan-day-title,.plan-time,.cover-alert,.prob-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  @page{margin:1.1cm 1.4cm;size:letter}
-  a{color:inherit;text-decoration:none}
-  .tier-box{border:1px solid #ccc}
-}
+  /* ── HIGH-YIELD OVERVIEW DASHBOARD ── */
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .dashboard-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: var(--shadow);
+  }
+  .dash-card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .dash-card-val {
+    font-family: 'Outfit', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+  .dash-card-val span {
+    color: var(--accent3);
+  }
+  .dash-card-desc {
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  /* Interactive Graph / Visual Dependency Map */
+  .dependency-map-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  .dependency-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 4px;
+  }
+  .dependency-subtitle {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+  .dependency-map-wrapper {
+    overflow-x: auto;
+    width: 100%;
+  }
+  .dependency-map {
+    width: 100%;
+    min-width: 750px;
+    height: auto;
+  }
+  .node {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .node:hover {
+    transform: scale(1.03);
+  }
+  .node text {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Priority Dashboard Table Upgrade */
+  .dash {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow);
+  }
+  .dash-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .dash-title span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .dash-container {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .dash-head {
+    display: grid;
+    grid-template-columns: 50px 220px 70px 70px 80px 1fr;
+    gap: 8px;
+    padding: 12px 16px;
+    font-size: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    color: var(--text-bright);
+    border-bottom: 2px solid var(--border);
+    background: var(--surface2);
+    text-transform: uppercase;
+  }
+  .dash-row {
+    display: grid;
+    grid-template-columns: 50px 220px 70px 70px 80px 1fr;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    align-items: center;
+    background: var(--surface);
+    cursor: pointer;
+  }
+  .dash-row:last-child { border-bottom: none; }
+  .dash-row:hover {
+    background: var(--surface2);
+  }
+  .bar-wrap {
+    background: var(--surface2);
+    border-radius: 10px;
+    height: 6px;
+    overflow: hidden;
+    display: inline-block;
+    width: 60px;
+    vertical-align: middle;
+    margin-left: 6px;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: var(--accent3);
+  }
+
+  /* ── TYPOGRAPHY RULES ── */
+  h1, h2, h3, h4, h5 {
+    color: var(--text-bright);
+  }
+  h2 { font-family: 'Outfit', sans-serif; }
+  h3 { font-family: 'Outfit', sans-serif; font-size: 16px; font-weight: 700; margin: 28px 0 14px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h4 { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 600; margin: 18px 0 8px; }
+  
+  body, p, li, td {
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  
+  p { margin: 10px 0; font-size: 14px; line-height: 1.7; }
+  strong { color: var(--text-bright); }
+
+  /* ── SECTIONS ── */
+  .section {
+    margin-bottom: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 80px;
+    padding: 0;
+  }
+  .section-header {
+    background: var(--surface2);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    margin-bottom: 0;
+  }
+  .section-header:hover { background: rgba(255, 255, 255, 0.02); }
+  .section-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-bright);
+    margin: 0;
+    flex: 1;
+  }
+  .section-header .sec-num {
+    margin-left: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .chevron {
+    font-size: 11px;
+    color: var(--text-dim);
+    transition: transform 0.2s;
+  }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { padding: 24px; display: none; }
+  .section.open .section-body { display: block; }
+
+  /* Mastery Checkboxes in Header */
+  .header-checkbox-container {
+    display: flex;
+    align-items: center;
+    z-index: 10;
+  }
+  .section-mastery-chk {
+    appearance: none;
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    cursor: pointer;
+    position: relative;
+    transition: all 0.15s;
+  }
+  .section-mastery-chk:checked {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .section-mastery-chk:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 11px;
+    font-weight: 900;
+    color: #000;
+  }
+  .section.mastered-section {
+    border-color: rgba(var(--accent-rgb), 0.3);
+  }
+  .section.mastered-section .section-header {
+    background: rgba(var(--accent-rgb), 0.02);
+  }
+
+  /* Section Meta Panels (Difficulty / Master Time / Prerequisites) */
+  .section-meta-panel {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 12px;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text);
+  }
+  .meta-label {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .meta-val {
+    font-weight: 700;
+    color: var(--text-bright);
+  }
+
+  .subsection-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-bright);
+    border-bottom: 1.5px solid var(--border);
+    padding-bottom: 6px;
+    margin: 22px 0 12px;
+  }
+
+  /* ── PRIORITY TAGS & BADGES ── */
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+  .s-tier { background: rgba(var(--accent2-rgb), 0.15); color: var(--accent2); border: 1px solid rgba(var(--accent2-rgb), 0.3); }
+  .a-tier { background: rgba(var(--accent3-rgb), 0.15); color: var(--accent3); border: 1px solid rgba(var(--accent3-rgb), 0.3); }
+  .b-tier { background: rgba(var(--accent4-rgb), 0.15); color: var(--accent4); border: 1px solid rgba(var(--accent4-rgb), 0.3); }
+  .c-tier { background: rgba(var(--accent5-rgb), 0.15); color: var(--accent5); border: 1px solid rgba(var(--accent5-rgb), 0.3); }
+  .new-tag { background: rgba(79, 255, 176, 0.15); color: var(--accent); border: 1px solid rgba(79, 255, 176, 0.3); }
+  .ec-tag { background: rgba(162, 155, 254, 0.15); color: var(--accent5); border: 1px solid rgba(162, 155, 254, 0.3); }
+
+  .prob-badge { background: var(--surface2); color: var(--accent3); border: 1px solid var(--border); }
+  .pts-badge { background: rgba(79, 255, 176, 0.08); color: var(--accent); border: 1px solid rgba(79, 255, 176, 0.2); }
+  .warn-badge { background: rgba(255, 107, 107, 0.08); color: var(--accent2); border: 1px solid rgba(255, 107, 107, 0.2); }
+
+  /* ── CARDS UPGRADE ── */
+  .card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 18px;
+    margin: 14px 0;
+    font-size: 13.5px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .card-blue { border-left-color: var(--accent4); background: var(--surface2); }
+  .card-red { border-left-color: var(--accent2); background: var(--surface2); }
+  .card-green { border-left-color: var(--accent); background: var(--surface2); }
+  .card-yellow { border-left-color: var(--accent3); background: var(--surface2); }
+  .card-purple { border-left-color: var(--accent5); background: var(--surface2); }
+  .card-orange { border-left-color: #ca6f1e; background: var(--surface2); }
+  
+  .card-dark {
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin: 14px 0;
+  }
+  .card-dark code { background: rgba(var(--accent3-rgb), 0.08); color: var(--accent3); border: 1px solid rgba(var(--accent3-rgb), 0.2); }
+
+  /* ── FORMULAS UPGRADE ── */
+  .formula-block {
+    background: #07090e;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 14px 0;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .formula-block code, .formula-block pre {
+    background: transparent;
+    color: var(--accent3);
+    border: none;
+    font-size: 13px;
+  }
+  .formula-line {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    background: rgba(var(--accent3-rgb), 0.05);
+    color: var(--accent3);
+    padding: 8px 14px;
+    border-radius: 6px;
+    margin: 8px 0;
+    border-left: 3px solid var(--accent3);
+  }
+  .formula-box {
+    border: 2px solid var(--accent4);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin: 14px 0;
+    background: rgba(var(--accent4-rgb), 0.03);
+  }
+  
+  /* ── TRAPS, SHORTCUTS, MEMORY ── */
+  .trap { border-left: 4px solid var(--accent2); background: var(--surface2); padding: 14px 18px; margin: 14px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+  .trap-title { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--accent2); font-size: 14px; margin-bottom: 8px; }
+  .shortcut { border-left: 4px solid var(--accent); background: var(--surface2); padding: 14px 18px; margin: 14px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+  .shortcut-title { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--accent); font-size: 14px; margin-bottom: 8px; }
+  .memory { border-left: 4px solid var(--accent5); background: var(--surface2); padding: 14px 18px; margin: 14px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+  .memory-title { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--accent5); font-size: 14px; margin-bottom: 8px; }
+  .speed { border-left: 4px solid #ca6f1e; background: var(--surface2); padding: 14px 18px; margin: 14px 0; border-radius: 0 var(--radius) var(--radius) 0; }
+  .speed-title { font-family: 'Outfit', sans-serif; font-weight: 700; color: #ca6f1e; font-size: 14px; margin-bottom: 8px; }
+
+  /* ── ALGORITHMS / STEPS ── */
+  .algo {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0;
+    margin: 18px 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  .algo-title {
+    background: var(--surface2);
+    color: var(--accent3);
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 14px 20px;
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    background: var(--surface2);
+    color: var(--accent3);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 26px; height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-body {
+    flex: 1;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  /* ── EXAMPLES ── */
+  .example {
+    border: 2px solid var(--accent4);
+    border-radius: var(--radius);
+    padding: 0;
+    margin: 18px 0;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .example-hard {
+    border: 2px solid var(--accent2);
+    border-radius: var(--radius);
+    padding: 0;
+    margin: 18px 0;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  .ex-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    margin: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.5px;
+  }
+  .ex-header-blue { background: rgba(var(--accent4-rgb), 0.1); color: var(--accent4); }
+  .ex-header-red { background: rgba(var(--accent2-rgb), 0.1); color: var(--accent2); }
+  .ex-header-green { background: rgba(79, 255, 176, 0.1); color: var(--accent); }
+  
+  .ex-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 12px;
+    padding: 12px 20px;
+    font-size: 13.5px;
+    align-items: start;
+    border-bottom: 1px dotted var(--border);
+  }
+  .ex-row:last-child { border-bottom: none; }
+  .ex-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    color: var(--text-dim);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    padding-top: 2px;
+  }
+  .ex-val { line-height: 1.7; color: var(--text); }
+
+  /* ── CODES & TABLES ── */
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    background: rgba(var(--accent3-rgb), 0.08);
+    border: 1px solid rgba(var(--accent3-rgb), 0.2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent3);
+  }
+  .light code { background: rgba(var(--accent3-rgb), 0.12); color: rgba(var(--accent3-rgb), 0.95); }
+  
+  pre {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    background: #07090e;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    line-height: 1.8;
+    color: #cbd5e0;
+    margin: 14px 0;
+  }
+  .light pre { background: #0f172a; color: #cbd5e0; }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 18px 0;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th {
+    background: var(--surface2) !important;
+    color: var(--text-bright) !important;
+    padding: 12px 16px;
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border);
+  }
+  td {
+    padding: 10px 16px;
+    border: none;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+  tr:hover td { background: var(--surface2); }
+
+  /* ── DEPENDENCY GRAPH CHIPPINGS ── */
+  .dep-chain { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .dep-node { background: var(--surface2); color: var(--text); padding: 5px 12px; border-radius: 6px; font-size: 11px; font-family: 'IBM Plex Mono', monospace; font-weight: 700; border: 1px solid var(--border); }
+  .dep-node.cur { background: rgba(var(--accent4-rgb), 0.15); color: var(--accent4); border-color: rgba(var(--accent4-rgb), 0.4); }
+  .dep-node.root { background: rgba(162, 155, 254, 0.15); color: var(--accent5); border-color: rgba(162, 155, 254, 0.4); }
+  .dep-node.goal { background: rgba(79, 255, 176, 0.15); color: var(--accent); border-color: rgba(79, 255, 176, 0.4); }
+  .dep-node.warn { background: rgba(var(--accent2-rgb), 0.15); color: var(--accent2); border-color: rgba(var(--accent2-rgb), 0.4); }
+  .dep-arrow { color: var(--text-dim); font-size: 12px; }
+  .dep-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; margin: 14px 0; }
+
+  /* ── RECOGNITION BOX ── */
+  .recognize { background: rgba(var(--accent3-rgb), 0.03); border: 2.5px solid var(--accent3); border-radius: var(--radius); padding: 16px; margin: 16px 0; }
+  .recognize-title { font-family: 'Outfit', sans-serif; font-size: 13px; font-weight: 800; color: var(--accent3); text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px; }
+  .rec-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; font-size: 13.5px; }
+  .rec-if { font-style: italic; color: var(--text-dim); }
+  .rec-then { font-weight: 700; color: var(--text-bright); }
+
+  /* ── ACTIVE RECALL MECHANICS ── */
+  .active-recall-wrapper {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  body.mode-recall .active-recall-wrapper {
+    border: 1px dashed var(--accent3);
+    padding: 6px;
+    background: rgba(255, 209, 102, 0.02);
+  }
+  body.mode-recall .active-recall-wrapper .active-recall-content {
+    filter: blur(8px);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.25;
+  }
+  body.mode-recall .active-recall-wrapper.revealed .active-recall-content {
+    filter: none !important;
+    pointer-events: auto !important;
+    user-select: auto !important;
+    opacity: 1 !important;
+  }
+  .active-recall-overlay {
+    display: none;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 10;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+  body.mode-recall .active-recall-wrapper:not(.revealed) .active-recall-overlay {
+    display: flex;
+    pointer-events: auto;
+  }
+  .recall-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent3);
+    background: rgba(255, 209, 102, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 209, 102, 0.2);
+  }
+  .active-recall-btn {
+    background: var(--accent3);
+    color: #0d0f14;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+  .active-recall-btn:hover {
+    background: var(--text-bright);
+    color: #000;
+  }
+  .active-recall-wrapper.revealed .active-recall-overlay {
+    display: none !important;
+  }
+  .recall-reset-trigger {
+    display: none;
+    position: absolute;
+    top: 8px; right: 8px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 5;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  body.mode-recall .active-recall-wrapper.revealed:hover .recall-reset-trigger {
+    display: block;
+  }
+  .recall-reset-trigger:hover {
+    background: var(--surface);
+    color: var(--accent3);
+    border-color: var(--accent3);
+  }
+
+  /* 🧠 ACTIVE RECALL CHECKPOINT & MASTERY */
+  .active-recall-checkpoint {
+    background: rgba(var(--accent3-rgb), 0.03);
+    border: 1px solid rgba(var(--accent3-rgb), 0.3);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .recall-chk-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--accent3);
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .active-recall-checkpoint ul {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0;
+  }
+  .active-recall-checkpoint li {
+    padding-left: 18px;
+    position: relative;
+    font-size: 12.5px;
+    color: var(--text);
+    margin: 4px 0;
+  }
+  .active-recall-checkpoint li::before {
+    content: '🛑';
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+    top: 2px;
+  }
+
+  .mastery-checkpoint {
+    background: rgba(var(--accent-rgb), 0.03);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 28px;
+  }
+  .mastery-chk-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .mastery-chk-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .mastery-chk-grid label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .mastery-chk-grid input[type="checkbox"] {
+    accent-color: var(--accent);
+  }
+
+  /* ── EXAM CRAM MECHANICS ── */
+  body.mode-cram .section:not(.cram-open) .section-body {
+    display: none !important;
+  }
+  body.mode-cram .section:not(.cram-open) {
+    opacity: 0.55;
+  }
+  body.mode-cram .section:not(.cram-open) .section-header {
+    border-bottom: none;
+  }
+  body.mode-cram .section.s-tier-section, body.mode-cram .section.a-tier-section {
+    border-color: var(--accent3);
+    box-shadow: 0 0 15px rgba(255, 209, 102, 0.05);
+    opacity: 1 !important;
+  }
+  body.mode-cram .section.s-tier-section .section-body, body.mode-cram .section.a-tier-section .section-body {
+    display: block !important;
+  }
+  body.mode-cram .card:not(.trap) {
+    opacity: 0.85;
+  }
+  body.mode-cram .card.trap, body.mode-cram .example-hard {
+    box-shadow: 0 0 15px rgba(255, 107, 107, 0.15);
+    border-width: 3px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.003); box-shadow: 0 0 18px rgba(255, 107, 107, 0.2); }
+    100% { transform: scale(1); }
+  }
+
+  /* ── RESPONSIVE SCROLL-OFFSET / PRINT / MEDIA ── */
+  @media (max-width: 1024px) {
+    aside {
+      transform: translateX(-100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    aside.open {
+      transform: translateX(0);
+    }
+    main {
+      margin-left: 0;
+      padding: 80px 16px 40px;
+    }
+    .mobile-header {
+      display: flex;
+    }
+  }
+
+  /* ── PRINT OPTIMIZATION ── */
+  @media print {
+    body {
+      background: #ffffff !important;
+      color: #000000 !important;
+      font-size: 11pt;
+    }
+    aside, .mobile-header, .modes-panel, .dependency-map-container, .action-btn, .dashboard-grid, .recall-reset-trigger, .sidebar-footer {
+      display: none !important;
+    }
+    main {
+      margin-left: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+    .section {
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: none !important;
+      margin-bottom: 20px !important;
+      page-break-inside: avoid;
+    }
+    .section-body {
+      display: block !important;
+    }
+    .active-recall-wrapper .active-recall-content {
+      filter: none !important;
+      opacity: 1 !important;
+    }
+    .active-recall-overlay {
+      display: none !important;
+    }
+    .card {
+      border: 1px solid #cbd5e1 !important;
+      border-left-width: 4px !important;
+      background: #f8fafc !important;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+    }
+    code {
+      background: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    pre {
+      background: #f8fafc !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+  }
+
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     COVER PAGE
-     ============================================================ -->
+<div class="app-container">
+
+  <!-- MOBILE HEADER -->
+  <div class="mobile-header">
+    <button class="menu-toggle-btn" onclick="toggleSidebar()">☰</button>
+    <div class="mobile-title">Math 7 Survival Guide</div>
+    <button class="theme-btn" onclick="toggleTheme()">🌓</button>
+  </div>
+
+  <!-- STICKY SIDEBAR -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><span>Math 7</span> Final Guide</div>
+      <div class="sidebar-subtitle">SMC · Calculus I</div>
+    </div>
+
+    <!-- Theme Control -->
+    <div class="theme-toggle-container">
+      <span class="toggle-label">Theme Settings</span>
+      <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">🌓 Toggle</button>
+    </div>
+
+    <!-- Live Search -->
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="search-input" placeholder="Search calculus topics, formulas..." oninput="handleSearch(this.value)">
+    </div>
+
+    <!-- Interactive Study Modes -->
+    <div class="modes-panel">
+      <div class="modes-title">Study Workflow Mode</div>
+      
+      <label class="mode-option active" id="mode-study-lbl" onclick="setStudyMode('study')">
+        <input type="radio" name="studymode" value="study" checked>
+        <span class="mode-dot"></span>
+        <div>
+          Standard Study Mode
+          <span class="mode-desc">Full explanations and complete guide visible.</span>
+        </div>
+      </label>
+
+      <label class="mode-option" id="mode-recall-lbl" onclick="setStudyMode('recall')">
+        <input type="radio" name="studymode" value="recall">
+        <span class="mode-dot"></span>
+        <div>
+          Active Recall Mode
+          <span class="mode-desc">Blurs solutions/examples. Click to reveal.</span>
+        </div>
+      </label>
+
+      <label class="mode-option" id="mode-cram-lbl" onclick="setStudyMode('cram')">
+        <input type="radio" name="studymode" value="cram">
+        <span class="mode-dot"></span>
+        <div>
+          "EXAM IN 48 HOURS"
+          <span class="mode-desc">Surfaces highest-yield S/A tiers and critical traps.</span>
+        </div>
+      </label>
+    </div>
+
+    <!-- Readiness tracker -->
+    <div class="readiness-container">
+      <div class="readiness-header">
+        <span>Exam Readiness</span>
+        <span id="readiness-pct">0%</span>
+      </div>
+      <div class="readiness-bar-bg">
+        <div class="readiness-bar-fg" id="readiness-bar"></div>
+      </div>
+      <div class="readiness-status" id="readiness-status">Focusing on basics</div>
+    </div>
+
+    <!-- TOC Navigation -->
+    <nav class="toc-nav">
+      <div class="toc-header">Topic Modules</div>
+      <a href="#sec1" class="toc-link" onclick="scrollToSection('sec1', event)">
+        <span class="toc-text">1. Exam Intelligence</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> S-Tier</span>
+      </a>
+      <a href="#sec2" class="toc-link" onclick="scrollToSection('sec2', event)">
+        <span class="toc-text">2. Algebra &amp; Trig</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> Core</span>
+      </a>
+      <a href="#sec3" class="toc-link" onclick="scrollToSection('sec3', event)">
+        <span class="toc-text">3. Limits - 7 Methods</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> S-Tier</span>
+      </a>
+      <a href="#sec4" class="toc-link" onclick="scrollToSection('sec4', event)">
+        <span class="toc-text">4. Continuity &amp; IVT</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> A-Tier</span>
+      </a>
+      <a href="#sec5" class="toc-link" onclick="scrollToSection('sec5', event)">
+        <span class="toc-text">5. Epsilon-Delta / Squeeze</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> B-Tier</span>
+      </a>
+      <a href="#sec6" class="toc-link" onclick="scrollToSection('sec6', event)">
+        <span class="toc-text">6. Derivatives Rules</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> S-Tier</span>
+      </a>
+      <a href="#sec7" class="toc-link" onclick="scrollToSection('sec7', event)">
+        <span class="toc-text">7. Tangents &amp; Diff</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> B-Tier</span>
+      </a>
+      <a href="#sec8" class="toc-link" onclick="scrollToSection('sec8', event)">
+        <span class="toc-text">8. Apps of Derivatives</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> A-Tier</span>
+      </a>
+      <a href="#sec9" class="toc-link" onclick="scrollToSection('sec9', event)">
+        <span class="toc-text">9. Curve Sketching</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> A-Tier</span>
+      </a>
+      <a href="#sec10" class="toc-link" onclick="scrollToSection('sec10', event)">
+        <span class="toc-text">10. Optimization &amp; Rates</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> A-Tier</span>
+      </a>
+      <a href="#sec11" class="toc-link" onclick="scrollToSection('sec11', event)">
+        <span class="toc-text">11. Integration Guide</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> S-Tier</span>
+      </a>
+      <a href="#sec12" class="toc-link" onclick="scrollToSection('sec12', event)">
+        <span class="toc-text">12. Area, Vol, Work, IFT</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> A-Tier</span>
+      </a>
+      <a href="#sec13" class="toc-link" onclick="scrollToSection('sec13', event)">
+        <span class="toc-text">13. Theorems &amp; Traps</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> Ref</span>
+      </a>
+      <a href="#sec14" class="toc-link" onclick="scrollToSection('sec14', event)">
+        <span class="toc-text">14. 48-Hr Cram Sheet</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> Cram</span>
+      </a>
+      <a href="#sec15" class="toc-link" onclick="scrollToSection('sec15', event)">
+        <span class="toc-text">15. Practice Map (FR)</span>
+        <span class="toc-meta"><span class="toc-check">✓</span> Map</span>
+      </a>
+    </nav>
+
+    <!-- Printing and quick controls -->
+    <div class="sidebar-footer">
+      <button class="action-btn" onclick="expandAll()">Expand All</button>
+      <button class="action-btn" onclick="collapseAll()">Collapse All</button>
+      <button class="action-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+    </div>
+  </aside>
+
+  <!-- MAIN SCROLLABLE CONTENT -->
+  <main>
 <div class="cover">
   <div class="cover-kicker">Math 7 · Calculus I · Spring 2026</div>
   <div class="cover-title">FINAL EXAM<br>SURVIVAL GUIDE</div>
@@ -290,8 +1510,136 @@ a{color:#1a5276;text-decoration:none}
 <!-- ============================================================
      #1 EXAM INTELLIGENCE
      ============================================================ -->
-<div class="section">
-<div id="sec1" class="section-header"><h2>#1 — Exam Intelligence &amp; Priority Dashboard</h2><span class="sec-num">Based on Exams 1–4 + Final Review Analysis</span></div>
+
+    <!-- HIGH-YIELD OVERVIEW DASHBOARD -->
+    <div class="dashboard-grid">
+      <div class="dashboard-card">
+        <div class="dash-card-title">Exam Scope</div>
+        <div class="dash-card-val">Calculus I <span>(Math 7)</span></div>
+        <div class="dash-card-desc">Comprehensive exam. No calculators. Exact results required.</div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dash-card-title">High-Yield Targets</div>
+        <div class="dash-card-val">5 <span>S-Tiers</span></div>
+        <div class="dash-card-desc">Limits, Derivatives, Integration carry 95%+ probability.</div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dash-card-title">Extra Credit Target</div>
+        <div class="dash-card-val">IFT <span>(Sec 6.1)</span></div>
+        <div class="dash-card-desc">Inverse Function Theorem: guaranteed extra credit points.</div>
+      </div>
+      <div class="dashboard-card">
+        <div class="dash-card-title">Completed Modules</div>
+        <div class="dash-card-val"><span id="dash-progress-val">0</span>/15 <span>Pass</span></div>
+        <div class="dash-card-desc">Check sections on mastery checklists to update.</div>
+      </div>
+    </div>
+
+    <!-- VISUAL CONCEPT DEPENDENCY MAP -->
+    <div class="dependency-map-container">
+      <div class="dependency-title">Calculus I Knowledge Dependency Network</div>
+      <div class="dependency-subtitle">Learn prerequisites to avoid points loss downstream. Click on any node to jump to its section.</div>
+      <div class="dependency-map-wrapper">
+        <svg viewBox="0 0 820 440" class="dependency-map">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--text-dim)" />
+            </marker>
+          </defs>
+          
+          <g class="edges" stroke="var(--border)" stroke-width="2" fill="none">
+            <!-- Map A: Limits -> Derivatives -> Critical Points -> Optimization -->
+            <path d="M 150 80 L 150 180" marker-end="url(#arrow)" />
+            <path d="M 150 180 L 100 280" marker-end="url(#arrow)" />
+            <path d="M 100 280 L 100 380" marker-end="url(#arrow)" />
+            
+            <!-- Map B: Limits -> L'Hopital -> Integrals -->
+            <path d="M 150 80 Q 275 130 400 180" marker-end="url(#arrow)" />
+            <path d="M 400 180 L 450 280" marker-end="url(#arrow)" />
+            
+            <!-- Map C: Derivatives -> Related Rates -->
+            <path d="M 150 180 Q 200 230 250 280" marker-end="url(#arrow)" />
+            
+            <!-- Map D: Function Analysis -> EVT -> MVT -->
+            <path d="M 650 180 Q 600 240 550 300" marker-end="url(#arrow)" />
+            <path d="M 650 180 Q 675 240 700 300" marker-end="url(#arrow)" />
+            
+            <!-- Core Continuity connections -->
+            <path d="M 150 80 L 400 80" marker-end="url(#arrow)" />
+            <path d="M 400 80 Q 275 130 150 180" marker-end="url(#arrow)" />
+          </g>
+
+          <g class="nodes" font-family="'IBM Plex Sans', sans-serif" font-size="10" font-weight="700">
+            <!-- Row 1 -->
+            <g class="node" onclick="scrollToSection('sec3', event)">
+              <rect x="70" y="60" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" />
+              <text x="150" y="78" text-anchor="middle" fill="var(--text-bright)">Limits (Sec 3)</text>
+              <text x="150" y="92" text-anchor="middle" fill="var(--accent)" font-family="'IBM Plex Mono', monospace" font-size="8">S-TIER · 97% PROB</text>
+            </g>
+            <g class="node" onclick="scrollToSection('sec4', event)">
+              <rect x="320" y="60" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent3)" stroke-width="2" />
+              <text x="400" y="78" text-anchor="middle" fill="var(--text-bright)">Continuity &amp; IVT (Sec 4)</text>
+              <text x="400" y="92" text-anchor="middle" fill="var(--accent3)" font-family="'IBM Plex Mono', monospace" font-size="8">A-TIER · 88% PROB</text>
+            </g>
+            
+            <!-- Row 2 -->
+            <g class="node" onclick="scrollToSection('sec6', event)">
+              <rect x="70" y="160" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" />
+              <text x="150" y="178" text-anchor="middle" fill="var(--text-bright)">Derivatives (Sec 6)</text>
+              <text x="150" y="192" text-anchor="middle" fill="var(--accent)" font-family="'IBM Plex Mono', monospace" font-size="8">S-TIER · 95% PROB</text>
+            </g>
+            <g class="node" onclick="scrollToSection('sec8', event)">
+              <rect x="320" y="160" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent3)" stroke-width="2" />
+              <text x="400" y="178" text-anchor="middle" fill="var(--text-bright)">L'Hôpital (Sec 3/8)</text>
+              <text x="400" y="192" text-anchor="middle" fill="var(--accent3)" font-family="'IBM Plex Mono', monospace" font-size="8">A-TIER · 85% PROB</text>
+            </g>
+            <g class="node" onclick="scrollToSection('sec9', event)">
+              <rect x="570" y="160" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent3)" stroke-width="2" />
+              <text x="650" y="178" text-anchor="middle" fill="var(--text-bright)">Fn Analysis (Sec 9)</text>
+              <text x="650" y="192" text-anchor="middle" fill="var(--accent3)" font-family="'IBM Plex Mono', monospace" font-size="8">A-TIER · 88% PROB</text>
+            </g>
+            
+            <!-- Row 3 -->
+            <g class="node" onclick="scrollToSection('sec8', event)">
+              <rect x="20" y="260" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent4)" stroke-width="2" />
+              <text x="100" y="278" text-anchor="middle" fill="var(--text-bright)">Critical Points (Sec 8)</text>
+              <text x="100" y="292" text-anchor="middle" fill="var(--accent4)" font-family="'IBM Plex Mono', monospace" font-size="8">B-TIER · 85% PROB</text>
+            </g>
+            <g class="node" onclick="scrollToSection('sec10', event)">
+              <rect x="170" y="260" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent4)" stroke-width="2" />
+              <text x="250" y="278" text-anchor="middle" fill="var(--text-bright)">Related Rates (Sec 10)</text>
+              <text x="250" y="292" text-anchor="middle" fill="var(--accent4)" font-family="'IBM Plex Mono', monospace" font-size="8">B-TIER · 80% PROB</text>
+            </g>
+            <g class="node" onclick="scrollToSection('sec11', event)">
+              <rect x="370" y="260" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" />
+              <text x="450" y="278" text-anchor="middle" fill="var(--text-bright)">Integrals (Sec 11)</text>
+              <text x="450" y="292" text-anchor="middle" fill="var(--accent)" font-family="'IBM Plex Mono', monospace" font-size="8">S-TIER · 93% PROB</text>
+            </g>
+            <g class="node" onclick="scrollToSection('sec13', event)">
+              <rect x="470" y="280" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent4)" stroke-width="2" />
+              <text x="550" y="298" text-anchor="middle" fill="var(--text-bright)">EVT (Sec 8/13)</text>
+              <text x="550" y="312" text-anchor="middle" fill="var(--accent4)" font-family="'IBM Plex Mono', monospace" font-size="8">B-TIER · Reference</text>
+            </g>
+            <g class="node" onclick="scrollToSection('sec13', event)">
+              <rect x="640" y="280" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent4)" stroke-width="2" />
+              <text x="720" y="298" text-anchor="middle" fill="var(--text-bright)">MVT (Sec 8/13)</text>
+              <text x="720" y="312" text-anchor="middle" fill="var(--accent4)" font-family="'IBM Plex Mono', monospace" font-size="8">B-TIER · Reference</text>
+            </g>
+            
+            <!-- Row 4 -->
+            <g class="node" onclick="scrollToSection('sec10', event)">
+              <rect x="20" y="360" width="160" height="40" rx="6" fill="var(--surface)" stroke="var(--accent3)" stroke-width="2" />
+              <text x="100" y="378" text-anchor="middle" fill="var(--text-bright)">Optimization (Sec 10)</text>
+              <text x="100" y="392" text-anchor="middle" fill="var(--accent3)" font-family="'IBM Plex Mono', monospace" font-size="8">A-TIER · 85% PROB</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="section" id="toc-sec" style="padding:24px;">
+      <h2>#1 — Exam Intelligence &amp; Priority Dashboard</h2><span class="sec-num">Based on Exams 1–4 + Final Review Analysis</span></div>
 
 <!-- PROFESSOR PATTERNS -->
 <h3>Confirmed Professor Patterns</h3>
@@ -425,8 +1773,43 @@ Factoring quadratics and cubics · Combining rational expressions (LCD method) �
 <!-- ============================================================
      #2 ALGEBRA & TRIG PREREQUISITES
      ============================================================ -->
-<div class="section">
-<div id="sec2" class="section-header"><h2>#2 — Algebra &amp; Trig Prerequisites</h2><span class="sec-num">Foundation skills — used in EVERY problem</span></div>
+
+    </div>
+
+    <!-- ══════════════════ SECTION 2 ══════════════════ -->
+    <div class="section open ref-section" id="sec2">
+      <div class="section-header" onclick="toggle('sec2')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec2" onchange="toggleSectionMastery('sec2', this.checked)">
+        </div>
+        <span class="rank-badge b-tier" style="margin-left: 12px;">Reference</span>
+        <span class="section-title" style="margin-left: 12px;">#2 — Algebra &amp; Trig Prerequisites</span>
+        <span class="section-prob">Foundation skills — used in EVERY problem</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">3.5/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">25 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">High school algebra & trig</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 <div class="card card-red"><strong>🚨 These are not "review" — they are tested implicitly in every calculus problem. A sign error or factoring mistake on a limit costs you the whole problem.</strong></div>
 
 <div class="two-col">
@@ -519,13 +1902,61 @@ f(2) = 4 (defined but limit DNE → <em>jump discontinuity</em>)
 </div>
 </div><!-- end #2 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec2')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec2')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec2')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec2')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec2')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #3 LIMITS
      ============================================================ -->
-<div class="section">
-<div id="sec3" class="section-header"><h2>#3 — Limits — All 7 Techniques</h2><span class="sec-num"><span class="tag s-tier">S-TIER</span> 97% probability · 14–20 pts</span></div>
+
+    <!-- ══════════════════ SECTION 3 ══════════════════ -->
+    <div class="section open s-tier-section" id="sec3">
+      <div class="section-header" onclick="toggle('sec3')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec3" onchange="toggleSectionMastery('sec3', this.checked)">
+        </div>
+        <span class="rank-badge s-tier" style="margin-left: 12px;">S-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#3 — Limits — All 7 Techniques</span>
+        <span class="section-prob"><span class="tag s-tier">S-TIER</span> 97% probability · 14–20 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.7/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">45 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Factoring, trig identities</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <div class="dep-chain" style="margin-bottom:6px">
   <span class="dep-node root">Algebra/Factoring</span><span class="dep-arrow">→</span>
@@ -544,7 +1975,16 @@ f(2) = 4 (defined but limit DNE → <em>jump discontinuity</em>)
 <div class="two-col">
 <div>
 <div class="subsection-title">The 7 Limit Techniques — Decision Order</div>
-<div class="algo">
+<div class="active-recall-wrapper" id="recall-block-1">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-1')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-1')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo">
+      </div>
+    </div>
 <span class="algo-title">ALGORITHM: Which technique to use?</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Direct substitution:</strong> Plug in x=a. If the result is defined and finite → DONE. Most limits end here.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>0/0 form → Factor:</strong> Factor numerator and denominator. Cancel common factor. Substitute. ALWAYS state restriction (x≠a).</span></div>
@@ -573,7 +2013,16 @@ Since x→−∞: |x|=−x, so = x/(−x·√4) = 1/(−2) = <strong>−1/2</str
 </div>
 <div>
 <div class="subsection-title">Trig Limits</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-2">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-2')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-2')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <span class="formula-line">lim(x→0) sin(x)/x = 1</span>
 <span class="formula-line">lim(x→0) (1 − cos x)/x = 0</span>
 <span class="formula-line">lim(x→0) tan(x)/x = 1</span>
@@ -616,7 +2065,16 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
 <!-- WORKED EXAMPLES — LIMITS -->
 <div class="subsection-title" style="margin-top:8px">Worked Examples</div>
 <div class="three-col">
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-3">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-3')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-3')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-green">Easy — Factor &amp; Cancel</span>
 <div class="ex-row"><span class="ex-label">Given</span><span class="ex-val">lim(x→2) (x²−x−2)/(x²−4)</span></div>
 <div class="ex-row"><span class="ex-label">Check</span><span class="ex-val">Direct sub → 0/0 → factor</span></div>
@@ -625,7 +2083,16 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">(2+1)/(2+2) = <strong>3/4</strong></span></div>
 <div class="ex-row"><span class="ex-label">Trap</span><span class="ex-val">Missing "x≠2" restriction loses a point</span></div>
 </div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-4">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-4')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-4')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">Medium — Rationalize</span>
 <div class="ex-row"><span class="ex-label">Given</span><span class="ex-val">lim(x→2) (√x−√2)/(x−2)</span></div>
 <div class="ex-row"><span class="ex-label">Check</span><span class="ex-val">0/0 with √ → rationalize</span></div>
@@ -635,7 +2102,16 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
 <div class="ex-row"><span class="ex-label">Cancel</span><span class="ex-val">1/(√x+√2), x≠2</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">1/(2√2) = <strong>√2/4</strong></span></div>
 </div>
-<div class="example-hard">
+<div class="active-recall-wrapper" id="recall-block-5">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-5')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-5')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example-hard">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">Hard — Exam FR Q2a Style</span>
 <div class="ex-row"><span class="ex-label">Given</span><span class="ex-val">lim(x→−∞) x/√(4x²+1)</span></div>
 <div class="ex-row"><span class="ex-label">Recog</span><span class="ex-val">√ at −∞ → sign trap</span></div>
@@ -657,18 +2133,75 @@ lim(x→a) f(x) can exist even when f(a) is undefined. lim(x→2) (x²−4)/(x�
 </div>
 </div><!-- end #3 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec3')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec3')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec3')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec3')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec3')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #4 CONTINUITY
      ============================================================ -->
-<div class="section">
-<div id="sec4" class="section-header"><h2>#4 — Continuity, IVT &amp; Discontinuities</h2><span class="sec-num"><span class="tag a-tier">A-TIER</span> 88% probability · 6–10 pts</span></div>
+
+    <!-- ══════════════════ SECTION 4 ══════════════════ -->
+    <div class="section open a-tier-section" id="sec4">
+      <div class="section-header" onclick="toggle('sec4')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec4" onchange="toggleSectionMastery('sec4', this.checked)">
+        </div>
+        <span class="rank-badge a-tier" style="margin-left: 12px;">A-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#4 — Continuity, IVT &amp; Discontinuities</span>
+        <span class="section-prob"><span class="tag a-tier">A-TIER</span> 88% probability · 6–10 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.0/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">30 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Limits from left & right</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <div class="two-col">
 <div>
 <div class="subsection-title">3 Conditions of Continuity at x = c</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-6">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-6')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-6')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <strong>f is continuous at c if ALL THREE hold:</strong><br>
 <span class="formula-line">1. f(c) is defined (c is in the domain of f)</span>
 <span class="formula-line">2. lim(x→c) f(x) exists (left = right limit)</span>
@@ -704,7 +2237,16 @@ Polynomials · Rational (where defined) · Trig functions (where defined) · Com
 <strong>Most common exam use:</strong> Show that f(x) = k has a solution, i.e., "a root exists."
 </div>
 
-<div class="algo" style="margin-top:6px">
+<div class="active-recall-wrapper" id="recall-block-7">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-7')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-7')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo" style="margin-top:6px">
+      </div>
+    </div>
 <span class="algo-title">ALGORITHM: IVT to show a root exists</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Define g(x) = f(x) − target value (e.g., if showing f(c)=5, let g(x)=f(x)−5)</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">State that g is continuous on [a,b] (and why — polynomial, composition, etc.)</span></div>
@@ -713,7 +2255,16 @@ Polynomials · Rational (where defined) · Trig functions (where defined) · Com
 <div class="step"><span class="step-num">5</span><span class="step-body">Translate back: "Thus f(c) = target value." ✓</span></div>
 </div>
 
-<div class="example" style="margin-top:6px">
+<div class="active-recall-wrapper" id="recall-block-8">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-8')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-8')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example" style="margin-top:6px">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">EXAM STYLE — SG1 Q18: Show x⁴+x−3=0 has a root on (1,2)</span>
 <div class="ex-row"><span class="ex-label">Let</span><span class="ex-val">g(x) = x⁴+x−3 (polynomial → continuous on [1,2])</span></div>
 <div class="ex-row"><span class="ex-label">g(1)</span><span class="ex-val">= 1+1−3 = −1 &lt; 0</span></div>
@@ -724,7 +2275,16 @@ Polynomials · Rational (where defined) · Trig functions (where defined) · Com
 </div>
 
 <div class="subsection-title" style="margin-top:6px">Exam-Style Continuity Analysis of Piecewise Function</div>
-<div class="example-hard">
+<div class="active-recall-wrapper" id="recall-block-9">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-9')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-9')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example-hard">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">EXAM STYLE — FR Q4: Find all x where f is continuous, all x where differentiable</span>
 <div style="font-size:9.5pt">
 f(x) = {3 if x&lt;−2 ; 1/(x−1) if |x|≤2, x≠1 ; 1 if x&gt;2}<br><br>
@@ -746,23 +2306,89 @@ Differentiable ⟹ Continuous (if f is differentiable at a, it is continuous the
 </div>
 </div><!-- end #4 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec4')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec4')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec4')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec4')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec4')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #5 EPSILON-DELTA & SQUEEZE THEOREM
      ============================================================ -->
-<div class="section">
-<div id="sec5" class="section-header"><h2>#5 — Epsilon-Delta &amp; Squeeze Theorem</h2><span class="sec-num"><span class="tag b-tier">B/C-TIER</span> 75–78% probability · 4–6 pts</span></div>
+
+    <!-- ══════════════════ SECTION 5 ══════════════════ -->
+    <div class="section open b-tier-section" id="sec5">
+      <div class="section-header" onclick="toggle('sec5')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec5" onchange="toggleSectionMastery('sec5', this.checked)">
+        </div>
+        <span class="rank-badge b-tier" style="margin-left: 12px;">B-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#5 — Epsilon-Delta &amp; Squeeze Theorem</span>
+        <span class="section-prob"><span class="tag b-tier">B/C-TIER</span> 75–78% probability · 4–6 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.9/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">35 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Limit definitions, inequalities</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <div class="two-col">
 <div>
 <div class="subsection-title">Epsilon-Delta Definition</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-10">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-10')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-10')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <strong>Formal definition:</strong><br>
 lim(x→a) f(x) = L means: for every ε &gt; 0, there exists δ &gt; 0 such that:<br>
 <span class="formula-line">if 0 &lt; |x − a| &lt; δ, then |f(x) − L| &lt; ε</span>
 </div>
-<div class="algo">
+<div class="active-recall-wrapper" id="recall-block-11">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-11')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-11')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo">
+      </div>
+    </div>
 <span class="algo-title">STEP 1 ALGORITHM: Finding δ (what is always asked)</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Write |f(x) − L| and substitute f(x).</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Simplify algebraically until you get an expression of the form: C·|x − a| where C is a constant.</span></div>
@@ -770,7 +2396,16 @@ lim(x→a) f(x) = L means: for every ε &gt; 0, there exists δ &gt; 0 such that
 <div class="step"><span class="step-num">4</span><span class="step-body">Therefore δ = ε/C. (Sometimes δ = min(1, ε/C) if needed.)</span></div>
 </div>
 
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-12">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-12')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-12')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">EXAM STYLE — FR Q1: lim(x→4) (2x/5 + 1) = 13/5</span>
 <div class="ex-row"><span class="ex-label">|f(x)−L|</span><span class="ex-val">|(2x/5+1) − 13/5| = |2x/5 − 8/5| = (2/5)|x−4|</span></div>
 <div class="ex-row"><span class="ex-label">Need</span><span class="ex-val">(2/5)|x−4| &lt; ε</span></div>
@@ -781,12 +2416,30 @@ lim(x→a) f(x) = L means: for every ε &gt; 0, there exists δ &gt; 0 such that
 </div>
 <div>
 <div class="subsection-title">Squeeze Theorem</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-13">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-13')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-13')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <strong>Theorem:</strong> If h(x) ≤ f(x) ≤ g(x) near a (but not necessarily at a),<br>
 and lim(x→a) h(x) = lim(x→a) g(x) = L,<br>
 <span class="formula-line">then lim(x→a) f(x) = L</span>
 </div>
-<div class="algo" style="margin-top:6px">
+<div class="active-recall-wrapper" id="recall-block-14">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-14')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-14')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo" style="margin-top:6px">
+      </div>
+    </div>
 <span class="algo-title">ALGORITHM: Squeeze Theorem Proof</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Identify the bounded part: usually a trig function. Write: −1 ≤ sin(anything) ≤ 1.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Multiply all sides by the other factor. <strong>CRUCIAL:</strong> If multiplying by x² (always ≥ 0), inequality direction unchanged. If multiplying by a possibly-negative quantity, handle signs carefully.</span></div>
@@ -794,7 +2447,16 @@ and lim(x→a) h(x) = lim(x→a) g(x) = L,<br>
 <div class="step"><span class="step-num">4</span><span class="step-body">Conclude: "By the Squeeze Theorem, lim f(x) = L." State the theorem by name.</span></div>
 </div>
 
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-15">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-15')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-15')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">EXAM STYLE — Exam 1 Q2: Prove lim(x→0) x²sin(1/x²) = 0</span>
 <div class="ex-row"><span class="ex-label">Step 1</span><span class="ex-val">−1 ≤ sin(1/x²) ≤ 1 for all x ≠ 0</span></div>
 <div class="ex-row"><span class="ex-label">Step 2</span><span class="ex-val">Multiply by x² ≥ 0: −x² ≤ x²sin(1/x²) ≤ x²</span></div>
@@ -810,13 +2472,61 @@ Picture f(x) squeezed between h(x) below and g(x) above. If top and bottom bread
 </div>
 </div><!-- end #5 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec5')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec5')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec5')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec5')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec5')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #6 DERIVATIVES — ALL RULES
      ============================================================ -->
-<div class="section">
-<div id="sec6" class="section-header"><h2>#6 — Derivatives — All Rules</h2><span class="sec-num"><span class="tag s-tier">S-TIER</span> 95% probability · 12–18 pts</span></div>
+
+    <!-- ══════════════════ SECTION 6 ══════════════════ -->
+    <div class="section open s-tier-section" id="sec6">
+      <div class="section-header" onclick="toggle('sec6')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec6" onchange="toggleSectionMastery('sec6', this.checked)">
+        </div>
+        <span class="rank-badge s-tier" style="margin-left: 12px;">S-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#6 — Derivatives — All Rules</span>
+        <span class="section-prob"><span class="tag s-tier">S-TIER</span> 95% probability · 12–18 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.5/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">40 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Continuity, power rules</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <div class="dep-chain" style="margin-bottom:6px">
   <span class="dep-node root">Limits</span><span class="dep-arrow">→</span>
@@ -831,7 +2541,16 @@ Picture f(x) squeezed between h(x) below and g(x) above. If top and bottom bread
 <div class="two-col">
 <div>
 <div class="subsection-title">Derivative Definition</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-16">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-16')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-16')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <span class="formula-line">f′(x) = lim(h→0) [f(x+h) − f(x)] / h</span>
 <span class="formula-line">f′(a) = lim(x→a) [f(x) − f(a)] / (x − a)</span>
 </div>
@@ -881,12 +2600,30 @@ d/dx[sin(3x)] = cos(3x)·<strong>3</strong>, NOT just cos(3x). d/dx[(x²+1)⁵] 
 </div>
 
 <div class="subsection-title" style="margin-top:8px">FTC Part 2 — Derivative of Integral</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-17">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-17')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-17')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <span class="formula-line">d/dx[∫ₐˣ f(t)dt] = f(x)</span>
 <span class="formula-line">d/dx[∫ₐ^(g(x)) f(t)dt] = f(g(x))·g′(x)</span>
 <span class="formula-line">d/dx[∫ₓᵇ f(t)dt] = −f(x)</span>
 </div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-18">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-18')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-18')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">EXAM 4 Q1 (8 pts): f(x) = ∫₂^(cosx) 1/(1−t²) dt, find f′(x)</span>
 <div class="ex-row"><span class="ex-label">Setup</span><span class="ex-val">Variable upper bound → FTC2 + chain rule</span></div>
 <div class="ex-row"><span class="ex-label">FTC2</span><span class="ex-val">f′(x) = 1/(1−cos²x)·(−sinx)</span></div>
@@ -904,14 +2641,32 @@ d/dx[∫ₐ^(cosx) f(t)dt] = f(cosx)·(−sinx). The inner derivative (−sinx) 
 <!-- WORKED EXAMPLES — DERIVATIVES -->
 <div class="subsection-title" style="margin-top:8px">Worked Examples — Differentiation</div>
 <div class="three-col">
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-19">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-19')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-19')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-green">Easy — Product Rule</span>
 <div class="ex-row"><span class="ex-label">Find</span><span class="ex-val">d/dx[(x⁶+1)(3x³−2x+5)]</span></div>
 <div class="ex-row"><span class="ex-label">f=</span><span class="ex-val">x⁶+1, f′=6x⁵</span></div>
 <div class="ex-row"><span class="ex-label">g=</span><span class="ex-val">3x³−2x+5, g′=9x²−2</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">6x⁵(3x³−2x+5)+(x⁶+1)(9x²−2) [no simplification needed]</span></div>
 </div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-20">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-20')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-20')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">Medium — Nested Chain Rule</span>
 <div class="ex-row"><span class="ex-label">Find</span><span class="ex-val">d/dx[sin²(4√x)]</span></div>
 <div class="ex-row"><span class="ex-label">Layer 1</span><span class="ex-val">Outer: (·)² → 2sin(4√x)·d/dx[sin(4√x)]</span></div>
@@ -919,7 +2674,16 @@ d/dx[∫ₐ^(cosx) f(t)dt] = f(cosx)·(−sinx). The inner derivative (−sinx) 
 <div class="ex-row"><span class="ex-label">Layer 3</span><span class="ex-val">4·(1/2)x⁻¹/² = 2/√x</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val">2sin(4√x)·cos(4√x)·2/√x = 4sin(4√x)cos(4√x)/√x</span></div>
 </div>
-<div class="example-hard">
+<div class="active-recall-wrapper" id="recall-block-21">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-21')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-21')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example-hard">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">Hard — FR Q8: f(x)=sin(x+cos²x)+cos3x, find f′(π/2)</span>
 <div class="ex-row"><span class="ex-label">f′(x)</span><span class="ex-val">cos(x+cos²x)·(1+2cosx·(−sinx))+(−sin3x)·3</span></div>
 <div class="ex-row"><span class="ex-label">Simplify</span><span class="ex-val">cos(x+cos²x)·(1−sin2x)−3sin3x</span></div>
@@ -934,24 +2698,90 @@ Sum/difference → apply power rule term by term. Product of two things → prod
 </div>
 </div><!-- end #6 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec6')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec6')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec6')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec6')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec6')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #7 TANGENT LINES & DIFFERENTIABILITY
      ============================================================ -->
-<div class="section">
-<div id="sec7" class="section-header"><h2>#7 — Tangent Lines &amp; Differentiability</h2><span class="sec-num"><span class="tag b-tier">B-TIER</span> 82% probability · 6–10 pts</span></div>
+
+    <!-- ══════════════════ SECTION 7 ══════════════════ -->
+    <div class="section open b-tier-section" id="sec7">
+      <div class="section-header" onclick="toggle('sec7')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec7" onchange="toggleSectionMastery('sec7', this.checked)">
+        </div>
+        <span class="rank-badge b-tier" style="margin-left: 12px;">B-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#7 — Tangent Lines &amp; Differentiability</span>
+        <span class="section-prob"><span class="tag b-tier">B-TIER</span> 82% probability · 6–10 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.2/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">25 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Derivative rules, tangent slopes</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <div class="two-col">
 <div>
 <div class="subsection-title">Tangent Line to Explicit Function</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-22">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-22')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-22')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <strong>Equation of tangent at (a, f(a)):</strong><br>
 <span class="formula-line">y − f(a) = f′(a)·(x − a)</span>
 <strong>Normal line</strong> (perpendicular to tangent):<br>
 <span class="formula-line">y − f(a) = −1/f′(a)·(x − a)</span>
 </div>
-<div class="algo">
+<div class="active-recall-wrapper" id="recall-block-23">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-23')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-23')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo">
+      </div>
+    </div>
 <span class="algo-title">ALGORITHM: Tangent Line</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Find f′(x) (differentiate)</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Evaluate f′(a) = slope m (the number)</span></div>
@@ -959,7 +2789,16 @@ Sum/difference → apply power rule term by term. Product of two things → prod
 <div class="step"><span class="step-num">4</span><span class="step-body">Write: y − f(a) = m(x − a). Simplify if requested.</span></div>
 </div>
 
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-24">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-24')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-24')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">FR Q6: Tangent to f(x)=x√(x−1) at x=5</span>
 <div class="ex-row"><span class="ex-label">f′(x)</span><span class="ex-val">= √(x−1) + x·1/(2√(x−1)) = √(x−1) + x/(2√(x−1))</span></div>
 <div class="ex-row"><span class="ex-label">f′(5)</span><span class="ex-val">= 2 + 5/4 = 13/4</span></div>
@@ -979,7 +2818,16 @@ Sum/difference → apply power rule term by term. Product of two things → prod
 <code>d/dx(x²y) = 2xy + x²·(dy/dx)</code>
 </div>
 
-<div class="algo" style="margin-top:6px">
+<div class="active-recall-wrapper" id="recall-block-25">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-25')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-25')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo" style="margin-top:6px">
+      </div>
+    </div>
 <span class="algo-title">ALGORITHM: Implicit Differentiation + Tangent Line</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Differentiate both sides of the equation w.r.t. x (chain rule on every y term)</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Collect all dy/dx terms on one side</span></div>
@@ -988,7 +2836,16 @@ Sum/difference → apply power rule term by term. Product of two things → prod
 <div class="step"><span class="step-num">5</span><span class="step-body">Write tangent line using point-slope form</span></div>
 </div>
 
-<div class="example-hard">
+<div class="active-recall-wrapper" id="recall-block-26">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-26')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-26')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example-hard">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">FR Q7: Tangent to xy³−x²=y²+xy−5 at (2,1)</span>
 <div style="font-size:9.5pt">
 <strong>Differentiate:</strong> (y³+3xy²y′) − 2x = 2yy′ + (y+xy′)<br>
@@ -1009,7 +2866,16 @@ Sum/difference → apply power rule term by term. Product of two things → prod
 <strong>Converse is FALSE:</strong> f can be continuous at a but NOT differentiable. Example: f(x)=|x| at x=0 is continuous but not differentiable (corner).<br><br>
 <strong>Points of non-differentiability:</strong> Corners, cusps, vertical tangents, discontinuities.
 </div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-27">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-27')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-27')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">FR Q32: Is f(x)={x² if x&lt;1; 2x−1 if x≥1} differentiable at x=1?</span>
 <div style="font-size:9.5pt">
 <strong>Continuity at 1:</strong> lim⁻=1, lim⁺=1, f(1)=1 ✓<br>
@@ -1031,14 +2897,62 @@ Left = Right = 2 → <strong>differentiable at x=1, f′(1)=2</strong>
 </div>
 </div><!-- end #7 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec7')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec7')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec7')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec7')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec7')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 <!-- END CHUNK 2 — CONTINUE WITH CHUNK 3 -->
 
 <!-- ============================================================
      #8 APPLICATIONS OF DERIVATIVES
      ============================================================ -->
-<div class="section">
-<div id="sec8" class="section-header"><h2>#8 — Applications of Derivatives</h2><span class="sec-num"><span class="tag a-tier">A-TIER</span> 85–90% probability · 6–14 pts</span></div>
+
+    <!-- ══════════════════ SECTION 8 ══════════════════ -->
+    <div class="section open a-tier-section" id="sec8">
+      <div class="section-header" onclick="toggle('sec8')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec8" onchange="toggleSectionMastery('sec8', this.checked)">
+        </div>
+        <span class="rank-badge a-tier" style="margin-left: 12px;">A-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#8 — Applications of Derivatives</span>
+        <span class="section-prob"><span class="tag a-tier">A-TIER</span> 85–90% probability · 6–14 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.6/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">35 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Curve behavior, derivatives</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <div class="dep-chain" style="margin-bottom:6px">
   <span class="dep-node root">f′(x)</span><span class="dep-arrow">→</span>
@@ -1057,7 +2971,16 @@ Left = Right = 2 → <strong>differentiable at x=1, f′(1)=2</strong>
 <div class="two-col">
 <div>
 <div class="subsection-title">Critical Numbers</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-28">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-28')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-28')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <strong>c is a critical number of f if:</strong><br>
 <span class="formula-line">f′(c) = 0 &nbsp;&nbsp; OR &nbsp;&nbsp; f′(c) is undefined</span>
 AND c is in the domain of f.
@@ -1090,7 +3013,16 @@ If f′(c) = 0:<br>
 </div>
 <div>
 <div class="subsection-title">Inflection Points</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-29">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-29')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-29')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <strong>Inflection point</strong> = where concavity changes (f″ changes sign).<br>
 <span class="formula-line">Candidate: f″(c) = 0 or f″(c) undefined</span>
 <strong>Must verify:</strong> f″ actually changes sign at c. If f″(c)=0 but doesn't change sign → <strong>NOT</strong> an inflection point.
@@ -1113,7 +3045,16 @@ Example: f(x) = x⁴. f″(x) = 12x². f″(0) = 0. But f″ doesn't change sign
 <span class="trap-title">☠ EXAM KILLER: Always evaluate BOTH endpoints</span>
 The absolute max/min is frequently at an endpoint. Students find the critical number values and forget to check f(a) and f(b). This costs the entire problem.
 </div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-30">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-30')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-30')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">FR Q9: Abs max/min of f(x)=x⁴−5x²+4 on [0,2]</span>
 <div class="ex-row"><span class="ex-label">Cite EVT</span><span class="ex-val">f is a polynomial, continuous on [0,2] → abs extrema exist (EVT)</span></div>
 <div class="ex-row"><span class="ex-label">f′(x)</span><span class="ex-val">= 4x³−10x = 2x(2x²−5) = 0 → x=0 or x=√(5/2) ≈ 1.58</span></div>
@@ -1128,13 +3069,61 @@ The absolute max/min is frequently at an endpoint. Students find the critical nu
 </div>
 </div><!-- end #8 section -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec8')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec8')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec8')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec8')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec8')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #9 CURVE SKETCHING
      ============================================================ -->
-<div class="section">
-<div id="sec9" class="section-header"><h2>#9 — Curve Sketching — The 7-Step Algorithm</h2><span class="sec-num"><span class="tag a-tier">A-TIER</span> 88% probability · 10–14 pts</span></div>
+
+    <!-- ══════════════════ SECTION 9 ══════════════════ -->
+    <div class="section open a-tier-section" id="sec9">
+      <div class="section-header" onclick="toggle('sec9')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec9" onchange="toggleSectionMastery('sec9', this.checked)">
+        </div>
+        <span class="rank-badge a-tier" style="margin-left: 12px;">A-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#9 — Curve Sketching — The 7-Step Algorithm</span>
+        <span class="section-prob"><span class="tag a-tier">A-TIER</span> 88% probability · 10–14 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.8/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">40 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">First & second derivative tests</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <div class="card card-dark" style="margin-bottom:8px">
 <strong>THE 7 STEPS — use this exact order on every curve sketch problem:</strong><br>
@@ -1176,7 +3165,16 @@ Divide: 2x+5 remainder 0/x−1 → y = 2x+5 is the oblique asymptote
 </div>
 </div>
 <div>
-<div class="example-hard">
+<div class="active-recall-wrapper" id="recall-block-31">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-31')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-31')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example-hard">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">EXAM STYLE — Full sketch: f(x) = 8/(x²+4)</span>
 <div style="font-size:9.5pt;line-height:1.6">
 <strong>1. Domain:</strong> All reals (denom x²+4 &gt; 0 always) → (−∞,∞)<br>
@@ -1193,7 +3191,16 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
 </div>
 </div>
 
-<div class="example" style="margin-top:6px">
+<div class="active-recall-wrapper" id="recall-block-32">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-32')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-32')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example" style="margin-top:6px">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">FR Q41 Style: y = x³/(x²−9)</span>
 <div style="font-size:9pt">
 <strong>1. Domain:</strong> x≠±3<br>
@@ -1215,13 +3222,61 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
 </div>
 </div><!-- end #9 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec9')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec9')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec9')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec9')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec9')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #10 OPTIMIZATION & RELATED RATES
      ============================================================ -->
-<div class="section">
-<div id="sec10" class="section-header"><h2>#10 — Optimization &amp; Related Rates</h2><span class="sec-num"><span class="tag a-tier">A-TIER</span> 80–85% probability · 8–12 pts</span></div>
+
+    <!-- ══════════════════ SECTION 10 ══════════════════ -->
+    <div class="section open a-tier-section" id="sec10">
+      <div class="section-header" onclick="toggle('sec10')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec10" onchange="toggleSectionMastery('sec10', this.checked)">
+        </div>
+        <span class="rank-badge a-tier" style="margin-left: 12px;">A-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#10 — Optimization &amp; Related Rates</span>
+        <span class="section-prob"><span class="tag a-tier">A-TIER</span> 80–85% probability · 8–12 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">5.0/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">60 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Implicit diff, geometry setup</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <!-- OPTIMIZATION -->
 <div class="subsection-title">Optimization</div>
@@ -1235,7 +3290,16 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
 
 <div class="two-col">
 <div>
-<div class="algo">
+<div class="active-recall-wrapper" id="recall-block-33">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-33')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-33')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo">
+      </div>
+    </div>
 <span class="algo-title">OPTIMIZATION ALGORITHM — 7 Steps</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Draw and label:</strong> Draw a picture. Label all quantities with variable names.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>Objective function:</strong> Write what you want to maximize or minimize. Usually area, volume, cost, distance. Call it Q(x,y).</span></div>
@@ -1247,7 +3311,16 @@ Check sign change at both → <strong>inflection points at x=±2/√3</strong>, 
 </div>
 </div>
 <div>
-<div class="example-hard">
+<div class="active-recall-wrapper" id="recall-block-34">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-34')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-34')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example-hard">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">FR Q14: Max surface area cylinder inscribed in sphere of radius 5 m</span>
 <div style="font-size:9.5pt">
 <strong>Setup:</strong> Cylinder has radius r, height h. Inscribed in sphere: r²+(h/2)²=25 → r²=25−h²/4<br>
@@ -1259,7 +3332,16 @@ Set S′=0 → solve for h. Then find r. Report both dimensions.
 </div>
 </div>
 
-<div class="example" style="margin-top:5px">
+<div class="active-recall-wrapper" id="recall-block-35">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-35')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-35')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example" style="margin-top:5px">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">SG4 Q5: Fencing — maximize area with 1000 yards total fencing. Field divided into 3 smaller rectangles with 2 internal fences parallel to width.</span>
 <div style="font-size:9.5pt">
 Let x = length, y = width. Fencing: 2x + 4y = 1000 (2 lengths + 4 widths).<br>
@@ -1283,7 +3365,16 @@ A″ = −4 &lt; 0 → maximum. Max area = 250·125 = 31,250 yd²
 
 <div class="two-col">
 <div>
-<div class="algo">
+<div class="active-recall-wrapper" id="recall-block-36">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-36')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-36')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo">
+      </div>
+    </div>
 <span class="algo-title">RELATED RATES ALGORITHM — 5 Steps</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Draw &amp; label:</strong> Draw at a general instant. Label quantities with variables and their rates (dx/dt, dV/dt, etc.). State all given numerical values separately.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>Write the geometric equation:</strong> Volume formula, Pythagorean theorem, similar triangles, area formula. This connects the variables.</span></div>
@@ -1297,7 +3388,16 @@ If you plug in the specific instant values before differentiating, all derivativ
 </div>
 </div>
 <div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-37">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-37')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-37')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">FR Q13: Water trough — inverted equilateral triangle cross-section, 10 ft long, altitude 2 ft. Water leaks at 1 ft³/hr. Find dh/dt when h=1 ft.</span>
 <div style="font-size:9.5pt">
 <strong>Similar triangles:</strong> w/h = (2√3·h/(2))... equilateral triangle: w = √3·h (base/height ratio)<br>
@@ -1333,7 +3433,16 @@ Pythagorean: x²+y²=z² → 2x·dx/dt+2y·dy/dt=2z·dz/dt
 Then ∃ c ∈ (a,b) such that f′(c) = 0<br><br>
 <strong>Recognition:</strong> "find c where f′(c)=0" + f(a)=f(b) given, or function periodic on interval.
 </div>
-<div class="example" style="margin-top:5px">
+<div class="active-recall-wrapper" id="recall-block-38">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-38')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-38')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example" style="margin-top:5px">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">FR Q16: f(x)=x³−x on [0,1]. Verify Rolle's, find c.</span>
 <div style="font-size:9.5pt">
 <strong>(1)</strong> f is a polynomial → continuous on [0,1] ✓<br>
@@ -1354,7 +3463,16 @@ Then ∃ c ∈ (a,b) such that:<br>
 <code>f′(c) = [f(b)−f(a)]/(b−a)</code><br><br>
 <strong>Recognition:</strong> "find c" where slope = average rate of change. "Find all numbers that satisfy the conclusion of MVT."
 </div>
-<div class="example" style="margin-top:5px">
+<div class="active-recall-wrapper" id="recall-block-39">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-39')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-39')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example" style="margin-top:5px">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">FR Q28: f(x)=5x²−3x+1 on [1,3]. Find all c satisfying MVT.</span>
 <div style="font-size:9.5pt">
 <strong>(1)</strong> polynomial → continuous [1,3] ✓<br>
@@ -1376,14 +3494,62 @@ Identify quantity to maximize (call it Q). Write it as a function of one variabl
 </div>
 </div><!-- end #10 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec10')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec10')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec10')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec10')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec10')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 <!-- END CHUNK 3 — CONTINUE WITH CHUNK 4 -->
 
 <!-- ============================================================
      #11 INTEGRATION — COMPLETE GUIDE
      ============================================================ -->
-<div class="section">
-<div id="sec11" class="section-header"><h2>#11 — Integration — Complete Guide</h2><span class="sec-num"><span class="tag s-tier">S-TIER</span> 93% probability · 12–16 pts</span></div>
+
+    <!-- ══════════════════ SECTION 11 ══════════════════ -->
+    <div class="section open s-tier-section" id="sec11">
+      <div class="section-header" onclick="toggle('sec11')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec11" onchange="toggleSectionMastery('sec11', this.checked)">
+        </div>
+        <span class="rank-badge s-tier" style="margin-left: 12px;">S-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#11 — Integration — Complete Guide</span>
+        <span class="section-prob"><span class="tag s-tier">S-TIER</span> 93% probability · 12–16 pts</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.7/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">45 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Anti-derivatives, u-substitution</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <div class="dep-chain" style="margin-bottom:6px">
   <span class="dep-node root">Derivatives (reverse)</span><span class="dep-arrow">→</span>
@@ -1416,7 +3582,16 @@ Every indefinite integral requires +C. Definite integrals do NOT need +C. This c
 </div>
 
 <div class="subsection-title" style="margin-top:8px">Fundamental Theorem of Calculus</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-40">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-40')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-40')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <strong>FTC Part 1:</strong><br>
 <span class="formula-line">If F(x) = ∫ₐˣ f(t)dt, then F′(x) = f(x)</span>
 (f must be continuous on [a,b])<br><br>
@@ -1452,7 +3627,16 @@ The integral of a rate of change = net change in quantity.
 Split at x=2: ∫₁² (2−x)dx + ∫₂⁴ (x−2)dx = 1/2 + 2 = 5/2
 </div>
 
-<div class="example" style="margin-top:5px">
+<div class="active-recall-wrapper" id="recall-block-41">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-41')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-41')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example" style="margin-top:5px">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">Definite Integral from Graph (FR Q18)</span>
 <div style="font-size:9.5pt">
 Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above), region 5→7 = area 1 (below). Find ∫₀⁵f, ∫₅⁷f, ∫₀⁵|f|. Use integral properties to combine labeled regions.
@@ -1470,7 +3654,16 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 
 <div class="two-col">
 <div>
-<div class="algo">
+<div class="active-recall-wrapper" id="recall-block-42">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-42')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-42')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo">
+      </div>
+    </div>
 <span class="algo-title">U-SUBSTITUTION ALGORITHM</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Choose u:</strong> Set u = the inside function (usually what's being raised to a power, or the argument of trig)</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>Find du:</strong> Differentiate u w.r.t. x to get du = g′(x)dx</span></div>
@@ -1496,7 +3689,16 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 </div>
 
 <div class="three-col" style="margin-top:6px">
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-43">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-43')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-43')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-green">Easy: ∫ sin³x cos x dx</span>
 <div class="ex-row"><span class="ex-label">u =</span><span class="ex-val">sin x</span></div>
 <div class="ex-row"><span class="ex-label">du =</span><span class="ex-val">cos x dx</span></div>
@@ -1504,7 +3706,16 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 <div class="ex-row"><span class="ex-label">Integrate</span><span class="ex-val">u⁴/4 + C</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val"><strong>sin⁴x/4 + C</strong></span></div>
 </div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-44">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-44')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-44')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">Medium: ∫ sec x tan x/(4+sec x)² dx</span>
 <div class="ex-row"><span class="ex-label">u =</span><span class="ex-val">4 + sec x</span></div>
 <div class="ex-row"><span class="ex-label">du =</span><span class="ex-val">sec x tan x dx</span></div>
@@ -1512,7 +3723,16 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 <div class="ex-row"><span class="ex-label">Integrate</span><span class="ex-val">−1/u + C</span></div>
 <div class="ex-row"><span class="ex-label">Answer</span><span class="ex-val"><strong>−1/(4+sec x) + C</strong></span></div>
 </div>
-<div class="example-hard">
+<div class="active-recall-wrapper" id="recall-block-45">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-45')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-45')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example-hard">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">Hard: ∫₁⁹ 3x/√(10−x) dx (FR Q17b)</span>
 <div class="ex-row"><span class="ex-label">u =</span><span class="ex-val">10−x → x = 10−u</span></div>
 <div class="ex-row"><span class="ex-label">du =</span><span class="ex-val">−dx</span></div>
@@ -1524,11 +3744,29 @@ Given graph with areas labeled: region 1→5 = 5, region 3→5 = area 2 (above),
 
 <div class="subsection-title" style="margin-top:8px">Average Value of a Function</div>
 <div class="two-col">
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-46">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-46')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-46')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <span class="formula-line">f_avg = 1/(b−a) · ∫ₐᵇ f(x) dx</span>
 Formula provided on exam.
 </div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-47">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-47')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-47')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">FR Q12: Avg of f(x)=sinx on [0,π/2]</span>
 <div style="font-size:9.5pt">
 f_avg = (1/(π/2−0))·∫₀^(π/2) sinx dx = (2/π)·[−cosx]₀^(π/2) = (2/π)(0−(−1)) = <strong>2/π</strong>
@@ -1537,23 +3775,89 @@ f_avg = (1/(π/2−0))·∫₀^(π/2) sinx dx = (2/π)·[−cosx]₀^(π/2) = (2
 </div>
 </div><!-- end #11 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec11')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec11')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec11')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec11')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec11')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #12 AREA, VOLUMES, WORK, ARC LENGTH, IFT
      ============================================================ -->
-<div class="section">
-<div id="sec12" class="section-header"><h2>#12 — Area, Volumes, Work, Arc Length &amp; Inverse Function Theorem</h2><span class="sec-num"><span class="tag a-tier">A-TIER</span> <span class="tag new-tag">NEW MATERIAL</span> 78–90% probability</span></div>
+
+    <!-- ══════════════════ SECTION 12 ══════════════════ -->
+    <div class="section open a-tier-section" id="sec12">
+      <div class="section-header" onclick="toggle('sec12')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec12" onchange="toggleSectionMastery('sec12', this.checked)">
+        </div>
+        <span class="rank-badge a-tier" style="margin-left: 12px;">A-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#12 — Area, Volumes, Work, Arc Length &amp; Inverse Function Theorem</span>
+        <span class="section-prob"><span class="tag a-tier">A-TIER</span> <span class="tag new-tag">NEW MATERIAL</span> 78–90% probability</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.9/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">50 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Definite integration, geometry</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <!-- AREA BETWEEN CURVES -->
 <div class="subsection-title">Area Between Curves <span class="tag new-tag">NEW</span></div>
 <div class="two-col">
 <div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-48">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-48')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-48')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <span class="formula-line">A = ∫ₐᵇ [f(x) − g(x)] dx</span>
 where f(x) ≥ g(x) on [a,b] (f is the TOP curve, g is the BOTTOM)
 </div>
-<div class="algo">
+<div class="active-recall-wrapper" id="recall-block-49">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-49')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-49')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo">
+      </div>
+    </div>
 <span class="algo-title">AREA BETWEEN CURVES ALGORITHM</span>
 <div class="step"><span class="step-num">1</span><span class="step-body">Find intersection points: set f(x)=g(x), solve for x. These are the bounds a and b.</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body">Test a point in (a,b) to confirm which function is on top (larger value).</span></div>
@@ -1563,7 +3867,16 @@ where f(x) ≥ g(x) on [a,b] (f is the TOP curve, g is the BOTTOM)
 </div>
 </div>
 <div>
-<div class="example-hard">
+<div class="active-recall-wrapper" id="recall-block-50">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-50')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-50')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example-hard">
+      </div>
+    </div>
 <span class="ex-header ex-header-red">FR Q22: Area between y=cosx, y=sinx, x=0, x=π/2</span>
 <div style="font-size:9.5pt">
 <strong>Intersect:</strong> cosx=sinx → tanx=1 → x=π/4<br>
@@ -1650,13 +3963,31 @@ Base has width w(x) = f(x)−g(x). Shape of cross-section determines A(x):<br>
 </div>
 <div>
 <div class="subsection-title">Work, Arc Length, Avg Value</div>
-<div class="formula-box">
+<div class="active-recall-wrapper" id="recall-block-51">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-51')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-51')">Hide</button>
+      <div class="active-recall-content">
+        <div class="formula-box">
+      </div>
+    </div>
 <span class="formula-line">Work: W = ∫ₐᵇ F(x) dx</span>
 <span class="formula-line">Average Value: f_avg = 1/(b−a)·∫ₐᵇ f(x)dx</span>
 <span class="formula-line">Arc Length: L = ∫ₐᵇ √(1+[f′(x)]²) dx</span>
 All three formulas will be provided on the exam.
 </div>
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-52">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-52')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-52')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-blue">FR Q19: Arc length of f(x)=(2/3)x^(3/2) on [0,3]</span>
 <div style="font-size:9pt">
 f′(x) = x^(1/2). 1+[f′]² = 1+x.<br>
@@ -1674,14 +4005,32 @@ L = ∫₀³ √(1+x)dx. Let u=1+x: = ∫₁⁴ u^(1/2)du = [(2/3)u^(3/2)]₁⁴
 <strong>Translation:</strong> To find the derivative of the inverse function at a, find the input b where f(b)=a, then take 1/f′(b).
 </div>
 
-<div class="algo" style="margin-bottom:6px">
+<div class="active-recall-wrapper" id="recall-block-53">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-53')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-53')">Hide</button>
+      <div class="active-recall-content">
+        <div class="algo" style="margin-bottom:6px">
+      </div>
+    </div>
 <span class="algo-title">INVERSE FUNCTION THEOREM — 3-STEP RECIPE (FR Q21)</span>
 <div class="step"><span class="step-num">1</span><span class="step-body"><strong>Find b = f⁻¹(a):</strong> Solve f(b) = a. What input gives the output a?</span></div>
 <div class="step"><span class="step-num">2</span><span class="step-body"><strong>Compute f′(b):</strong> Differentiate f(x), then evaluate at x=b.</span></div>
 <div class="step"><span class="step-num">3</span><span class="step-body"><strong>Answer = 1/f′(b).</strong> Done.</span></div>
 </div>
 
-<div class="example">
+<div class="active-recall-wrapper" id="recall-block-54">
+      <div class="active-recall-overlay">
+        <span class="recall-badge">Active Recall</span>
+        <button class="active-recall-btn" onclick="toggleRecall('recall-block-54')">Reveal Content</button>
+      </div>
+      <button class="recall-reset-trigger" onclick="resetRecall('recall-block-54')">Hide</button>
+      <div class="active-recall-content">
+        <div class="example">
+      </div>
+    </div>
 <span class="ex-header ex-header-green">FR Q21 (GUARANTEED EXTRA CREDIT): f(x)=3x³+4x²+6x+5, find (f⁻¹)′(5)</span>
 <div class="ex-row"><span class="ex-label">Step 1</span><span class="ex-val">Solve f(b)=5: 3b³+4b²+6b+5=5 → 3b³+4b²+6b=0 → b(3b²+4b+6)=0 → b=0 (others complex) → b=0</span></div>
 <div class="ex-row"><span class="ex-label">Step 2</span><span class="ex-val">f′(x)=9x²+8x+6. f′(0) = 0+0+6 = 6</span></div>
@@ -1699,14 +4048,62 @@ L = ∫₀³ √(1+x)dx. Let u=1+x: = ∫₁⁴ u^(1/2)du = [(2/3)u^(3/2)]₁⁴
 </div>
 </div><!-- end #12 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec12')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec12')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec12')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec12')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec12')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 <!-- END CHUNK 4 — CONTINUE WITH CHUNK 5 -->
 
 <!-- ============================================================
      #13 THEOREMS + TRAPS MASTER LIST
      ============================================================ -->
-<div class="section">
-<div id="sec13" class="section-header"><h2>#13 — All Theorems + Professor Traps Master List</h2><span class="sec-num">Complete reference — state every theorem before applying it</span></div>
+
+    <!-- ══════════════════ SECTION 13 ══════════════════ -->
+    <div class="section open c-tier-section" id="sec13">
+      <div class="section-header" onclick="toggle('sec13')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec13" onchange="toggleSectionMastery('sec13', this.checked)">
+        </div>
+        <span class="rank-badge c-tier" style="margin-left: 12px;">C-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#13 — All Theorems + Professor Traps Master List</span>
+        <span class="section-prob">Complete reference — state every theorem before applying it</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.3/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">30 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">All theorem statements</span></div>
+        </div>
+        
+        
+        <div class="active-recall-checkpoint">
+          <span class="recall-chk-title">🧠 ACTIVE RECALL CHECKPOINT</span>
+          <p>STOP! Before reading this section, try to reproduce from memory:
+          <ul>
+            <li>What is the core definition/concept of this topic?</li>
+            <li>What primary formulas or theorems apply here?</li>
+            <li>What are the step-by-step procedures to attack these problems?</li>
+            <li>What common mistakes or traps should you watch out for?</li>
+          </ul>
+          </p>
+        </div>
+            
+        
 
 <!-- THEOREM QUICK REFERENCE -->
 <h3 style="margin-bottom:6px">Theorem Quick Reference Table</h3>
@@ -1814,13 +4211,49 @@ Every indefinite integral requires +C. Professor sees this as a notation/format 
 </div>
 </div><!-- end #13 -->
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec13')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec13')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec13')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec13')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec13')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #14 STUDY PLAN + EMERGENCY CHEAT SHEET
      ============================================================ -->
-<div class="section">
-<div id="sec14" class="section-header"><h2>#14 — 48-Hour Study Plan &amp; Emergency Cheat Sheet</h2><span class="sec-num">Last 48 hours before the final</span></div>
+
+    <!-- ══════════════════ SECTION 14 ══════════════════ -->
+    <div class="section open b-tier-section" id="sec14">
+      <div class="section-header" onclick="toggle('sec14')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec14" onchange="toggleSectionMastery('sec14', this.checked)">
+        </div>
+        <span class="rank-badge b-tier" style="margin-left: 12px;">B-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#14 — 48-Hour Study Plan &amp; Emergency Cheat Sheet</span>
+        <span class="section-prob">Last 48 hours before the final</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">3.0/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">20 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Emergency reference sheet</span></div>
+        </div>
+        
+        
+        
 
 <!-- 48-HOUR PLAN -->
 <h3>48-Hour A-Level Cram Plan</h3>
@@ -2180,13 +4613,49 @@ f(0)=5→b=0; f′(0)=6 → ans = <strong>1/6</strong>
 </div><!-- end #14 cheat sheet -->
 
 
-<div class="page-break"></div>
+<div class="page-break">
+        
+        <div class="mastery-checkpoint">
+          <span class="mastery-chk-title">✓ MODULE MASTERY CHECKLIST</span>
+          <div class="mastery-chk-grid">
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec14')"> I can recognize this problem type</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec14')"> I know the formulas &amp; theorems</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec14')"> I know the prerequisites</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec14')"> I can solve it without notes</label>
+            <label><input type="checkbox" class="chk-sub" onchange="updateSubMastery('sec14')"> I can explain it to another student</label>
+          </div>
+        </div>
+            
+      </div>
+    </div>
+</div>
 
 <!-- ============================================================
      #15 PRACTICE PROBLEMS — FINAL REVIEW NUMBERS BY TOPIC
      ============================================================ -->
-<div class="section">
-<div id="sec15" class="section-header"><h2>#15 — Practice Problems: What to Work by Topic</h2><span class="sec-num">Exact Final Review (FR) problem numbers mapped to every topic</span></div>
+
+    <!-- ══════════════════ SECTION 15 ══════════════════ -->
+    <div class="section open b-tier-section" id="sec15">
+      <div class="section-header" onclick="toggle('sec15')">
+        <div class="header-checkbox-container" onclick="event.stopPropagation()">
+          <input type="checkbox" class="section-mastery-chk" id="chk-sec15" onchange="toggleSectionMastery('sec15', this.checked)">
+        </div>
+        <span class="rank-badge b-tier" style="margin-left: 12px;">B-Tier</span>
+        <span class="section-title" style="margin-left: 12px;">#15 — Practice Problems: What to Work by Topic</span>
+        <span class="section-prob">Exact Final Review (FR) problem numbers mapped to every topic</span>
+        <span class="chevron">▼</span>
+      </div>
+      <div class="section-body">
+        
+        <!-- Pedagogical Meta Panel -->
+        <div class="section-meta-panel">
+          <div class="meta-item"><span class="meta-label">Difficulty:</span><span class="meta-val">4.2/5.0</span></div>
+          <div class="meta-item"><span class="meta-label">Est. Time:</span><span class="meta-val">30 mins</span></div>
+          <div class="meta-item"><span class="meta-label">Prereqs:</span><span class="meta-val">Algebra & Trig foundations</span></div>
+        </div>
+        
+        
+        
 
 <div class="card card-red" style="margin-bottom:10px">
 <strong>HOW TO USE THIS SECTION:</strong> For each topic you're studying, go directly to the numbered problems from the Final Review (FR) study guide. These are the professor's own practice problems — the closest thing to the actual exam. Work them without looking at the answer key first. The numbers here map exactly to the Final Review problem sheet.
@@ -2613,8 +5082,336 @@ f(0)=5→b=0; f′(0)=6 → ans = <strong>1/6</strong>
 </div>
 </div>
 
+
+        
+      </div>
+    </div>
 </div><!-- end #15 -->
 
 </body>
 </html>
 <!-- FINAL HTML COMPLETE -->
+
+  </main>
+</div>
+
+<script>
+  // State Management
+  let studyMode = 'study';
+  let masteredSections = {};
+
+  // Initialize page and load local storage
+  window.addEventListener('DOMContentLoaded', () => {
+    // Load mastered sections
+    try {
+      const stored = localStorage.getItem('math7_mastered_sections');
+      if (stored) {
+        masteredSections = JSON.parse(stored);
+        Object.keys(masteredSections).forEach(id => {
+          if (masteredSections[id]) {
+            const chk = document.getElementById(`chk-${id}`);
+            if (chk) {
+              chk.checked = true;
+              toggleSectionMastery(id, true, false); // don't write again during load
+              
+              // Also check all child sub-checkboxes
+              const secEl = document.getElementById(id);
+              if (secEl) {
+                secEl.querySelectorAll('.chk-sub').forEach(subChk => {
+                  subChk.checked = true;
+                });
+              }
+            }
+          }
+        });
+      }
+    } catch(e) { console.error("Could not load progress", e); }
+
+    // Load active study mode
+    const savedMode = localStorage.getItem('math7_study_mode');
+    if (savedMode) {
+      setStudyMode(savedMode);
+    }
+
+    // Load theme setting
+    const savedTheme = localStorage.getItem('math7_theme');
+    if (savedTheme === 'light') {
+      document.documentElement.classList.add('light');
+    } else {
+      document.documentElement.classList.remove('light');
+    }
+
+    // Update global progress tracker UI
+    updateProgressUI();
+    highlightActiveTOC();
+  });
+
+  // Toggle Section Collapse
+  function toggle(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.toggle('open');
+    const body = el.querySelector('.section-body');
+    if (body) {
+      if (el.classList.contains('open')) {
+        body.style.display = 'block';
+      } else {
+        body.style.display = 'none';
+      }
+    }
+    highlightActiveTOC();
+  }
+
+  // Scroll smoothly to a section and open it
+  function scrollToSection(id, event) {
+    if (event) event.preventDefault();
+    const el = document.getElementById(id);
+    if (!el) return;
+    
+    // Close sidebar on mobile if open
+    document.getElementById('sidebar').classList.remove('open');
+
+    // If cram mode and clicking a non-tier-1/2 section, open it as a temporary exception
+    if (studyMode === 'cram' && !el.classList.contains('s-tier-section') && !el.classList.contains('a-tier-section')) {
+      el.classList.add('cram-open');
+    }
+
+    // Expand
+    if (!el.classList.contains('open')) {
+      el.classList.add('open');
+      const body = el.querySelector('.section-body');
+      if (body) body.style.display = 'block';
+    }
+
+    el.scrollIntoView({ behavior: 'smooth' });
+    highlightActiveTOC(id);
+  }
+
+  // Expand / Collapse Buttons
+  function expandAll() {
+    document.querySelectorAll('.section').forEach(el => {
+      el.classList.add('open');
+      if (studyMode === 'cram' && !el.classList.contains('s-tier-section') && !el.classList.contains('a-tier-section')) {
+        el.classList.add('cram-open');
+      }
+      const body = el.querySelector('.section-body');
+      if (body) body.style.display = 'block';
+    });
+    highlightActiveTOC();
+  }
+
+  function collapseAll() {
+    document.querySelectorAll('.section').forEach(el => {
+      el.classList.remove('open');
+      el.classList.remove('cram-open');
+      const body = el.querySelector('.section-body');
+      if (body) body.style.display = 'none';
+    });
+    highlightActiveTOC();
+  }
+
+  // Toggle Mastery Checks
+  function toggleSectionMastery(id, isMastered, writeToStorage = true) {
+    const section = document.getElementById(id);
+    const tocLink = document.querySelector(`.toc-link[href="#${id}"]`);
+
+    if (isMastered) {
+      masteredSections[id] = true;
+      if (section) section.classList.add('mastered-section');
+      if (tocLink) tocLink.classList.add('mastered');
+    } else {
+      masteredSections[id] = false;
+      if (section) section.classList.remove('mastered-section');
+      if (tocLink) tocLink.classList.remove('mastered');
+    }
+
+    if (writeToStorage) {
+      localStorage.setItem('math7_mastered_sections', JSON.stringify(masteredSections));
+    }
+
+    updateProgressUI();
+  }
+
+  // Sub-mastery checklists
+  function updateSubMastery(secId) {
+    const section = document.getElementById(secId);
+    if (!section) return;
+
+    const subCheckboxes = section.querySelectorAll('.chk-sub');
+    const checkedCount = Array.from(subCheckboxes).filter(c => c.checked).length;
+    
+    // If all checked, auto check section mastery
+    const mainChk = document.getElementById(`chk-${secId}`);
+    if (mainChk) {
+      const allChecked = checkedCount === subCheckboxes.length;
+      mainChk.checked = allChecked;
+      toggleSectionMastery(secId, allChecked);
+    }
+  }
+
+  // Progress Calculations
+  function updateProgressUI() {
+    const totalSections = 15;
+    const masteredCount = Object.values(masteredSections).filter(Boolean).length;
+    
+    // Readiness progress bar percentage
+    const pct = Math.round((masteredCount / totalSections) * 100);
+    
+    const bar = document.getElementById('readiness-bar');
+    const label = document.getElementById('readiness-pct');
+    const status = document.getElementById('readiness-status');
+    const dashVal = document.getElementById('dash-progress-val');
+
+    if (bar) bar.style.width = `${pct}%`;
+    if (label) label.innerText = `${pct}%`;
+    if (dashVal) dashVal.innerText = masteredCount;
+
+    if (status) {
+      if (pct === 0) status.innerText = 'Ready to start!';
+      else if (pct < 30) status.innerText = 'Limits conquered';
+      else if (pct < 60) status.innerText = 'Derivative expert';
+      else if (pct < 90) status.innerText = 'Integration master!';
+      else status.innerText = 'Calculus Master — A+ ready!';
+    }
+  }
+
+  // Switch Study Modes
+  function setStudyMode(mode) {
+    studyMode = mode;
+    localStorage.setItem('math7_study_mode', mode);
+
+    // Update UI options classes
+    document.querySelectorAll('.mode-option').forEach(opt => opt.classList.remove('active'));
+    const activeLabel = document.getElementById(`mode-${mode}-lbl`);
+    if (activeLabel) {
+      const radio = activeLabel.querySelector('input');
+      if (radio) radio.checked = true;
+      activeLabel.classList.add('active');
+    }
+
+    // Toggle body class
+    document.body.classList.remove('mode-study', 'mode-recall', 'mode-cram');
+    document.body.classList.add(`mode-${mode}`);
+
+    // Action adjustments based on mode
+    if (mode === 'cram') {
+      // Auto open S-Tier & A-Tier, collapse others
+      document.querySelectorAll('.section').forEach(el => {
+        el.classList.remove('cram-open'); // reset exceptions
+        const body = el.querySelector('.section-body');
+        if (el.classList.contains('s-tier-section') || el.classList.contains('a-tier-section')) {
+          el.classList.add('open');
+          if (body) body.style.display = 'block';
+        } else {
+          el.classList.remove('open');
+          if (body) body.style.display = 'none';
+        }
+      });
+    } else if (mode === 'recall') {
+      // Blur solution blocks, reset revealed classes
+      document.querySelectorAll('.active-recall-wrapper').forEach(wrap => {
+        wrap.classList.remove('revealed');
+      });
+    } else {
+      // Study mode - expand everything standard or keep as is
+    }
+
+    highlightActiveTOC();
+  }
+
+  // Active Recall Block Toggles
+  function toggleRecall(id) {
+    const wrap = document.getElementById(id);
+    if (wrap) {
+      wrap.classList.add('revealed');
+    }
+  }
+
+  function resetRecall(id) {
+    const wrap = document.getElementById(id);
+    if (wrap) {
+      wrap.classList.remove('revealed');
+    }
+  }
+
+  // Theme Switches
+  function toggleTheme() {
+    const isLight = document.documentElement.classList.toggle('light');
+    localStorage.setItem('math7_theme', isLight ? 'light' : 'dark');
+  }
+
+  // Mobile drawer trigger
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+      sidebar.classList.toggle('open');
+    }
+  }
+
+  // Live Search
+  function handleSearch(query) {
+    const q = query.toLowerCase().trim();
+    const sections = document.querySelectorAll('.section');
+
+    sections.forEach(sec => {
+      if (!q) {
+        // Reset view
+        sec.style.display = 'block';
+        return;
+      }
+      const text = sec.textContent.toLowerCase();
+      if (text.includes(q)) {
+        sec.style.display = 'block';
+        // Auto open if matching search
+        sec.classList.add('open');
+        const body = sec.querySelector('.section-body');
+        if (body) body.style.display = 'block';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+    highlightActiveTOC();
+  }
+
+  // TOC highlight sync during scroll
+  function highlightActiveTOC(activeId) {
+    if (activeId) {
+      document.querySelectorAll('.toc-link').forEach(link => {
+        link.classList.remove('active-toc');
+        if (link.getAttribute('href') === `#${activeId}`) {
+          link.classList.add('active-toc');
+        }
+      });
+      return;
+    }
+
+    // Default highlights matching first visible scroll block
+    const scrollPos = window.scrollY + 100;
+    const sections = document.querySelectorAll('.section');
+    let currentSection = null;
+
+    for (let i = 0; i < sections.length; i++) {
+      const sec = sections[i];
+      if (sec.style.display === 'none') continue;
+      if (sec.offsetTop <= scrollPos) {
+        currentSection = sec.getAttribute('id');
+      } else {
+        break;
+      }
+    }
+
+    document.querySelectorAll('.toc-link').forEach(link => {
+      link.classList.remove('active-toc');
+      if (currentSection && link.getAttribute('href') === `#${currentSection}`) {
+        link.classList.add('active-toc');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    highlightActiveTOC();
+  });
+</script>
+
+</body>
+</html>
