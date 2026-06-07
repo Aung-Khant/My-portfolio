@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useScrollDirection } from "../hooks/useScrollDirection";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = [
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -22,12 +23,12 @@ export function Navbar() {
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <nav className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4 md:h-16 md:px-6">
-        <a
-          href="#hero"
+        <Link
+          to="/"
           className="text-sm font-medium tracking-tight text-primary md:text-[0.9375rem]"
         >
           Jonathan Aung
-        </a>
+        </Link>
 
         <div className="flex items-center gap-5 md:gap-7">
           {navLinks.map((link) => (

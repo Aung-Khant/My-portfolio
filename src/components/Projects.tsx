@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
-import { Award, ExternalLink, Github } from "lucide-react";
+import { Award, BookOpen, ExternalLink, Github } from "lucide-react";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { projects } from "../data/projects";
 import realibuddyLogo from "../assets/realibuddy-logo.png";
 import solauraLogo from "../assets/solaura-logo.png";
@@ -43,7 +44,7 @@ export function Projects() {
           <p className="section-desc">Hackathon and side projects</p>
         </motion.div>
 
-        <div className="grid gap-5 sm:grid-cols-2 sm:gap-6">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6">
           {projects.map((project, i) => (
             <motion.article
               key={project.id}
@@ -124,6 +125,53 @@ export function Projects() {
               </div>
             </motion.article>
           ))}
+
+          <motion.article
+            custom={projects.length}
+            variants={cardVariants}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            className="card-surface group flex min-h-0 flex-col p-5 sm:p-6"
+          >
+            <div className="mb-4 flex justify-start">
+              <div className="flex h-7 w-7 items-center justify-center rounded-md border border-subtle bg-bg">
+                <BookOpen className="h-4 w-4 text-muted" />
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="text-base font-medium text-primary sm:text-lg">
+                Study Guides
+              </h3>
+              <span className="badge-pill">Exam prep</span>
+            </div>
+
+            <p className="mt-1.5 text-xs text-muted">Math 7 & CS 42</p>
+
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+              Printable final exam survival guides for Calculus I and CS 42 —
+              limits, integration, core CS concepts, and last-minute review.
+            </p>
+
+            <div className="mt-4 flex flex-wrap gap-1.5">
+              {["Math 7", "CS 42", "Final Exam"].map((tag) => (
+                <span key={tag} className="tag-pill">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-5 flex items-center gap-5 border-t border-subtle pt-4">
+              <Link
+                to="/study-guides"
+                className="link-quiet inline-flex items-center gap-2 text-sm"
+                aria-label="Browse study guides"
+              >
+                <BookOpen className="h-4 w-4" />
+                <span>Browse guides</span>
+              </Link>
+            </div>
+          </motion.article>
         </div>
       </div>
     </section>
