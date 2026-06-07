@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS 42 Final Exam Study Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #141720;
+    --surface2: #1c2030;
+    --border: #2a3050;
+    --accent: #4fffb0;
+    --accent2: #ff6b6b;
+    --accent3: #ffd166;
+    --accent4: #74b9ff;
+    --accent5: #a29bfe;
+    --text: #e4e8f7;
+    --text-dim: #7a8aaa;
+    --text-bright: #ffffff;
+    --danger: #ff4757;
+    --success: #2ed573;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a1f35 50%, #0d0f14 100%);
+    border-bottom: 2px solid var(--accent);
+    padding: 40px 32px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(79,255,176,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-bright);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  header h1 span { color: var(--accent); }
+  .header-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex; gap: 24px; flex-wrap: wrap; margin-top: 14px;
+  }
+  .header-meta span { display: flex; align-items: center; gap: 6px; }
+  .header-meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1000px; margin: 0 auto; padding: 32px 24px 80px; }
+
+  /* ── PROBABILITY DASHBOARD ── */
+  .dash {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+  }
+  .dash-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .prob-row {
+    display: grid;
+    grid-template-columns: 1fr auto 180px;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .prob-row:last-child { border-bottom: none; }
+  .prob-label { font-size: 13px; font-weight: 600; }
+  .prob-pct {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    min-width: 42px;
+    text-align: right;
+  }
+  .prob-bar-bg {
+    height: 6px; border-radius: 3px;
+    background: var(--border); overflow: hidden;
+  }
+  .prob-bar { height: 100%; border-radius: 3px; }
+  .p99 { color: var(--accent); }
+  .p99 .prob-bar { background: var(--accent); }
+  .p95 { color: var(--accent3); }
+  .p95 .prob-bar { background: var(--accent3); }
+  .p90 { color: var(--accent4); }
+  .p90 .prob-bar { background: var(--accent4); }
+  .p85 { color: var(--accent5); }
+  .p85 .prob-bar { background: var(--accent5); }
+  .p80 { color: #fd79a8; }
+  .p80 .prob-bar { background: #fd79a8; }
+  .p75 { color: var(--text-dim); }
+  .p75 .prob-bar { background: var(--text-dim); }
+
+  /* ── SECTION ── */
+  .section {
+    margin-bottom: 36px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .section-header:hover { background: var(--surface2); }
+  .rank-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid currentColor;
+    white-space: nowrap;
+  }
+  .section-title { font-size: 16px; font-weight: 700; flex: 1; }
+  .section-prob {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .chevron {
+    font-size: 12px; color: var(--text-dim);
+    transition: transform 0.2s;
+  }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { padding: 20px 24px; display: none; }
+  .section.open .section-body { display: block; }
+
+  /* ── TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 1px solid currentColor;
+    text-transform: uppercase;
+  }
+  .tag-exam { color: var(--accent2); }
+  .tag-hw { color: var(--accent4); }
+  .tag-review { color: var(--accent); }
+
+  /* ── CONTENT BLOCKS ── */
+  .desc { color: var(--text); margin-bottom: 16px; font-size: 14px; line-height: 1.7; }
+
+  .card {
+    background: var(--surface2);
+    border-left: 3px solid var(--border);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card.pattern { border-left-color: var(--accent4); }
+  .card.pattern .card-title { color: var(--accent4); }
+  .card.shortcut { border-left-color: var(--accent); }
+  .card.shortcut .card-title { color: var(--accent); }
+  .card.trap { border-left-color: var(--accent2); }
+  .card.trap .card-title { color: var(--accent2); }
+  .card.predict { border-left-color: var(--accent3); }
+  .card.predict .card-title { color: var(--accent3); }
+
+  ul.list {
+    list-style: none;
+    padding: 0;
+  }
+  ul.list li {
+    padding: 4px 0 4px 18px;
+    position: relative;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  ul.list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--text-dim);
+    font-size: 10px;
+    top: 7px;
+  }
+
+  /* ── CODE / MATH ── */
+  code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    background: rgba(79,255,176,0.07);
+    border: 1px solid rgba(79,255,176,0.15);
+    padding: 1px 6px;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+  pre {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    background: #0a0c10;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    line-height: 1.8;
+    color: var(--text);
+    margin: 10px 0;
+  }
+  pre .kw { color: var(--accent); font-weight: 600; }
+  pre .cm { color: var(--text-dim); font-style: italic; }
+  pre .val { color: var(--accent3); }
+  pre .op { color: var(--accent5); }
+
+  /* ── TABLE ── */
+  .tbl-wrap { overflow-x: auto; margin: 10px 0; }
+  table {
+    border-collapse: collapse;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    width: 100%;
+  }
+  th {
+    background: var(--surface2);
+    padding: 8px 12px;
+    text-align: left;
+    color: var(--text-dim);
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 10px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  td {
+    padding: 7px 12px;
+    border-bottom: 1px solid rgba(42,48,80,0.5);
+    font-size: 12px;
+  }
+  tr:last-child td { border-bottom: none; }
+  .hi { color: var(--accent); font-weight: 600; }
+  .warn { color: var(--accent3); }
+  .danger-cell { color: var(--accent2); font-weight: 700; }
+
+  /* ── GRID ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── EXAM ANATOMY ── */
+  .exam-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .exam-box-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 10px;
+  }
+
+  /* ── ALERT ── */
+  .alert {
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 13px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert.info { background: rgba(116,185,255,0.08); border: 1px solid rgba(116,185,255,0.25); }
+  .alert.warn { background: rgba(255,209,102,0.07); border: 1px solid rgba(255,209,102,0.25); }
+  .alert.danger { background: rgba(255,71,87,0.08); border: 1px solid rgba(255,71,87,0.25); }
+  .alert.success { background: rgba(46,213,115,0.07); border: 1px solid rgba(46,213,115,0.25); }
+
+  /* ── TOC ── */
+  .toc {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .toc-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .toc-item:hover { border-color: var(--accent); background: var(--surface2); }
+  .toc-item .toc-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  h3 { font-size: 14px; font-weight: 700; margin: 16px 0 8px; color: var(--text-bright); }
+  h4 { font-size: 12px; font-weight: 700; margin: 12px 0 6px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; font-family: 'IBM Plex Mono', monospace; }
+  p { margin: 8px 0; font-size: 13px; line-height: 1.7; }
+  strong { color: var(--text-bright); }
+  .spacer { height: 12px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">CS 42 · Kurtz · Santa Monica College</div>
+  <h1><span>Final Exam</span> Deep-Dive Study Guide</h1>
+  <div class="header-meta">
+    <span><span class="dot"></span> 6 Questions · 200 Points · 130 Min</span>
+    <span><span class="dot" style="background:var(--accent3)"></span> Comprehensive · All Topics</span>
+    <span><span class="dot" style="background:var(--accent4)"></span> Based on 2 Exams + All Assignments + Review Sessions</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- EXAM FORMAT REMINDER -->
+  <div class="exam-box" style="border-color:var(--accent); margin-bottom:28px;">
+    <div class="exam-box-title">⚡ Exam Format — Know Before You Sit Down</div>
+    <div class="two-col">
+      <ul class="list">
+        <li>6 questions, some multi-part (a/b/c)</li>
+        <li>200 total points</li>
+        <li>~130 minutes (2 hr + 10 min submit)</li>
+        <li>Show ALL work — answers-only may lose points</li>
+      </ul>
+      <ul class="list">
+        <li>Complements available/not available — READ the problem</li>
+        <li>Don't use red ink</li>
+        <li>Write name on every page</li>
+        <li>Number your pages</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PROBABILITY DASHBOARD -->
+  <div class="dash">
+    <div class="dash-title">◈ Prediction Dashboard — Topic Probability</div>
+    <div class="prob-row p99">
+      <span class="prob-label">Sequential Circuit: logic diagram + state table + state diagram</span>
+      <span class="prob-pct">99%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:99%"></div></div>
+    </div>
+    <div class="prob-row p99">
+      <span class="prob-label">Boolean expr → Logic diagram (no-simplify) + K-map + 2-level SOP</span>
+      <span class="prob-pct">99%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:99%"></div></div>
+    </div>
+    <div class="prob-row p95">
+      <span class="prob-label">Counter design with D flip-flops (state table → K-maps → diagram)</span>
+      <span class="prob-pct">95%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:95%"></div></div>
+    </div>
+    <div class="prob-row p90">
+      <span class="prob-label">Register transfer logic diagram (MUX + load-enable signals)</span>
+      <span class="prob-pct">90%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:90%"></div></div>
+    </div>
+    <div class="prob-row p90">
+      <span class="prob-label">MUX-based logical input mask (4-to-1, find S & B values)</span>
+      <span class="prob-pct">90%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:90%"></div></div>
+    </div>
+    <div class="prob-row p85">
+      <span class="prob-label">Bitwise logic masks (AND/OR/XOR on 16-bit operand)</span>
+      <span class="prob-pct">85%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:85%"></div></div>
+    </div>
+    <div class="prob-row p80">
+      <span class="prob-label">Decoder + OR gate implementation of Boolean functions</span>
+      <span class="prob-pct">80%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:80%"></div></div>
+    </div>
+    <div class="prob-row p75">
+      <span class="prob-label">Adder-subtractor circuit (4-bit ripple, S=0 add / S=1 subtract)</span>
+      <span class="prob-pct">75%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:75%"></div></div>
+    </div>
+    <div class="prob-row p75">
+      <span class="prob-label">MUX implementation (truth table → select A,B as MSBs, map D input)</span>
+      <span class="prob-pct">75%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:75%"></div></div>
+    </div>
+    <div class="prob-row p75">
+      <span class="prob-label">NAND-only two-level diagram (from simplified SOP)</span>
+      <span class="prob-pct">75%</span>
+      <div class="prob-bar-bg"><div class="prob-bar" style="width:75%"></div></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 1 ══════════════════ -->
+  <div class="section open" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">#1 HIGHEST</span>
+      <span class="section-title">Sequential Circuits — Logic Diagram + State Table + State Diagram</span>
+      <span class="section-prob" style="color:var(--accent)">99%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-exam">Exam 2C Q3 (45 pts)</span>
+        <span class="tag tag-hw">Assig 7 Q1</span>
+        <span class="tag tag-review">Final Review Ex. 2</span>
+        <span class="tag tag-review">Mid2 Review</span>
+      </div>
+
+      <div class="alert success">
+        <span class="alert-icon">★</span>
+        <span>This was worth <strong>45 points</strong> on Exam 2C — the single biggest problem on any exam. It is <em>explicitly</em> listed as #2 and #3 on the professor's "You should know how to" list and appears in every review session. Expect it.</span>
+      </div>
+
+      <div class="card pattern">
+        <div class="card-title">Exact Problem Pattern</div>
+        Given: two D flip-flops (A, B), 1–2 inputs (X [,Y]), one output (Z/Y) with equations like:<br>
+        <pre><span class="kw">D_A</span> = AX' + XY    <span class="cm">← function of current state + inputs</span>
+<span class="kw">D_B</span> = AX + BX
+<span class="kw">Z</span>  = A' + B       <span class="cm">← output equation</span></pre>
+        Tasks asked: <strong>(a) logic diagram, (b) state table, (c) state diagram</strong>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">Step-by-Step Procedure</div>
+        <ul class="list">
+          <li><strong>Logic Diagram:</strong> Draw AND/OR/NOT gates feeding D inputs of each flip-flop. Feedback from Q outputs. Clock line to all FFs. Output combinational logic at bottom.</li>
+          <li><strong>State Table:</strong> Enumerate all 2² = 4 present states (AB = 00, 01, 10, 11). For each, try each input combination. Compute D_A, D_B by substituting values → these become next state A, B. Compute Z.</li>
+          <li><strong>State Diagram:</strong> One bubble per state (labeled "AB"). Arrow for each input, labeled "input/output". Self-loops allowed.</li>
+        </ul>
+        <p>With 1 input X: each state has 2 arrows (X=0 and X=1).<br>
+        With 2 inputs X,Y: each state has 4 arrows.</p>
+      </div>
+
+      <div class="card predict">
+        <div class="card-title">Most Likely Variation on Final</div>
+        Based on Exam 2C pattern, expect <strong>3 sub-parts (a/b/c)</strong> each worth ~15 pts. The equations will be similar in complexity to:
+        <pre><span class="kw">D_A</span> = AX + BX    <span class="val">(Exam 2C)</span>
+<span class="kw">D_B</span> = A'X + BX
+<span class="kw">Y</span>  = B</pre>
+        or the review guide's:
+        <pre><span class="kw">D_A</span> = AX + BX
+<span class="kw">D_B</span> = A'X + BX
+<span class="kw">Y</span>  = B</pre>
+        Practice both. The Assig 7 version uses 2 inputs — that may appear too.
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps — These Cost Points</div>
+        <ul class="list">
+          <li>Forgetting the <strong>clock line</strong> in the logic diagram (lost 2 pts on Exam 2C)</li>
+          <li>Leaving out a transition in the state diagram — every state needs arrows for ALL input combos</li>
+          <li>State diagram label format: <code>input/output</code>, not just input</li>
+          <li>For Mealy machines: output depends on BOTH state and input; for Moore: output depends only on state. Know which one you have</li>
+          <li>When output equation is just Y=B, output column is simply the B flip-flop value — easy points if you remember</li>
+        </ul>
+      </div>
+
+      <h3>Quick Reference: State Table Template</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Present A</th><th>Present B</th><th>Input X</th><th>D_A (next A)</th><th>D_B (next B)</th><th>Output Y</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td><em>compute</em></td><td><em>compute</em></td><td><em>compute</em></td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td><em>compute</em></td><td><em>compute</em></td><td><em>compute</em></td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td><em>compute</em></td><td><em>compute</em></td><td><em>compute</em></td></tr>
+          <tr><td colspan="6" style="text-align:center;color:var(--text-dim)">... (8 rows total for 2 FFs, 1 input)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 2 ══════════════════ -->
+  <div class="section open" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">#2 HIGHEST</span>
+      <span class="section-title">Boolean Expr → Logic Diagram (exact) + K-map Simplification + SOP Diagram</span>
+      <span class="section-prob" style="color:var(--accent)">99%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-exam">Exam 1C Q3 (18 pts)</span>
+        <span class="tag tag-exam">Exam 1C Q4 (20 pts)</span>
+        <span class="tag tag-review">Final Review Ex. 1</span>
+        <span class="tag tag-review">CS42 Review Ex. 1</span>
+      </div>
+
+      <div class="alert warn">
+        <span class="alert-icon">⚡</span>
+        <span>This topic appeared as <strong>two separate problems</strong> on Exam 1C. Expect it again — possibly combined into one multi-part problem worth 25–40 pts on the final.</span>
+      </div>
+
+      <div class="card pattern">
+        <div class="card-title">Exact Problem Pattern (3 parts)</div>
+        <pre><span class="val">Part (a)</span>: Draw logic diagram corresponding <span class="kw">EXACTLY</span> to the equation.
+         Do NOT simplify. Complements <span class="kw">ARE</span> available.
+         e.g. F = BC + B(AD + C'D)
+
+<span class="val">Part (b)</span>: Simplify with a <span class="kw">Karnaugh map</span>. Draw the two-level (SOP)
+         logic diagram. Complements <span class="kw">ARE</span> available.
+
+<span class="val">Part (c)</span>: Redraw using <span class="kw">ONLY NAND gates + inverters</span>.
+         Complements are <span class="kw">NOT</span> available.</pre>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">Part (a) Shortcut — Exact Diagram</div>
+        <ul class="list">
+          <li>Work <strong>inside-out</strong>: innermost parentheses first</li>
+          <li>Each + (OR) → one OR gate. Each product → one AND gate</li>
+          <li>For F = BC + B(AD + C'D): first build (AD + C'D), then AND with B, then OR with BC</li>
+          <li>Complement inputs (A', B', etc.) come directly as wires — no extra gates needed when they're available</li>
+          <li>Count levels: this tells you the number of gate layers to draw</li>
+        </ul>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">K-Map Shortcut</div>
+        <ul class="list">
+          <li>Convert the expression to a truth table first (fill minterms)</li>
+          <li>Label the K-map correctly: for 3-var (ABC), cols are BC = 00,01,11,10 (Gray code!)</li>
+          <li>For 4-var (ABCD): rows AB = 00,01,11,10 and cols CD = 00,01,11,10</li>
+          <li>Group 1s in powers of 2 (1,2,4,8). Largest groups first. Wrap edges.</li>
+          <li>Each group → one product term. Write simplified SOP.</li>
+          <li>Don't cares (X): can be included in any group to make it larger</li>
+        </ul>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">Part (c) NAND-Only Shortcut</div>
+        <ul class="list">
+          <li>Start from the simplified SOP (sum of products)</li>
+          <li>Replace each AND gate with a NAND gate</li>
+          <li>Replace the final OR gate with a NAND gate (DeMorgan: NAND of complements = OR)</li>
+          <li>Because complements are NOT available: add an inverter on each uncomplemented input going into AND/NAND gates that need the complement</li>
+          <li>Visual check: a 2-level SOP → 2-level NAND-NAND with inverters on raw inputs where needed</li>
+        </ul>
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps</div>
+        <ul class="list">
+          <li><strong>"Do not simplify"</strong> — students simplify anyway. The diagram must match the equation exactly, even if redundant</li>
+          <li>K-map column/row ordering: must use Gray code (00,01,<strong>11</strong>,10) — not binary order</li>
+          <li>NAND diagram: when complements are NOT available, you must add an inverter for every complemented literal. Forgetting these = -2 pts each</li>
+          <li>2-variable K-maps have 4 cells; 3-var → 8 cells; 4-var → 16 cells</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 3 ══════════════════ -->
+  <div class="section open" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="rank-badge" style="color:var(--accent3);border-color:var(--accent3)">#3 HIGH</span>
+      <span class="section-title">Counter Design with D Flip-Flops</span>
+      <span class="section-prob" style="color:var(--accent3)">95%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-hw">Assig 8 Q1–Q3</span>
+        <span class="tag tag-review">Final Review Ex. 4</span>
+        <span class="tag tag-review">CS42 Review Ex. 4 (solved)</span>
+        <span class="tag tag-review">Mid2 Review</span>
+      </div>
+
+      <div class="alert success">
+        <span class="alert-icon">★</span>
+        <span>The professor provided a <strong>fully worked solution</strong> for the counter sequence 1,3,5,7,9,11,13,15 in the review session notes — complete with state table, K-maps, equations, and logic diagram. This exact problem or a close variation is very likely.</span>
+      </div>
+
+      <div class="card pattern">
+        <div class="card-title">Full Procedure</div>
+        <ul class="list">
+          <li><strong>Step 1 — How many flip-flops?</strong> 2ⁿ ≥ length of sequence. For 8 states: 4 bits (W,X,Y,Z)</li>
+          <li><strong>Step 2 — State table:</strong> List present state, next state. Unused states → don't cares (X)</li>
+          <li><strong>Step 3 — D equations:</strong> For each flip-flop, write D_FF = minterm list from next-state column</li>
+          <li><strong>Step 4 — K-maps:</strong> One K-map per flip-flop. Include don't cares.</li>
+          <li><strong>Step 5 — Logic diagram:</strong> Draw gates + D FFs with clock</li>
+        </ul>
+      </div>
+
+      <div class="card predict">
+        <div class="card-title">★ Memorize This Solved Example (Sequence 1,3,5,7,9,11,13,15)</div>
+        <pre><span class="cm">4 flip-flops: W X Y Z</span>
+<span class="cm">All are ODD → Z (LSB) is always 1</span>
+
+<span class="kw">D_W</span> = WY' + WX' + W'XY    <span class="cm">(from K-map)</span>
+<span class="kw">D_X</span> = XY' + X'Y = X <span class="op">⊕</span> Y  <span class="cm">(XOR!)</span>
+<span class="kw">D_Y</span> = Y'                   <span class="cm">(just complement Y)</span>
+<span class="kw">D_Z</span> = 1                    <span class="cm">(LSB always 1)</span>
+
+Don't cares: 0,2,4,6,8,10,12,14 (all even numbers)</pre>
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps</div>
+        <ul class="list">
+          <li>Forgetting to mark unused states as don't cares → missed simplification = wrong equations</li>
+          <li>State table needs the NEXT state, not the next value in sequence by +1 — it's whatever comes next in the <em>given sequence</em></li>
+          <li>For 3-bit counters: 3 flip-flops, 8 rows even if sequence is shorter — fill remaining as don't cares</li>
+          <li>K-map size matches number of flip-flops (for W,X,Y,Z → 4-variable K-maps = 16 cells)</li>
+        </ul>
+      </div>
+
+      <h3>Other Counter Sequences from Assignments</h3>
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Sequence</th><th>Bits</th><th>Don't Cares</th><th>Key Observation</th></tr>
+          <tr><td class="hi">0, 1, 2 (repeat)</td><td>2</td><td>3</td><td>Simple 2-bit, only state 11 unused</td></tr>
+          <tr><td class="hi">0,1,2,3,4,5</td><td>3</td><td>6,7</td><td>6-state 3-bit counter</td></tr>
+          <tr><td class="hi">0,2,1,3,4,6,5,7</td><td>3</td><td>none</td><td>Gray-code-like, no don't cares</td></tr>
+          <tr><td class="warn">1,3,5,7,9,11,13,15</td><td>4</td><td>0,2,4,6,8,10,12,14</td><td>★ Most likely on final</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 4 ══════════════════ -->
+  <div class="section open" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="rank-badge" style="color:var(--accent4);border-color:var(--accent4)">#4 HIGH</span>
+      <span class="section-title">Register Transfer — Logic Diagram with MUX & Load-Enable</span>
+      <span class="section-prob" style="color:var(--accent4)">90%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-hw">Assig 9 Q1–Q3</span>
+        <span class="tag tag-review">Final Review Ex. 5</span>
+        <span class="tag tag-review">CS42 Review Ex. 5 (fully solved)</span>
+      </div>
+
+      <div class="card pattern">
+        <div class="card-title">Problem Pattern</div>
+        Given conditional register transfer statements with mutually exclusive control inputs:<br>
+        <pre><span class="kw">C₀</span>: R1 ← R0, R2 ← R0
+<span class="kw">C₁</span>: R1 ← R0
+<span class="kw">C₂</span>: R2 ← R1
+<span class="cm">Only one Cᵢ = 1 at a time.</span>
+<span class="cm">→ Complete the logic diagram (MUX selects + register LE signals)</span></pre>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">Derivation Method</div>
+        <p>Build a truth table for control outputs (L₀, L₁, L₂ = load enables; S = MUX select):</p>
+        <div class="tbl-wrap">
+          <table>
+            <tr><th>C₂</th><th>C₁</th><th>C₀</th><th>L₀ (load R0?)</th><th>L₁ (load R1?)</th><th>L₂ (load R2?)</th><th>S (MUX sel)</th></tr>
+            <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>X</td></tr>
+            <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+          </table>
+        </div>
+        <p>From the table: <code>L₀ = 0</code>, <code>L₁ = C₀ + C₁</code>, <code>L₂ = C₀ + C₂</code>, <code>S = C₂</code></p>
+        <p>S=0 → MUX routes R0. S=1 → MUX routes R1. The OR gates for L₁ and L₂ are drawn explicitly in the diagram.</p>
+      </div>
+
+      <div class="card predict">
+        <div class="card-title">★ Assignment 9 Variation — Likely on Final</div>
+        <pre><span class="kw">C₀</span>: R2 ← 0      <span class="cm">(clear)</span>
+<span class="kw">C₁</span>: R2 ← R̄2    <span class="cm">(complement)</span>
+<span class="kw">C₂</span>: R2 ← R1    <span class="cm">(transfer)</span></pre>
+        For this: need AND gates, OR gates, inverters. No MUX needed — the D input expression for each register bit is:<br>
+        <code>D = C₁·Q̄ + C₂·R1_bit</code>  (with C₀ driving clear via the LE or reset)
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps</div>
+        <ul class="list">
+          <li>When no control is active (all C=0), the register must NOT load → LE = 0</li>
+          <li>The MUX output goes to ALL registers' D input — but only the one with LE=1 actually loads</li>
+          <li>For simultaneous transfers (C₀: R1←R0 AND R2←R0), both L₁ and L₂ fire</li>
+          <li>Assig 9 Q2 uses a 4-to-1 MUX (4 sources R0–R3 → R4). Select lines S₁S₀ encode which Cᵢ is active</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 5 ══════════════════ -->
+  <div class="section open" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="rank-badge" style="color:var(--accent4);border-color:var(--accent4)">#5 HIGH</span>
+      <span class="section-title">MUX Logical Input Mask (4-to-1, find S & B values)</span>
+      <span class="section-prob" style="color:var(--accent4)">90%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-review">Final Review Ex. 6</span>
+        <span class="tag tag-review">CS42 Review Ex. 6 (fully solved)</span>
+      </div>
+
+      <div class="card pattern">
+        <div class="card-title">Problem Pattern</div>
+        A 4-bit, 4-to-1 MUX circuit where inputs A₀–A₃ and mask B₀–B₃ feed four 4-to-1 MUXes in parallel (one per bit). S₁ is the HIGH-ORDER select bit. Given desired output G₀–G₃, find S₀, S₁, and B₀–B₃.
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">★ Master Key — Memorize This Table</div>
+        <div class="tbl-wrap">
+          <table>
+            <tr><th>Goal</th><th>Operation</th><th>S₁S₀ selects</th><th>B value</th></tr>
+            <tr><td class="hi">G = A (pass through)</td><td>Select A</td><td>S = 00 (input 0 = A)</td><td>irrelevant</td></tr>
+            <tr><td class="hi">G = Ā (complement)</td><td>XOR with 1</td><td>01 or 11</td><td class="warn">B = 1 (all 1s)</td></tr>
+            <tr><td class="hi">G = 1 (set all bits)</td><td>OR with 1</td><td>11 (input 3 = 1)</td><td class="warn">B = 1</td></tr>
+            <tr><td class="hi">G = 0 (clear all bits)</td><td>AND with 0</td><td>10 (input 2 = 0)</td><td class="warn">B = 0</td></tr>
+          </table>
+        </div>
+        <p>The MUX inputs are wired: input 0 = A (operand), input 1 = A XOR B, input 2 = 0, input 3 = 1. So selecting S₁S₀ = 01 gives A⊕B (logical mask with XOR).</p>
+        <p>Review session note: <strong>"Could B be a mask? AND OR XOR"</strong> — think of B as the mask operand.</p>
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps</div>
+        <ul class="list">
+          <li><strong>S₁ is the HIGH-order select bit</strong> — the professor bolds this in the problem. S₁S₀ = 10 means input 2, not input 1</li>
+          <li>Each MUX in the 4-bit circuit shares the same S₀, S₁ — but has its own B bit</li>
+          <li>When G = A (identity), B values are irrelevant (don't care) but you still write something</li>
+          <li>When G = Ā, you need S₁S₀ = 01 and B = 1 (XOR with all 1s)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 6 ══════════════════ -->
+  <div class="section open" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <span class="rank-badge" style="color:var(--accent5);border-color:var(--accent5)">#6 HIGH</span>
+      <span class="section-title">Bitwise Logic Masks (AND / OR / XOR on n-bit operands)</span>
+      <span class="section-prob" style="color:var(--accent5)">85%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-hw">Assig 9 Q4–Q5</span>
+        <span class="tag tag-review">Final Review Ex. 7</span>
+        <span class="tag tag-review">CS42 Review Ex. 7 (solved)</span>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">★ The Three Rules — Anchor Everything Here</div>
+        <div class="tbl-wrap">
+          <table>
+            <tr><th>Goal</th><th>Operation</th><th>Mask Bit</th><th>Why</th></tr>
+            <tr><td class="hi">Clear bit to 0</td><td class="hi">AND</td><td class="warn">0</td><td>0 AND anything = 0</td></tr>
+            <tr><td class="hi">Set bit to 1</td><td class="hi">OR</td><td class="warn">1</td><td>1 OR anything = 1</td></tr>
+            <tr><td class="hi">Complement/toggle bit</td><td class="hi">XOR</td><td class="warn">1</td><td>1 XOR x = x̄</td></tr>
+            <tr><td style="color:var(--text-dim)">Leave bit unchanged</td><td style="color:var(--text-dim)">AND or OR</td><td style="color:var(--text-dim)">1 (AND) or 0 (OR)</td><td>Identity element</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="card predict">
+        <div class="card-title">★ The Exact Problem That Will Appear (Assig 9 Q5 = Review Ex. 7)</div>
+        <pre>Operand: 0011 0101 1100 1010  (16-bit, positions 15–0)
+
+(a) Clear all ODD bit positions to 0
+    → AND mask with 0 at odd positions (15,13,11,...,1)
+    → Mask: 1010 1010 1010 1010  <span class="val">= 0xAAAA</span>
+
+(b) Set the rightmost 4 bits to 1
+    → OR mask with 1 at bits 3,2,1,0
+    → Mask: 0000 0000 0000 1111  <span class="val">= 0x000F</span>
+
+(c) Complement the most significant 8 bits
+    → XOR mask with 1 at bits 15–8
+    → Mask: 1111 1111 0000 0000  <span class="val">= 0xFF00</span></pre>
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps</div>
+        <ul class="list">
+          <li><strong>Bit position 15 = leftmost (MSB), bit position 0 = rightmost (LSB)</strong>. The professor states this explicitly in the problem — don't flip them</li>
+          <li>"Odd bit positions" means positions 15, 13, 11, 9, 7, 5, 3, 1 (every other bit starting from left for 15, or right for 1). Use the explicitly stated convention</li>
+          <li>Show your work: write out the operand, the mask, and the result bit-by-bit</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 7 ══════════════════ -->
+  <div class="section" id="s7">
+    <div class="section-header" onclick="toggle('s7')">
+      <span class="rank-badge" style="color:#fd79a8;border-color:#fd79a8">#7 SOLID</span>
+      <span class="section-title">Decoder + OR Gate Implementation of Boolean Functions</span>
+      <span class="section-prob" style="color:#fd79a8">80%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-review">Final Review Ex. 3</span>
+        <span class="tag tag-review">CS42 Review Ex. 3 (solved)</span>
+        <span class="tag tag-review">Mid2 Review</span>
+      </div>
+
+      <div class="card pattern">
+        <div class="card-title">Problem Pattern</div>
+        <pre>Given: F₁ = AB + A'B'C
+        F₂ = AB + A'BC'
+        F₃ = AB + AB'C'
+
+Implement with a <span class="kw">3-to-8 decoder</span> and three external OR gates.</pre>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">Step-by-Step</div>
+        <ul class="list">
+          <li><strong>Step 1:</strong> Build the truth table for each function (3 inputs A,B,C → 8 rows)</li>
+          <li><strong>Step 2:</strong> Identify the minterms where each function = 1</li>
+          <li><strong>Step 3:</strong> For the solved example: F₁ = Σm(1,6,7), F₂ = Σm(2,6,7), F₃ = Σm(4,6,7)</li>
+          <li><strong>Step 4:</strong> Connect decoder outputs 1,6,7 to OR gate → F₁. Outputs 2,6,7 → F₂. Outputs 4,6,7 → F₃</li>
+          <li><strong>Step 5:</strong> Draw: A,B,C → S₂,S₁,S₀ of decoder → 8 outputs → OR gates</li>
+        </ul>
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps</div>
+        <ul class="list">
+          <li>Which input is MSB? In a 3-to-8 decoder, S₂ is the most significant (A usually), S₀ least significant (C)</li>
+          <li>A function with output 1 only when AB=11 (regardless of C) covers minterms 6 AND 7 — write both</li>
+          <li>The OR gate has one input per minterm — so a function with 3 minterms needs a 3-input OR gate</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 8 ══════════════════ -->
+  <div class="section" id="s8">
+    <div class="section-header" onclick="toggle('s8')">
+      <span class="rank-badge" style="color:var(--text-dim);border-color:var(--text-dim)">#8 LIKELY</span>
+      <span class="section-title">Adder-Subtractor Circuit (4-bit ripple carry)</span>
+      <span class="section-prob" style="color:var(--text-dim)">75%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-exam">Exam 2C Q2 (20 pts)</span>
+        <span class="tag tag-hw">Assig 6 Q5</span>
+        <span class="tag tag-review">Mid2 Review</span>
+      </div>
+
+      <div class="alert info">
+        <span class="alert-icon">ℹ</span>
+        <span>This appeared on Exam 2C and as a homework problem with the <strong>exact same circuit</strong>. The professor may include it on the final as a lower-point warm-up or sub-part.</span>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">How the Circuit Works</div>
+        <ul class="list">
+          <li>S = 0 → ADD. S = 1 → SUBTRACT (2's complement subtraction)</li>
+          <li>Each B bit is XOR'd with S before entering the full adder</li>
+          <li>When S=1: B is complemented, and C₀ = 1, giving A + B̄ + 1 = A - B (2's complement)</li>
+          <li>Output: C₄, S₃, S₂, S₁, S₀</li>
+        </ul>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">Computation Shortcut</div>
+        <ul class="list">
+          <li>S=0: just binary add A + B. C₄ = carry out. Result = S₃S₂S₁S₀</li>
+          <li>S=1: take 2's complement of B, add to A. Show your work in columns (1's complement → add 1)</li>
+          <li>For negative results: the answer is a negative number in 2's complement if C₄=0 when expected otherwise</li>
+        </ul>
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps (from Exam 2C)</div>
+        <ul class="list">
+          <li>On Exam 2C, several students lost points for not showing the 2's complement steps explicitly</li>
+          <li>C₄ is the carry OUT of the MSB FA — include it as part of your answer</li>
+          <li>When subtracting and there's no borrow, C₄=1 and the result is positive. When C₄=0, result is negative (2's complement representation)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SECTION 9 ══════════════════ -->
+  <div class="section" id="s9">
+    <div class="section-header" onclick="toggle('s9')">
+      <span class="rank-badge" style="color:var(--text-dim);border-color:var(--text-dim)">#9 LIKELY</span>
+      <span class="section-title">MUX Implementation of Boolean Functions</span>
+      <span class="section-prob" style="color:var(--text-dim)">75%</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tags">
+        <span class="tag tag-exam">Exam 2C Q1 (20 pts)</span>
+        <span class="tag tag-review">Mid2 Review (4-to-1 MUX)</span>
+        <span class="tag tag-hw">Assig 5</span>
+      </div>
+
+      <div class="card pattern">
+        <div class="card-title">Problem Pattern</div>
+        <pre>F(X,Y,Z) = Σm(1,2,4,7)
+Implement with one or two <span class="kw">4-to-1 MUXes</span> and a single inverter.</pre>
+      </div>
+
+      <div class="card shortcut">
+        <div class="card-title">The Trick</div>
+        <ul class="list">
+          <li>Use the two most-significant variables (X, Y) as select lines S₁, S₀</li>
+          <li>For each of the 4 groupings of (X,Y): look at F values with Z=0 and Z=1</li>
+          <li>Each data input (I₀–I₃) gets: 0, 1, Z, or Z' based on the function value pattern</li>
+          <li>For 2 functions: use 2 separate 4-to-1 MUXes with shared select lines</li>
+        </ul>
+      </div>
+
+      <div class="card predict">
+        <div class="card-title">Exam 2C Q1 Exact Pattern — Learn This</div>
+        <pre>F = Σm(1,2,4,7), G = Σm(0,1,5,7)
+
+Use X,Y as select → for each group:
+XY=00: F: Z=0→0, Z=1→1 → <span class="kw">I₀ = Z</span>
+XY=01: F: Z=0→1, Z=1→0 → <span class="kw">I₁ = Z'</span>  <span class="cm">(inverter)</span>
+XY=10: F: Z=0→1, Z=1→0 → <span class="kw">I₂ = Z'</span>
+XY=11: F: Z=0→0, Z=1→1 → <span class="kw">I₃ = Z</span></pre>
+      </div>
+
+      <div class="card trap">
+        <div class="card-title">⚠ Top Traps</div>
+        <ul class="list">
+          <li>Must also draw the truth table when asked — don't skip it</li>
+          <li>S₁ is the high-order select bit (connected to X/first variable)</li>
+          <li>The data inputs (0,1,2,3) select when S₁S₀ = 00,01,10,11 respectively</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ GLOBAL TRAPS ══════════════════ -->
+  <div class="section" id="s10">
+    <div class="section-header" onclick="toggle('s10')" style="border-bottom-color:var(--accent2)">
+      <span class="rank-badge" style="color:var(--accent2);border-color:var(--accent2)">⚠ TRAPS</span>
+      <span class="section-title">Professor Kurtz's Favorite Tricks & Global Traps</span>
+      <span class="section-prob" style="color:var(--accent2)">Read This</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="two-col">
+        <div class="card trap">
+          <div class="card-title">Wording Traps</div>
+          <ul class="list">
+            <li><strong>"Exactly"</strong> or <strong>"Do not simplify"</strong> = draw gates matching the equation, every layer, no shortcuts</li>
+            <li><strong>"Complements ARE available"</strong> = use A' directly as a wire</li>
+            <li><strong>"Complements are NOT available"</strong> = add inverter for each complemented literal</li>
+            <li><strong>"S₁ is the high-order select bit"</strong> = always stated when it matters — S₁S₀=10 → input 2, not input 1</li>
+          </ul>
+        </div>
+        <div class="card trap">
+          <div class="card-title">Circuit Drawing Traps</div>
+          <ul class="list">
+            <li>Sequential circuits: always draw the <strong>clock line</strong> connecting all D flip-flops</li>
+            <li>Feedback wires: Q outputs must loop back to input gates</li>
+            <li>State diagram: every state needs a transition for EVERY input combination — missing = partial credit deduction</li>
+            <li>Logic diagram: show gate types (AND, OR, NOT — not just boxes)</li>
+          </ul>
+        </div>
+        <div class="card trap">
+          <div class="card-title">K-Map Traps</div>
+          <ul class="list">
+            <li>Column/row order must be <strong>Gray code</strong>: 00, 01, <strong>11</strong>, 10</li>
+            <li>Groups must be powers of 2: 1, 2, 4, 8, 16</li>
+            <li>Groups can wrap around edges (top↔bottom, left↔right, corners)</li>
+            <li>Don't cares: include in groups to maximize group size — but you don't have to cover them</li>
+          </ul>
+        </div>
+        <div class="card trap">
+          <div class="card-title">Arithmetic Traps</div>
+          <ul class="list">
+            <li>2's complement of 0 is 0 (not 2^n)</li>
+            <li>For subtraction: show 2's complement steps explicitly for full credit</li>
+            <li>Overflow vs. carry: C₄=1 doesn't always mean positive result; check sign bits</li>
+            <li>Bit position 15 = MSB (leftmost), bit 0 = LSB (rightmost) — stated explicitly in problems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ STUDY PLAN ══════════════════ -->
+  <div class="section open" id="s11">
+    <div class="section-header" onclick="toggle('s11')" style="border-bottom-color:var(--accent)">
+      <span class="rank-badge" style="color:var(--accent);border-color:var(--accent)">▶ PLAN</span>
+      <span class="section-title">Optimal Study Session Plan (Priority Order)</span>
+      <span class="section-prob" style="color:var(--accent)">Do This</span>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="tbl-wrap">
+        <table>
+          <tr><th>Priority</th><th>Topic</th><th>What to Practice</th><th>Source</th><th>Est. Points</th></tr>
+          <tr>
+            <td class="danger-cell">1st</td>
+            <td>Sequential Circuit</td>
+            <td>Logic diagram + state table + state diagram from D equations</td>
+            <td>Final Review Ex. 2; Assig 7 Q1</td>
+            <td class="hi">~45 pts</td>
+          </tr>
+          <tr>
+            <td class="danger-cell">2nd</td>
+            <td>K-map + Logic Diagram</td>
+            <td>Exact diagram (no simplify) + K-map + SOP diagram + NAND version</td>
+            <td>Final Review Ex. 1; Exam 1C Q3,Q4</td>
+            <td class="hi">~35 pts</td>
+          </tr>
+          <tr>
+            <td class="warn">3rd</td>
+            <td>Counter Design</td>
+            <td>State table → D equations via K-maps → logic diagram</td>
+            <td>CS42 Review Ex. 4 (solved!); Assig 8</td>
+            <td class="hi">~35 pts</td>
+          </tr>
+          <tr>
+            <td class="warn">4th</td>
+            <td>Register Transfer</td>
+            <td>Derive LE/select truth table → draw MUX + register diagram</td>
+            <td>CS42 Review Ex. 5 (solved!); Assig 9</td>
+            <td class="hi">~30 pts</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-dim)">5th</td>
+            <td>Logical Mask (MUX)</td>
+            <td>Given target G values, find S bits and B mask</td>
+            <td>CS42 Review Ex. 6 (solved!)</td>
+            <td>~25 pts</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-dim)">6th</td>
+            <td>Bitwise AND/OR/XOR</td>
+            <td>16-bit operand, identify operation + build mask</td>
+            <td>CS42 Review Ex. 7 (solved!); Assig 9 Q5</td>
+            <td>~15 pts</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-dim)">7th</td>
+            <td>Decoder + OR</td>
+            <td>Convert SOP to minterms, wire decoder outputs</td>
+            <td>CS42 Review Ex. 3 (solved!)</td>
+            <td>~15 pts</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="alert success" style="margin-top:16px;">
+        <span class="alert-icon">✓</span>
+        <span><strong>The CS42 Review document (Final_Review.pdf in your project) contains fully worked solutions for ALL 7 examples.</strong> This is the single most valuable resource — work through each solution step-by-step, then re-do the problem from scratch without looking.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function toggle(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+// All sections start closed except the first 6 and the plan
+document.querySelectorAll('.section').forEach((s, i) => {
+  if (!s.classList.contains('open')) {
+    // already closed
+  }
+});
+</script>
+</body>
+</html>
